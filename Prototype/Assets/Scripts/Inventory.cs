@@ -29,6 +29,7 @@ public class Inventory : MonoBehaviour
             item.SetActive(true);
             item.transform.SetParent(gameObject.transform);
             item.transform.localPosition = new Vector3(0, 0.5f, 0);
+            item.GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
             items.RemoveAt(0);
         }
     }

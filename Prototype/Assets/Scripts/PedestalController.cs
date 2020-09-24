@@ -5,6 +5,7 @@ using UnityEngine;
 public class PedestalController : MonoBehaviour
 {
     public int id;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,11 @@ public class PedestalController : MonoBehaviour
             GetComponent<Renderer>().material.SetColor("_Color", Color.red);
             if (Input.GetKey(KeyCode.E))
             {
-                GameEvents.current.InteractPedestal(id, gameObject);
+                Inventory inventory = player.GetComponent<Inventory>();
+                if (inventory.items.Count > 0)
+                {
+                    GameEvents.current.InteractPedestal(id, gameObject);
+                }
             }
         }
     }

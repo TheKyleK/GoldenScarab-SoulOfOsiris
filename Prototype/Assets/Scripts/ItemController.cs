@@ -10,6 +10,8 @@ public class ItemController : MonoBehaviour
     {
         GameEvents.current.onItemHit += OnItemHit;
         GameEvents.current.onItemTriggerExit += OnItemTriggerExit;
+        //GameEvents.current.onInteractPedestal += OnInteractPedestal;
+        //GameEvents.current.onPedestalTriggerExit += OnPedestalTriggerExit;
     }
 
     void OnItemHit(int id, GameObject gameObject)
@@ -28,9 +30,26 @@ public class ItemController : MonoBehaviour
         }
     }
 
+    //void OnInteractPedestal(int id, GameObject gameObject)
+    //{
+    //    if (id == this.id)
+    //    {
+    //        GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+    //    }
+    //}
+
+    //void OnPedestalTriggerExit(int id)
+    //{
+    //    if (id == this.id)
+    //    {
+    //        GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+    //    }
+    //}
+
     private void OnDestroy()
     {
         GameEvents.current.onItemHit -= OnItemHit;
         GameEvents.current.onItemTriggerExit -= OnItemTriggerExit;
+        //GameEvents.current.onInteractPedestal -= OnPedestalTriggerExit;
     }
 }
