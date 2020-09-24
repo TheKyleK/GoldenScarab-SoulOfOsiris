@@ -15,9 +15,13 @@ public class MonsterSpawner : MonoBehaviour
 
     void InteractPedestal(int id, GameObject gameObject)
     {
-        GameObject monster = Instantiate(monsterPrefab, transform.position, Quaternion.identity);
-        monster.GetComponent<MonsterMovement>().player = player;
-        Destroy(this.gameObject);
+        Inventory inventory = player.GetComponent<Inventory>();
+        if (inventory.items.Count > 0)
+        {
+            GameObject monster = Instantiate(monsterPrefab, transform.position, Quaternion.identity);
+            monster.GetComponent<MonsterMovement>().player = player;
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnDestroy()
