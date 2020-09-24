@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -24,6 +24,7 @@ public class CharacterRB : MonoBehaviour
         ApplyFriction();
         UpdateRotation();
         acceleration *= 0;
+        //velocity *= 0;
     }
 
     void ApplyFriction()

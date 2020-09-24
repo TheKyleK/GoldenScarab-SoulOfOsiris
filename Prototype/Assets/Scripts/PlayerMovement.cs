@@ -40,10 +40,14 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
+        if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+        {
         Vector3 move = transform.forward * z + transform.right * x;
-        Vector3 moveForce = move * rb.maxAcceleration;
+        Vector3 moveForce = move.normalized * rb.speed;
 
-        rb.velocity += moveForce;
+        rb.velocity = moveForce;
+        }
+
         //velocity.y += gravity * Time.deltaTime;
     }
 }
