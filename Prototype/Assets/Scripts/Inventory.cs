@@ -16,10 +16,7 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E) && items.Count < capacity)
         {
-            AudioSource source = gameObject.GetComponent<AudioSource>();
-            //source.clip = 
-            SoundManager.current.PlaySound(source,"Chime");
-            //source.Play();
+            SoundManager.current.PlaySound("Chime", gameObject.transform.position);
             items.Add(gameObject);
             gameObject.SetActive(false);
         }

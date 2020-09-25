@@ -9,30 +9,20 @@ public class SoundManager : MonoBehaviour
 
     public Dictionary<string, AudioClip> audioMap = new Dictionary<string, AudioClip>();
 
-    public AudioClip placeholder;
-
     private void Awake()
     {
         current = this;
         
-        //placeholder = Resources.Load<AudioClip>("Sounds/Chime");
-
         audioMap.Add("Chime", Resources.Load<AudioClip>("Sounds/Chime"));
       
         audioMap.Add("Ding", Resources.Load<AudioClip>("Sounds/Ding"));
-
-        AudioSource.PlayClipAtPoint(clips[soundName], position);
-
+        
 
     }
 
-    public void PlaySound(AudioSource source, string soundName)
+    public void PlaySound(string soundName, Vector3 position)
     {
-        source.clip = audioMap[soundName];
-        source.Play();
-
-
-
+        AudioSource.PlayClipAtPoint(audioMap[soundName], position);
     }
 
 }
