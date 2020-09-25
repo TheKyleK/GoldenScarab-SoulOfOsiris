@@ -16,6 +16,10 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E) && items.Count < capacity)
         {
+            AudioSource source = gameObject.GetComponent<AudioSource>();
+            //source.clip = 
+            SoundManager.current.PlaySound(source,"Chime");
+            //source.Play();
             items.Add(gameObject);
             gameObject.SetActive(false);
         }
@@ -32,6 +36,8 @@ public class Inventory : MonoBehaviour
             item.GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
             items.RemoveAt(0);
         }
+
+
     }
 }
 
