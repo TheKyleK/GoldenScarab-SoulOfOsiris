@@ -14,7 +14,7 @@ public class FieldOfView : MonoBehaviour
     public LayerMask obstacleMask;
 
     public Transform eyeTransform;
-    public List<Transform> visibleTargets = new List<Transform>();
+    public List<Vector3> visibleTargets = new List<Vector3>();
 
     private void Start()
     {
@@ -49,7 +49,8 @@ public class FieldOfView : MonoBehaviour
 
                 if (!Physics.Raycast(eyeTransform.position, directionToTarget, distanceToTarget, obstacleMask))
                 {
-                    visibleTargets.Add(target);
+
+                    visibleTargets.Add(new Vector3(target.position.x, target.position.y, target.position.z));
                 }
                
             }

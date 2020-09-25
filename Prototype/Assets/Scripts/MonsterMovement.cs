@@ -14,22 +14,36 @@ public class MonsterMovement : MonoBehaviour
     CharacterRB rb;
     NavMeshAgent agent;
 
+    FieldOfView fov;
+    Vector3 lastSaw;
+
     // Update is called once per frame
     void Start()
     {
         rb = GetComponent<CharacterRB>();
         path = new NavMeshPath();
         agent = GetComponent<NavMeshAgent>();
+        fov = GetComponent<FieldOfView>();
+        lastSaw = transform.position;
     }
     void Update()
     {
-        SeekPath();
+        if (fov.visibleTargets.Count > 0)
+        {
+            SeekPath(fov.visibleTargets[0]);
+            lastSaw = fov.visibleTargets[0];
+            //lastSaw = fov.visibleTargets
+        }
+        else
+        {
+            SeekPath(lastSaw);
+        }
         Arrive();
     }
 
-    void SeekPath()
+    void SeekPath(Vector3 targetPos)
     {
-        if (agent.CalculatePath(player.transform.position, path))
+        if (agent.CalculatePath(targetPos, path))
         {
             for (int i = 0; i < path.corners.Length; i++)
             {
@@ -50,7 +64,7 @@ public class MonsterMovement : MonoBehaviour
     {
         Vector3 agentXZ = transform.position;
         agentXZ.y = 0;
-        Vector3 playerXZ = player.transform.position;
+        Vector3 playerXZ = lastSaw;
         playerXZ.y = 0;
 
         if ((agentXZ - playerXZ).magnitude < stoppingDistance)

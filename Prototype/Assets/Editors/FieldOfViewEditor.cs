@@ -20,8 +20,8 @@ public class FieldOfViewEditor : Editor
         Handles.color = Color.red;
         for (int i = 0; i < fov.visibleTargets.Count; i++)
         {
-            Transform target = fov.visibleTargets[i];
-            Vector3 targetPos = new Vector3(target.position.x, fov.eyeTransform.position.y, target.position.z);
+            Vector3 target = fov.visibleTargets[i];
+            Vector3 targetPos = new Vector3(target.x, fov.eyeTransform.position.y, target.z);
             Handles.DrawLine(fov.eyeTransform.position, targetPos);
         }
     }
