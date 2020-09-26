@@ -10,22 +10,20 @@ public class MonsterSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameEvents.current.onInteractPedestal += InteractPedestal;
+        GameEvents.current.onPlayerPlaceDown += OnPlayerPlaceDown;
     }
 
-    void InteractPedestal(int id, GameObject gameObject)
+    void OnPlayerPlaceDown(GameObject player, GameObject item)
     {
-        Inventory inventory = player.GetComponent<Inventory>();
-        if (inventory.items.Count > 0)
-        {
-            GameObject monster = Instantiate(monsterPrefab, transform.position, Quaternion.identity);
-            monster.GetComponent<MonsterMovement>().player = player;
-            Destroy(this.gameObject);
-        }
+        GameObject monster = Instantiate(monsterPrefab, transform.position, Quaternion.identity);
+        monster.GetComponent<MonsterMovement>().player = player;
+        Destroy(gameObject);
+
     }
 
     private void OnDestroy()
     {
-        GameEvents.current.onInteractPedestal -= InteractPedestal;
+        GameEvents.current.onPlayerPlaceDown -= OnPlayerPlaceDown;
+
     }
 }

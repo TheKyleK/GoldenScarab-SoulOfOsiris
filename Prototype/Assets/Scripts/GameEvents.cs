@@ -12,60 +12,48 @@ public class GameEvents : MonoBehaviour
         current = this;
     }
 
-    // Itmes
-    public event Action<int, GameObject> onItemHit;
-    public void ItemHit(int id, GameObject gameObject)
+    // Objects
+    public event Action<GameObject> onObjectTriggerEnter;
+    public void ObjectTriggerEnter(GameObject obj)
     {
-        if (onItemHit != null)
-        {
-            onItemHit(id, gameObject);
-        }
+        onObjectTriggerEnter(obj);
     }
 
-    public event Action<int> onItemTriggerExit;
-    public void ItemTriggerExit(int id)
+    public event Action<GameObject> onObjectTriggerExit;
+    public void ObjectTriggerExit(GameObject obj)
     {
-        if (onItemTriggerExit != null)
-        {
-            onItemTriggerExit(id);
-        }
+        onObjectTriggerExit(obj);
     }
 
-    // Pedestal
-    public event Action<int, GameObject> onPedestalHit;
-    public void PedestalHit(int id, GameObject gameObject)
+    // Player
+    public event Action<GameObject, GameObject> onPlayerRayHitEnter;
+    public void PlayerRayHitEnter(GameObject player, GameObject target)
     {
-        if (onPedestalHit != null)
-        {
-            onPedestalHit(id, gameObject);
-        }
+        onPlayerRayHitEnter(player, target);
     }
 
-    public event Action<int> onPedestalTriggerExit;
-    public void PedestalTriggerExit(int id)
+    public event Action<GameObject> onPlayerRayHitExit;
+    public void PlayerRayHitExit(GameObject player)
     {
-        if (onPedestalTriggerExit != null)
-        {
-            onPedestalTriggerExit(id);
-        }
+        onPlayerRayHitExit(player);
     }
 
-    public event Action<int, GameObject> onInteractPedestal;
-    public void InteractPedestal(int id, GameObject gameObject)
+
+    //public event Action<GameObject, GameObject> onPlayerInteract;
+    //public void PlayerInteract(GameObject player, GameObject target)
+    //{
+    //    onPlayerInteract(player, target);
+    //}
+
+    public event Action<GameObject, GameObject> onPlayerPickUp;
+    public void PlayerPickUp(GameObject player, GameObject target)
     {
-        if (onInteractPedestal != null)
-        {
-            onInteractPedestal(id, gameObject);
-        }
+        onPlayerPickUp(player, target);
     }
 
-    // Door
-    public event Action<int> onOpenDoor;
-    public void OpenDoor(int id)
+    public event Action<GameObject, GameObject> onPlayerPlaceDown;
+    public void PlayerPlaceDown(GameObject player, GameObject target)
     {
-        if (onOpenDoor != null)
-        {
-            onOpenDoor(id);
-        }
+        onPlayerPlaceDown(player, target);
     }
 }
