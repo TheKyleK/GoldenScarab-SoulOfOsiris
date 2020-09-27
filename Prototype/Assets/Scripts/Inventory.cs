@@ -28,7 +28,6 @@ public class Inventory : MonoBehaviour
         {
             SoundManager.current.PlaySound(Sound.Chime, item.transform.position);
             items.Add(item);
-            item.SetActive(false);
             return true;
         }
         return false;

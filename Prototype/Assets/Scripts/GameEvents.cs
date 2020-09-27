@@ -51,6 +51,12 @@ public class GameEvents : MonoBehaviour
         onPlayerPickUp(player, target);
     }
 
+    public event Action<GameObject, GameObject, GameObject> onPlayerPickUpFromPedestal;
+    public void PlayerPickUpFromPedestal(GameObject player, GameObject target, GameObject pedestal)
+    {
+        onPlayerPickUpFromPedestal(player, target, pedestal);
+    }
+
     public event Action<GameObject, GameObject> onPlayerPlaceDown;
     public void PlayerPlaceDown(GameObject player, GameObject target)
     {

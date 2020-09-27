@@ -18,7 +18,7 @@ public class PedestalEventManager : MonoBehaviour
         GameEvents.current.onObjectTriggerExit += OnObjectTriggerExit;
         GameEvents.current.onPlayerRayHitEnter += OnPlayerRayHitEnter;
         GameEvents.current.onPlayerRayHitExit += OnPlayerRayHitExit;
-        GameEvents.current.onPlayerPickUp += OnPlayerPickUp;
+        //GameEvents.current.onPlayerPickUp += OnPlayerPickUp;
     }
 
     void OnObjectTriggerEnter(GameObject obj)
@@ -60,7 +60,7 @@ public class PedestalEventManager : MonoBehaviour
         if (pedestalInventory.items.Contains(item))
         {
             item.SetActive(false);
-            pedestalInventory.Transfer(pedestalInventory.items.IndexOf(item), playerInventory);
+            pedestalInventory.items.RemoveAt(pedestalInventory.items.IndexOf(item));
             SoundManager.current.PlaySound(Sound.Chime, item.transform.position);
         }
     }

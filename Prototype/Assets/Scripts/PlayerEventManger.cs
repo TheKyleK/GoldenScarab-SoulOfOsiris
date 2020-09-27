@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -13,6 +14,7 @@ public class PlayerEventManger : MonoBehaviour
     void Start()
     {
         GameEvents.current.onPlayerPickUp += OnPlayerPickUp;
+        GameEvents.current.onPlayerPickUpFromPedestal += OnPlayerPickUpFromPedestal;
         GameEvents.current.onPlayerPlaceDown += OnPlayerPlaceDown;
     }
 
@@ -29,7 +31,15 @@ public class PlayerEventManger : MonoBehaviour
                 // if we are trying to interact with item
                 if (hit.transform.CompareTag("Item"))
                 {
-                    GameEvents.current.PlayerPickUp(gameObject, hit.transform.gameObject);
+                    GameObject parent = hit.transform.parent.parent.gameObject;
+                    if (parent.transform.CompareTag("Pedestal"))
+                    {
+                        GameEvents.current.PlayerPickUpFromPedestal(gameObject, hit.transform.gameObject, parent);
+                    }
+                    else
+                    {
+                        GameEvents.current.PlayerPickUp(gameObject, hit.transform.gameObject);
+                    }
                 }
 
                 if (hit.transform.CompareTag("Pedestal"))
@@ -51,7 +61,29 @@ public class PlayerEventManger : MonoBehaviour
         if (player == gameObject)
         {
             Inventory inventory = GetComponent<Inventory>();
-            inventory.Pickup(item);
+            if (inventory.Pickup(item))
+            {
+                item.transform.SetParent(player.transform);
+                item.SetActive(false);
+            }
+        }
+    }
+
+    void OnPlayerPickUpFromPedestal(GameObject player, GameObject item, GameObject pedestal)
+    {
+        if (player == gameObject)
+        {
+            Inventory playerInventory = GetComponent<Inventory>();
+            Inventory pedestalInventory = pedestal.GetComponent<Inventory>();
+            if (pedestalInventory.items.Contains(item))
+            {
+                if (pedestalInventory.Transfer(pedestalInventory.items.IndexOf(item), playerInventory))
+                {
+                    item.SetActive(false);
+                    item.transform.SetParent(player.transform);
+                    SoundManager.current.PlaySound(Sound.Chime, item.transform.position);
+                }
+            }
         }
     }
 
@@ -68,6 +100,7 @@ public class PlayerEventManger : MonoBehaviour
                 Transform anchorPoint = pedestal.GetComponent<PedestalEventManager>().ancherPoint;
                 item.transform.SetParent(anchorPoint);
                 item.transform.localPosition = Vector3.zero;
+                item.transform.localRotation = Quaternion.identity;
                 SoundManager.current.PlaySound(Sound.Ding, item.transform.position);
             }
         }
