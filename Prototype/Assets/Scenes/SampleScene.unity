@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb0e0a414e6a624db88b2f5200ddeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volume: 0.5
 --- !u!4 &72255836
 Transform:
   m_ObjectHideFlags: 0
@@ -1081,7 +1082,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 3.0092666e-36, y: 1.009742e-28, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 9.8607613e-32, y: 0, z: 0, w: 2.1e-44}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2421,10 +2422,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 67354896495488690, guid: 05ce83df1b04b4842a4184dca5311fbb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3942448992741073744, guid: 05ce83df1b04b4842a4184dca5311fbb,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942448992741073745, guid: 05ce83df1b04b4842a4184dca5311fbb,
+        type: 3}
+      propertyPath: force
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942448992741073756, guid: 05ce83df1b04b4842a4184dca5311fbb,
+        type: 3}
+      propertyPath: friction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942448992741073756, guid: 05ce83df1b04b4842a4184dca5311fbb,
+        type: 3}
+      propertyPath: speed
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3942448992741073757, guid: 05ce83df1b04b4842a4184dca5311fbb,
         type: 3}

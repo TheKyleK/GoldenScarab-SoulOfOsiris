@@ -16,9 +16,7 @@ public class MonsterSpawner : MonoBehaviour
     void OnPlayerPlaceDown(GameObject player, GameObject item)
     {
         GameObject monster = Instantiate(monsterPrefab, transform.position, Quaternion.identity);
-        monster.GetComponent<MonsterMovement>().player = player;
         Destroy(gameObject);
-
     }
 
     private void OnDestroy()

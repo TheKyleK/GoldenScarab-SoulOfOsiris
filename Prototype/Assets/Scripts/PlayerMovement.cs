@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
 
     CharacterRB rb;
-
+    public float force;
  
 
     // Start is called before the first frame update
@@ -42,10 +42,10 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
         {
-        Vector3 move = transform.forward * z + transform.right * x;
-        Vector3 moveForce = move.normalized * rb.speed;
+            Vector3 move = transform.forward * z + transform.right * x;
+            Vector3 moveForce = move.normalized * force;
 
-        rb.velocity = moveForce;
+            rb.acceleration += moveForce;
         }
 
         //velocity.y += gravity * Time.deltaTime;

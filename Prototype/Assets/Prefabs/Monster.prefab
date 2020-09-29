@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &563549978
+--- !u!1 &-3346135196499305196
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 563549979}
-  m_Layer: 10
+  - component: {fileID: 7991993716544557607}
+  m_Layer: 0
   m_Name: Eye Transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &563549979
+--- !u!4 &7991993716544557607
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 563549978}
+  m_GameObject: {fileID: -3346135196499305196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.662, z: 0.096}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 311539980322345466}
   m_Father: {fileID: 2850863420944318635}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -855,10 +856,9 @@ GameObject:
   - component: {fileID: 2850863420944318634}
   - component: {fileID: 2850863420944318637}
   - component: {fileID: 569099631}
-  - component: {fileID: 2850863420944318633}
-  - component: {fileID: 569099629}
-  - component: {fileID: 569099630}
-  - component: {fileID: 1806556827}
+  - component: {fileID: 311539979809785571}
+  - component: {fileID: 4295705184620768801}
+  - component: {fileID: 3699188591019807993}
   m_Layer: 10
   m_Name: Monster
   m_TagString: Untagged
@@ -874,12 +874,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2850863420944318630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.72, y: 0, z: 7.58}
+  m_LocalPosition: {x: -3.64, y: 0, z: 7.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7127784117784761516}
   - {fileID: 2850863420232790446}
-  - {fileID: 563549979}
+  - {fileID: 7991993716544557607}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -908,7 +908,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.6
   m_Speed: 10
-  m_Acceleration: 1000000
+  m_Acceleration: 1000
   avoidancePriority: 50
   m_AngularSpeed: 999
   m_StoppingDistance: 2.5
@@ -956,7 +956,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.95, z: 0}
---- !u!114 &2850863420944318633
+--- !u!114 &311539979809785571
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -965,13 +965,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2850863420944318630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e612d0f18a88bf4a84e793d28c5d7a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b5bb00efd806e444af6f139923a623f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  stoppingDistance: 2.5
-  steeringForce: 5
---- !u!114 &569099629
+  root: {fileID: 11400000, guid: 8e1a69e3d951d5342bbd7a1d8312db1f, type: 2}
+  eyeTransform: {fileID: 7991993716544557607}
+--- !u!114 &4295705184620768801
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -986,11 +985,9 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   friction: 0.99
-  speed: 5
-  maxAcceleration: 10000
+  speed: 4
   controller: {fileID: 569099631}
-  updateRotation: 1
---- !u!114 &569099630
+--- !u!114 &3699188591019807993
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1003,28 +1000,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
---- !u!114 &1806556827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2850863420944318630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 971a29a2ffd55e74481e59a423ae1b9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewRadius: 20
-  viewAngle: 90
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 512
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 2048
-  eyeTransform: {fileID: 563549979}
-  visibleTargets: []
 --- !u!1 &2890920255950348033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,6 +1683,36 @@ Transform:
   m_Children:
   - {fileID: 3703977761286594266}
   m_Father: {fileID: 6709918544359958811}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6546923916990955624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 311539980322345466}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &311539980322345466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546923916990955624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7991993716544557607}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6648213423629606386

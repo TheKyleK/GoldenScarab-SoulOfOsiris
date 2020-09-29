@@ -37,9 +37,11 @@ public class CharacterState : MonoBehaviour
     void UpdateState()
     {
         Vector3 velocityXZ = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        Vector3 accelerationXZ = new Vector3(rb.acceleration.x, 0, rb.acceleration.z);
+        float magVel = velocityXZ.magnitude;
+        float magAcc = accelerationXZ.magnitude;
 
-        float mag = velocityXZ.magnitude;
-        if (mag > 0)
+        if (magVel > 0 || magAcc > 0)
         {
             state = State.Running;
         }
@@ -47,7 +49,6 @@ public class CharacterState : MonoBehaviour
         {
             state = State.Idle;
         }
-
     }
 
     void UpdateAnimation()

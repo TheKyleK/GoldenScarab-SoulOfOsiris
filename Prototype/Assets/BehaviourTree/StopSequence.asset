@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf125b5f6aef68d49add3ffc93433bdc, type: 3}
+  m_Name: StopSequence
+  m_EditorClassIdentifier: 
+  children:
+  - {fileID: 11400000, guid: 6c1f3a866cea85649b4d0c510d11ff53, type: 2}
+  - {fileID: 11400000, guid: edb5a858711943a43ba3f885713eb87e, type: 2}
+  pendingChild: {fileID: 0}

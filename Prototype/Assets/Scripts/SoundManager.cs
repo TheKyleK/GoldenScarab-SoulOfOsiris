@@ -13,6 +13,8 @@ public class SoundManager : MonoBehaviour
    
     // Start is called before the first frame update
     public static SoundManager current;
+    [Range(0, 1)]
+    public float volume;
 
     public Dictionary<Sound, AudioClip> audioMap = new Dictionary<Sound, AudioClip>();
 
@@ -29,7 +31,8 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(Sound sound, Vector3 position)
     {
-        AudioSource.PlayClipAtPoint(audioMap[sound], position);
+
+        AudioSource.PlayClipAtPoint(audioMap[sound], position, volume);
     }
 
 }
