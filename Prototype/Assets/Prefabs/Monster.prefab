@@ -987,7 +987,6 @@ MonoBehaviour:
   acceleration: {x: 0, y: 0, z: 0}
   friction: 0.99
   speed: 5
-  maxAcceleration: 10000
   controller: {fileID: 569099631}
   updateRotation: 1
 --- !u!114 &569099630
