@@ -7,17 +7,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //public float moveSpeed = 12.0f;
-    //public float acceleration = 5.0f;
-    //public float gravity = -9.81f;
-    //public float friction = 0.95f;
+    public float force;
 
-
-    //public PlayerState state = PlayerState.Idle;
     Animator animator;
-
     CharacterRB rb;
-
  
 
     // Start is called before the first frame update
@@ -42,10 +35,10 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
         {
-        Vector3 move = transform.forward * z + transform.right * x;
-        Vector3 moveForce = move.normalized * rb.speed;
+            Vector3 move = transform.forward * z + transform.right * x;
+            Vector3 moveForce = move.normalized * force;
 
-        rb.velocity = moveForce;
+            rb.acceleration += moveForce;
         }
 
         //velocity.y += gravity * Time.deltaTime;

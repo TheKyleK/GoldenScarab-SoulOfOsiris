@@ -62,4 +62,11 @@ public class GameEvents : MonoBehaviour
     {
         onPlayerPlaceDown(player, target);
     }
+
+    // Velocity
+    public event Action<GameObject> onVelocityChanged;
+    public void VelocityChanged(GameObject character)
+    {
+        onVelocityChanged(character);
+    }
 }
