@@ -988,14 +988,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   rotateSpeed: 5
-  viewRange: 10
+  viewRange: 20
   eyeTransform: {fileID: 563549979}
   viewAngle: 90
   obstacleMask:
     serializedVersion: 2
     m_Bits: 2048
   steeringForce: 1
-  seekThreshold: 1
+  seekThreshold: 0.1
   lookAtPlayerRange: 200
 --- !u!1 &2890920255950348033
 GameObject:
