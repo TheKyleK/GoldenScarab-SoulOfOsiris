@@ -35,4 +35,18 @@ public class GetTargetsInLineOfSight : BTNode
         blackboard.Set(BlackboardKey.Input, visibleTargets);
         return BehaviourResult.Success;
     }
+
+    //ViewCastInfo ViewCast(float globalAngle)
+    //{
+    //    Vector3 dir = DirFromAngle(globalAngle, true);
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(eyeTransform.position, dir, out hit, viewRange, obstacleMask))
+    //    {
+    //        return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
+    //    }
+    //    else
+    //    {
+    //        return new ViewCastInfo(false, eyeTransform.position + dir * viewRange, viewRange, globalAngle);
+    //    }
+    //}
 }
