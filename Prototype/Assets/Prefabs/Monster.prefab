@@ -855,10 +855,8 @@ GameObject:
   - component: {fileID: 2850863420944318634}
   - component: {fileID: 2850863420944318637}
   - component: {fileID: 569099631}
-  - component: {fileID: 2850863420944318633}
   - component: {fileID: 569099629}
-  - component: {fileID: 569099630}
-  - component: {fileID: 1806556827}
+  - component: {fileID: 3395804326014273797}
   m_Layer: 10
   m_Name: Monster
   m_TagString: Untagged
@@ -956,21 +954,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.95, z: 0}
---- !u!114 &2850863420944318633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2850863420944318630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e612d0f18a88bf4a84e793d28c5d7a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  stoppingDistance: 2.5
-  steeringForce: 5
 --- !u!114 &569099629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,11 +968,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
-  friction: 0.99
-  speed: 5
+  friction: 1
+  speed: 60
   controller: {fileID: 569099631}
-  updateRotation: 1
---- !u!114 &569099630
+--- !u!114 &3395804326014273797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -998,32 +980,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2850863420944318630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e744bac2554b4a34897b9143973e4082, type: 3}
+  m_Script: {fileID: 11500000, guid: 7df99e90c49c8b34bbb13429d0a02fcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
---- !u!114 &1806556827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2850863420944318630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 971a29a2ffd55e74481e59a423ae1b9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewRadius: 20
-  viewAngle: 90
-  targetMask:
+  stopRange: 2
+  playerMask:
     serializedVersion: 2
     m_Bits: 512
+  rotateSpeed: 5
+  viewRange: 10
+  eyeTransform: {fileID: 563549979}
+  viewAngle: 90
   obstacleMask:
     serializedVersion: 2
     m_Bits: 2048
-  eyeTransform: {fileID: 563549979}
-  visibleTargets: []
+  steeringForce: 1
+  seekThreshold: 1
+  lookAtPlayerRange: 200
 --- !u!1 &2890920255950348033
 GameObject:
   m_ObjectHideFlags: 0
