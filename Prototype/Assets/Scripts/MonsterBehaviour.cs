@@ -21,6 +21,10 @@ public class MonsterBehaviour : MonoBehaviour
     [Header("Look At Player Sequence")]
     public float lookAtPlayerRange;
 
+    [Header("Foot Steps")]
+    public Transform leftFoot;
+    public Transform rightFoot;
+
     [Header("Debug Draw")]
     public float meshResolution;
     public int edgeResolveIterations;
@@ -316,5 +320,15 @@ public class MonsterBehaviour : MonoBehaviour
             angleInDegree += transform.eulerAngles.y;
         }
         return new Vector3(Mathf.Sin(angleInDegree * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegree * Mathf.Deg2Rad));
+    }
+
+    public void PlayFootStepSoundLeft()
+    {
+        SoundManager.current.PlaySound(Sound.FootStep, leftFoot.position);
+    }
+
+    public void PlayFootStepSoundRight()
+    {
+        SoundManager.current.PlaySound(Sound.FootStep, rightFoot.position);
     }
 }

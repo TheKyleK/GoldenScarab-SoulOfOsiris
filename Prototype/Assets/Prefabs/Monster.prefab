@@ -1077,6 +1077,8 @@ MonoBehaviour:
   steeringForce: 1
   seekThreshold: 0.1
   lookAtPlayerRange: 200
+  leftFoot: {fileID: 4900518979009859248}
+  rightFoot: {fileID: 3467202938508055205}
   meshResolution: 1
   edgeResolveIterations: 4
   edgeDistanceThreshold: 0.5

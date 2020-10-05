@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerStateMachine : MonoBehaviour
 {
     public float moveStrength;
+    public Transform leftFoot;
+    public Transform rightFoot;
     PlayerState state;
     CharacterRB rb;
     Animator animator;
@@ -26,5 +28,15 @@ public class PlayerStateMachine : MonoBehaviour
         }
         state.UpdateMovement(gameObject, rb, moveStrength);
         state.UpdateAnimation(animator);
+    }
+
+    public void PlayFootStepSoundLeft()
+    {
+        SoundManager.current.PlaySound(Sound.FootStep, leftFoot.position);
+    }
+
+    public void PlayFootStepSoundRight()
+    {
+        SoundManager.current.PlaySound(Sound.FootStep, rightFoot.position);
     }
 }
