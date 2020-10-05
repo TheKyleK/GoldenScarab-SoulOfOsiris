@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GetClosest : BTNode
+public class GetClosest : ActionNode
 {
     public BlackboardKey key;
 

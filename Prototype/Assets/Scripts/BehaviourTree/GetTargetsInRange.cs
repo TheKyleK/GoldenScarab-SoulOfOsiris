@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GetTargetsInRange : BTNode
+public class GetTargetsInRange : ActionNode
 {
     public LayerMask targetMask;
     public float range;

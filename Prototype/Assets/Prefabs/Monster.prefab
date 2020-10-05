@@ -1066,7 +1066,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 512
-  stopRange: 2
+  stopRange: 1
   rotateSpeed: 5
   viewRange: 10
   eyeTransform: {fileID: 563549979}

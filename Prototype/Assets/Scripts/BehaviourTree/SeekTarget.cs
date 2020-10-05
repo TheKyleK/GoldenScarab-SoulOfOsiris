@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeekTarget : BTNode
+public class SeekTarget : ActionNode
 {
     public CharacterRB rb;
     public BlackboardKey key;

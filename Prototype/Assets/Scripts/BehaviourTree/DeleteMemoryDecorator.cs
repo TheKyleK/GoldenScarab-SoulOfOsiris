@@ -11,6 +11,7 @@ public class DeleteMemoryDecorator : Decorator
         this.key = key;
         this.BehaviourResult = BehaviourResult;
     }
+
     public override BehaviourResult Execute(GameObject agent, Blackboard blackboard, float dt)
     {
         BehaviourResult result = child.Execute(agent, blackboard, dt);

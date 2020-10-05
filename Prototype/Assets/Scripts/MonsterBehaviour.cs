@@ -26,13 +26,15 @@ public class MonsterBehaviour : MonoBehaviour
     public int edgeResolveIterations;
     public float edgeDistanceThreshold;
     public MeshFilter viewMeshFilter;
-    Mesh viewMesh;
+    //public BTNode root;
+    [HideInInspector]
+    public BTNode root;
 
-    BTNode root;
+    Mesh viewMesh;
     CharacterRB rb;
     Animator animator;
     NavMeshAgent agent;
-    Blackboard blackboard;
+    public Blackboard blackboard;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,8 +48,6 @@ public class MonsterBehaviour : MonoBehaviour
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
 
-        
-
         ConstructBehaviourTree();
     }
 
@@ -55,6 +55,8 @@ public class MonsterBehaviour : MonoBehaviour
     void Update()
     {
         root.Execute(gameObject, blackboard, Time.deltaTime);
+        //Debug.Log(blackboard.Get(BlackboardKey.Debug));
+        //root.DebugLog();
         DrawFieldOfView();
     }
 
@@ -65,85 +67,118 @@ public class MonsterBehaviour : MonoBehaviour
         // Stop Sequence
         {
             SequenceNode sequence = new SequenceNode();
+            DebugLogDecorator stopSequenceDebugger = new DebugLogDecorator
+            {
+                child = sequence,
+                label = "Stop Sequence",
+                expectedResult = BehaviourResult.Success
+            };
             GetTargetsInRange inRnage = new GetTargetsInRange(playerMask, stopRange);
             GetClosest getClosest = new GetClosest(BlackboardKey.Input);
             Stop stop = new Stop(rb);
             RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
             UpdateAnimation updateAnimation = new UpdateAnimation(animator, "Idle");
-            sequence.children.Add(inRnage);
-            sequence.children.Add(getClosest);
-            sequence.children.Add(stop);
-            sequence.children.Add(rotateTowardsTarget);
-            sequence.children.Add(updateAnimation);
-            monsterBehaviour.children.Add(sequence);
+            sequence.Add(inRnage);
+            sequence.Add(getClosest);
+            sequence.Add(stop);
+            sequence.Add(rotateTowardsTarget);
+            sequence.Add(updateAnimation);
+            monsterBehaviour.Add(stopSequenceDebugger);
         }
 
         // Seek Sequence
         {
             SequenceNode sequence = new SequenceNode();
+            DebugLogDecorator seekSequenceDebugger = new DebugLogDecorator
+            {
+                child = sequence,
+                label = "Seek Sequence",
+                expectedResult = BehaviourResult.Success
+            };
             GetTargetsInRange inRange = new GetTargetsInRange(playerMask, viewRange);
             GetTargetsInLineOfSight inLineOfSignt = new GetTargetsInLineOfSight(eyeTransform, viewAngle, obstacleMask);
-            StoreOutputDecorator storeClosestTarget = new StoreOutputDecorator(BlackboardKey.Storage);
+            GetClosest getClosest = new GetClosest(BlackboardKey.Input);
+            StoreOutputDecorator storeClosestTarget = new StoreOutputDecorator(BlackboardKey.Storage)
             {
-                GetClosest getClosest = new GetClosest(BlackboardKey.Input);
-                storeClosestTarget.child = getClosest;
-            }
+                child = getClosest
+            };
             GetNextWaypoint getNextWayPoint = new GetNextWaypoint(agent, BlackboardKey.Input, seekThreshold);
             SeekTarget seekTarget = new SeekTarget(rb, BlackboardKey.Input, steeringForce);
             RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
             UpdateAnimation updateAnimation = new UpdateAnimation(animator, "Running");
-            sequence.children.Add(inRange);
-            sequence.children.Add(inLineOfSignt);
-            sequence.children.Add(storeClosestTarget);
-            sequence.children.Add(getNextWayPoint);
-            sequence.children.Add(seekTarget);
-            sequence.children.Add(rotateTowardsTarget);
-            sequence.children.Add(updateAnimation);
-            monsterBehaviour.children.Add(sequence);
+            sequence.Add(inRange);
+            sequence.Add(inLineOfSignt);
+            sequence.Add(storeClosestTarget);
+            sequence.Add(getNextWayPoint);
+            sequence.Add(seekTarget);
+            sequence.Add(rotateTowardsTarget);
+            sequence.Add(updateAnimation);
+            monsterBehaviour.Add(seekSequenceDebugger);
         }
 
         // stop last saw position
         {
-            DeleteMemoryDecorator removeStorageDecorator = new DeleteMemoryDecorator(BlackboardKey.Storage, BehaviourResult.Success);
             SequenceNode sequence = new SequenceNode();
-            removeStorageDecorator.child = sequence;
+            DeleteMemoryDecorator removeStorageDecorator = new DeleteMemoryDecorator(BlackboardKey.Storage, BehaviourResult.Success)
+            {
+                child = sequence
+            };
+            DebugLogDecorator stopLastSawPosSequenceDebugger = new DebugLogDecorator
+            {
+                child = removeStorageDecorator,
+                label = "Stop Last Saw Position Sequence",
+                expectedResult = BehaviourResult.Success
+            };
+
             IsTargetInRange isTargetInRange = new IsTargetInRange(BlackboardKey.Storage, stopRange);
             Stop stop = new Stop(rb);
             UpdateAnimation updateAnimation = new UpdateAnimation(animator, "Idle");
-            sequence.children.Add(isTargetInRange);
-            sequence.children.Add(stop);
-            sequence.children.Add(updateAnimation);
-            monsterBehaviour.children.Add(removeStorageDecorator);
+            sequence.Add(isTargetInRange);
+            sequence.Add(stop);
+            sequence.Add(updateAnimation);
+            monsterBehaviour.Add(stopLastSawPosSequenceDebugger);
         }
 
         // Seek last saw position Sequence
         {
             SequenceNode sequence = new SequenceNode();
+            DebugLogDecorator seekLastSawPosSequenceDebugger = new DebugLogDecorator
+            {
+                child = sequence,
+                label = "Seek Last Saw Position Sequence",
+                expectedResult = BehaviourResult.Success
+            };
             GetNextWaypoint getNextWayPoint = new GetNextWaypoint(agent, BlackboardKey.Storage, seekThreshold);
             SeekTarget seekTarget = new SeekTarget(rb, BlackboardKey.Input, steeringForce);
             RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
             UpdateAnimation updateAnimation = new UpdateAnimation(animator, "Running");
-            sequence.children.Add(getNextWayPoint);
-            sequence.children.Add(seekTarget);
-            sequence.children.Add(rotateTowardsTarget);
-            sequence.children.Add(updateAnimation);
-            monsterBehaviour.children.Add(sequence);
+            sequence.Add(getNextWayPoint);
+            sequence.Add(seekTarget);
+            sequence.Add(rotateTowardsTarget);
+            sequence.Add(updateAnimation);
+            monsterBehaviour.Add(seekLastSawPosSequenceDebugger);
         }
 
         // look at player sequence
         {
             SequenceNode sequence = new SequenceNode();
+            DebugLogDecorator lookAtPlayerSequenceDebugger = new DebugLogDecorator
+            {
+                child = sequence,
+                label = "Look At Player Sequence",
+                expectedResult = BehaviourResult.Success
+            };
             GetTargetsInRange inRnage = new GetTargetsInRange(playerMask, lookAtPlayerRange);
             GetClosest getClosest = new GetClosest(BlackboardKey.Input);
             Stop stop = new Stop(rb);
             RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
             UpdateAnimation updateAnimation = new UpdateAnimation(animator, "Idle");
-            sequence.children.Add(inRnage);
-            sequence.children.Add(getClosest);
-            sequence.children.Add(stop);
-            sequence.children.Add(rotateTowardsTarget);
-            sequence.children.Add(updateAnimation);
-            monsterBehaviour.children.Add(sequence);
+            sequence.Add(inRnage);
+            sequence.Add(getClosest);
+            sequence.Add(stop);
+            sequence.Add(rotateTowardsTarget);
+            sequence.Add(updateAnimation);
+            monsterBehaviour.Add(lookAtPlayerSequenceDebugger);
         }
 
         // delete the input after the tree is finished

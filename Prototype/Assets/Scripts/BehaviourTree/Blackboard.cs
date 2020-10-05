@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +7,15 @@ using UnityEngine;
 public enum BlackboardKey
 {
     Input,
-    Storage
+    Storage,
+    Debug
 }
+
+[Serializable]
 public class Blackboard
 {
-    Dictionary<BlackboardKey, dynamic> entries = new Dictionary<BlackboardKey, dynamic>();
+    [SerializeField]
+    public Dictionary<BlackboardKey, dynamic> entries = new Dictionary<BlackboardKey, dynamic>();
 
     public void Set<T>(BlackboardKey key, T value)
     {

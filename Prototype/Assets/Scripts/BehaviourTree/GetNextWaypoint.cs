@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GetNextWaypoint : BTNode
+public class GetNextWaypoint : ActionNode
 {
     public NavMeshAgent navAgent;
     public BlackboardKey key;

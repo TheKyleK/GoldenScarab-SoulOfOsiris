@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IsTargetInRange : BTNode
+public class IsTargetInRange : ActionNode
 {
     public BlackboardKey key;
     public float range;

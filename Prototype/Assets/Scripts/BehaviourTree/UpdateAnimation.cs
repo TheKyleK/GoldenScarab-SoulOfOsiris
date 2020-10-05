@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpdateAnimation : BTNode
+public class UpdateAnimation : ActionNode
 {
     public Animator animator;
     public string animationState;

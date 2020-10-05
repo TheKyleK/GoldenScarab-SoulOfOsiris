@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GetTargetsInLineOfSight : BTNode
+public class GetTargetsInLineOfSight : ActionNode
 {
     public Transform eyeTransform;
     public float viewAngle;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stop : BTNode
+public class Stop : ActionNode
 {
     public CharacterRB rb;
     public Stop(CharacterRB rb)
