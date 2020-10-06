@@ -6,7 +6,8 @@ public enum Sound
 {
     Chime,
     Ding,
-    FootStep
+    FootStep,
+    FootStepWood
 }
 
 public class SoundManager : MonoBehaviour
@@ -26,12 +27,18 @@ public class SoundManager : MonoBehaviour
         audioMap.Add(Sound.Chime, Resources.Load<AudioClip>("Sounds/Chime"));
         audioMap.Add(Sound.Ding, Resources.Load<AudioClip>("Sounds/Ding"));
         audioMap.Add(Sound.FootStep, Resources.Load<AudioClip>("Sounds/FootStep"));
+        audioMap.Add(Sound.FootStepWood, Resources.Load<AudioClip>("Sounds/FootStepWood"));
 
     }
 
     public void PlaySound(Sound sound, Vector3 position)
     {
         AudioSource.PlayClipAtPoint(audioMap[sound], position, volume);
+    }
+
+    public void PlaySound(Sound sound, Vector3 position, float volume)
+    {
+        AudioSource.PlayClipAtPoint(audioMap[sound], position, volume * this.volume);
     }
 
 }

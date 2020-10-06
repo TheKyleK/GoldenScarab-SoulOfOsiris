@@ -936,6 +936,7 @@ GameObject:
   - component: {fileID: 569099631}
   - component: {fileID: 569099629}
   - component: {fileID: 3395804326014273797}
+  - component: {fileID: -7549666865662580193}
   m_Layer: 10
   m_Name: Monster
   m_TagString: Untagged
@@ -1077,12 +1078,30 @@ MonoBehaviour:
   steeringForce: 1
   seekThreshold: 0.1
   lookAtPlayerRange: 200
-  leftFoot: {fileID: 4900518979009859248}
-  rightFoot: {fileID: 3467202938508055205}
+  debug: 0
   meshResolution: 1
   edgeResolveIterations: 4
   edgeDistanceThreshold: 0.5
   viewMeshFilter: {fileID: 1011940905}
+--- !u!114 &-7549666865662580193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2850863420944318630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee6c3c150d66234dabce0eca1183b82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftFoot: {fileID: 4900518979009859248}
+  rightFoot: {fileID: 7786458115111661270}
+  footstepVolume: 1
+  rayDistance: 100
+  ignoreMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &2890920255950348033
 GameObject:
   m_ObjectHideFlags: 0
