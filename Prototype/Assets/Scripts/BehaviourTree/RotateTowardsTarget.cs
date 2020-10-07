@@ -17,7 +17,7 @@ public class RotateTowardsTarget : ActionNode
         if (!blackboard.Contains(key)) return BehaviourResult.Failure;
         Vector3 target = blackboard.Get(key);
         Vector3 targetDir = target - agent.transform.position;
-        Vector3 newDir = Vector3.RotateTowards(agent.transform.forward, targetDir, rotationSpeed * Time.deltaTime, 0.0f);
+        Vector3 newDir = Vector3.RotateTowards(agent.transform.forward, targetDir, rotationSpeed * dt, 0.0f);
         agent.transform.rotation = Quaternion.LookRotation(newDir);
         return BehaviourResult.Success;
     }

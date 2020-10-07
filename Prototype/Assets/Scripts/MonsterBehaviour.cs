@@ -21,10 +21,8 @@ public class MonsterBehaviour : MonoBehaviour
     [Header("Look At Player Sequence")]
     public float lookAtPlayerRange;
 
-    //[Header("Foot Steps")]
-    //public Transform leftFoot;
-    //public Transform rightFoot;
-    //public float footstepVolume;
+    [Header("Behaviour tree delay")]
+    public float delay;
 
     [Header("Debug Draw")]
     public bool debug;
@@ -53,17 +51,23 @@ public class MonsterBehaviour : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
         root = ConstructBehaviourTree();
+
+        StartCoroutine("ExecuteTree");
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator ExecuteTree()
     {
-        root.Execute(gameObject, blackboard, Time.deltaTime);
-        if (debug)
+        while (true)
         {
-            DrawFieldOfView();
+            root.Execute(gameObject, blackboard, delay);
+            if (debug)
+            {
+                DrawFieldOfView();
+            }
+            yield return new WaitForSeconds(delay);
         }
     }
+
 
     BTNode ConstructBehaviourTree()
     {
@@ -348,16 +352,6 @@ public class MonsterBehaviour : MonoBehaviour
         }
         return new Vector3(Mathf.Sin(angleInDegree * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegree * Mathf.Deg2Rad));
     }
-
-    //public void PlayFootStepSoundLeft()
-    //{
-    //    SoundManager.current.PlaySound(Sound.FootStep, leftFoot.position, footstepVolume);
-    //}
-
-    //public void PlayFootStepSoundRight()
-    //{
-    //    SoundManager.current.PlaySound(Sound.FootStep, rightFoot.position, footstepVolume);
-    //}
 
 
 }

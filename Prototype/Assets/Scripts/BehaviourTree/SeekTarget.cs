@@ -19,7 +19,7 @@ public class SeekTarget : ActionNode
         Vector3 target = blackboard.Get(key);
         Vector3 desireVelocity = (target - agent.transform.position).normalized * rb.speed;
         Vector3 force = (desireVelocity - rb.velocity) * steeringForce;
-        rb.acceleration += force;
+        rb.acceleration += force * dt;
         return BehaviourResult.Success;
     }
 }

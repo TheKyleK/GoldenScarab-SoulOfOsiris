@@ -14,7 +14,7 @@ public class CharacterRB : MonoBehaviour
     void FixedUpdate()
     {
         ClampMoveSpeed();
-        velocity += acceleration * Time.fixedDeltaTime;
+        velocity += acceleration;
         controller.Move(velocity * Time.fixedDeltaTime);
         ApplyFriction();
         acceleration *= 0;
@@ -22,7 +22,7 @@ public class CharacterRB : MonoBehaviour
 
     void ApplyFriction()
     {
-        float decay = Mathf.Pow(1 - friction, Time.deltaTime);
+        float decay = Mathf.Pow(1 - friction, Time.fixedDeltaTime);
         velocity.x *= decay;
         velocity.z *= decay;
     }

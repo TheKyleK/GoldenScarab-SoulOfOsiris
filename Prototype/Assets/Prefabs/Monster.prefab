@@ -1050,7 +1050,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   friction: 1
-  speed: 60
+  speed: 200
   controller: {fileID: 569099631}
 --- !u!114 &3395804326014273797
 MonoBehaviour:
@@ -1078,7 +1078,8 @@ MonoBehaviour:
   steeringForce: 1
   seekThreshold: 0.1
   lookAtPlayerRange: 200
-  debug: 0
+  delay: 0.0167
+  debug: 1
   meshResolution: 1
   edgeResolveIterations: 4
   edgeDistanceThreshold: 0.5
