@@ -31,25 +31,34 @@ public class PlayerEventManger : MonoBehaviour
                 // if we are trying to interact with item
                 if (hit.transform.CompareTag("Item"))
                 {
-                    GameObject parent = hit.transform.parent.parent.gameObject;
-                    if (parent.transform.CompareTag("Pedestal"))
+                    GameObject item = hit.transform.gameObject;
+                    ItemEventManager iem = item.GetComponent<ItemEventManager>();
+                    if (iem != null && iem.rayhit && iem.entered)
                     {
-                        GameEvents.current.PlayerPickUpFromPedestal(gameObject, hit.transform.gameObject, parent);
-                    }
-                    else
-                    {
-                        GameEvents.current.PlayerPickUp(gameObject, hit.transform.gameObject);
+                        GameObject parent = hit.transform.parent.parent.gameObject;
+                        if (parent.transform.CompareTag("Pedestal"))
+                        {
+                            GameEvents.current.PlayerPickUpFromPedestal(gameObject, hit.transform.gameObject, parent);
+                        }
+                        else
+                        {
+                            GameEvents.current.PlayerPickUp(gameObject, hit.transform.gameObject);
+                        }
                     }
                 }
 
                 if (hit.transform.CompareTag("Pedestal"))
                 {
                     GameObject pedestal = hit.transform.gameObject;
-                    Inventory playerInventory = GetComponent<Inventory>();
-                    Inventory pedestalInventory = pedestal.GetComponent<Inventory>();
-                    if (playerInventory.CanTransfer(0, pedestalInventory))
+                    PedestalEventManager pem = pedestal.GetComponent<PedestalEventManager>();
+                    if (pem != null && pem.entered && pem.rayhit)
                     {
-                        GameEvents.current.PlayerPlaceDown(gameObject, pedestal);
+                        Inventory playerInventory = GetComponent<Inventory>();
+                        Inventory pedestalInventory = pedestal.GetComponent<Inventory>();
+                        if (playerInventory.CanTransfer(0, pedestalInventory))
+                        {
+                            GameEvents.current.PlayerPlaceDown(gameObject, pedestal);
+                        }
                     }
                 }
             }

@@ -18,5 +18,4 @@ public class ObjectTrigger : MonoBehaviour
     {
         GameEvents.current.ObjectTriggerExit(gameObject);
     }
-
 }
