@@ -52,19 +52,28 @@ public class MonsterBehaviour : MonoBehaviour
 
         root = ConstructBehaviourTree();
 
-        StartCoroutine("ExecuteTree");
+        //StartCoroutine("ExecuteTree");
     }
 
-    IEnumerator ExecuteTree()
+    //IEnumerator ExecuteTree()
+    //{
+    //    while (true)
+    //    {
+    //        root.Execute(gameObject, blackboard, delay);
+    //        if (debug)
+    //        {
+    //            DrawFieldOfView();
+    //        }
+    //        yield return new WaitForSeconds(delay);
+    //    }
+    //}
+
+    private void Update()
     {
-        while (true)
+        root.Execute(gameObject, blackboard, Time.deltaTime);
+        if (debug)
         {
-            root.Execute(gameObject, blackboard, delay);
-            if (debug)
-            {
-                DrawFieldOfView();
-            }
-            yield return new WaitForSeconds(delay);
+            DrawFieldOfView();
         }
     }
 
