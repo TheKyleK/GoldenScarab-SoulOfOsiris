@@ -22,11 +22,14 @@ public class ItemEventManager : MonoBehaviour
     {
         if (entered && rayhit)
         {
-            GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+            //GetComponent<Renderer>().material.shader = Shader.Find("HDRenderPipeline/Lit");
+            GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
         }
         else
         {
-            GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+            //GetComponent<Renderer>().material.shader = Shader.Find("HDRenderPipeline/Lit");
+            GetComponent<Renderer>().material.SetColor("_BaseColor", Color.blue);
+           
         }
     }
 

@@ -70,11 +70,11 @@ public class PedestalEventManager : MonoBehaviour
     {
         if (entered && rayhit)
         {
-            GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+            GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
         }
         else
         {
-            GetComponent<Renderer>().material.SetColor("_Color", new Color(1, 0.4339094f, 0));
+            GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(1, 0.6231f, 0));
         }
     }
 
