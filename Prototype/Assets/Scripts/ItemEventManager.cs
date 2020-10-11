@@ -8,12 +8,16 @@ public class ItemEventManager : MonoBehaviour
     public bool entered = false;
     [HideInInspector]
     public bool rayhit = false;
+
+    public float intensitiy;
     void Start()
     {
         GameEvents.current.onObjectTriggerEnter += OnObjectTriggerEnter;
         GameEvents.current.onObjectTriggerExit += OnObjectTriggerExit;
         GameEvents.current.onPlayerRayHitEnter += OnPlayerRayHitEnter;
         GameEvents.current.onPlayerRayHitExit += OnPlayerRayHitExit;
+        Color color = new Color(0, 0.7509283f, 5.992157f);
+        GetComponent<Renderer>().material.SetColor("_Emission", color);
         //GameEvents.current.onPlayerInteract += OnPlayerInteract;
         //GameEvents.current.onPlayerPickUp += OnPlayerPickUp;
     }
@@ -23,12 +27,15 @@ public class ItemEventManager : MonoBehaviour
         if (entered && rayhit)
         {
             //GetComponent<Renderer>().material.shader = Shader.Find("HDRenderPipeline/Lit");
-            GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
+            float factor = Mathf.Pow(2, intensitiy);
+            Color color = new Color(5.992157f, 0, 0.05640277f);
+            GetComponent<Renderer>().material.SetColor("_Emission", color);
         }
         else
         {
             //GetComponent<Renderer>().material.shader = Shader.Find("HDRenderPipeline/Lit");
-            GetComponent<Renderer>().material.SetColor("_BaseColor", Color.blue);
+            Color color = new Color(0, 0.7509283f, 5.992157f);
+            GetComponent<Renderer>().material.SetColor("_Emission", color);
            
         }
     }
