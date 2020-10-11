@@ -9,15 +9,17 @@ public class ItemEventManager : MonoBehaviour
     [HideInInspector]
     public bool rayhit = false;
 
-    public float intensitiy;
+    [ColorUsage(true, true)]
+    public Color color1;
+    [ColorUsage(true, true)]
+    public Color color2;
     void Start()
     {
         GameEvents.current.onObjectTriggerEnter += OnObjectTriggerEnter;
         GameEvents.current.onObjectTriggerExit += OnObjectTriggerExit;
         GameEvents.current.onPlayerRayHitEnter += OnPlayerRayHitEnter;
         GameEvents.current.onPlayerRayHitExit += OnPlayerRayHitExit;
-        Color color = new Color(0, 0.7509283f, 5.992157f);
-        GetComponent<Renderer>().material.SetColor("_Emission", color);
+        GetComponent<Renderer>().material.SetColor("_Emission", color1);
         //GameEvents.current.onPlayerInteract += OnPlayerInteract;
         //GameEvents.current.onPlayerPickUp += OnPlayerPickUp;
     }
@@ -27,15 +29,12 @@ public class ItemEventManager : MonoBehaviour
         if (entered && rayhit)
         {
             //GetComponent<Renderer>().material.shader = Shader.Find("HDRenderPipeline/Lit");
-            float factor = Mathf.Pow(2, intensitiy);
-            Color color = new Color(5.992157f, 0, 0.05640277f);
-            GetComponent<Renderer>().material.SetColor("_Emission", color);
+            GetComponent<Renderer>().material.SetColor("_Emission", color2);
         }
         else
         {
             //GetComponent<Renderer>().material.shader = Shader.Find("HDRenderPipeline/Lit");
-            Color color = new Color(0, 0.7509283f, 5.992157f);
-            GetComponent<Renderer>().material.SetColor("_Emission", color);
+            GetComponent<Renderer>().material.SetColor("_Emission", color1);
            
         }
     }
