@@ -4,34 +4,54 @@ using UnityEngine;
 
 public class DoorEventManager : MonoBehaviour
 {
-    public List<GameObject> pedestals;
+    public List<GameObject> triggers;
+    public float animationOffSet;
     // Start is called before the first frame update
     void Start()
     {
-        GameEvents.current.onPlayerPlaceDown += OnPlayerPlaceDown;
+        //GameEvents.current.onPlayerPlaceDown += OnPlayerPlaceDown;
+        GameEvents.current.onTriggerActivated += OnTriggerActivated;
     }
 
-    void OnPlayerPlaceDown(GameObject player, GameObject item)
+    void OnTriggerActivated(GameObject gameObject)
     {
-        bool allPlaced = true;
-        foreach (GameObject pedestal in pedestals)
+        bool allTriggered = true;
+        foreach (GameObject trigger in triggers)
         {
-            Inventory pedestalInventory = pedestal.GetComponent<Inventory>();
-            if (pedestalInventory.items.Count == 0)
+            TriggerEventManager tem = trigger.GetComponent<TriggerEventManager>();
+            if (tem.triggered == false)
             {
-                allPlaced = false;
+                allTriggered = false;
                 break;
             }
         }
-        if (allPlaced)
+        if (allTriggered)
         {
             OpenDoor();
         }
     }
 
+    //void OnPlayerPlaceDown(GameObject player, GameObject item)
+    //{
+    //    bool allPlaced = true;
+    //    foreach (GameObject pedestal in pedestals)
+    //    {
+    //        Inventory pedestalInventory = pedestal.GetComponent<Inventory>();
+    //        if (pedestalInventory.items.Count == 0)
+    //        {
+    //            allPlaced = false;
+    //            break;
+    //        }
+    //    }
+    //    if (allPlaced)
+    //    {
+    //        OpenDoor();
+    //    }
+    //}
+
     void OpenDoor()
     {
-        LeanTween.moveLocalY(gameObject, -2.55f, 1.0f).setEaseOutQuad().setOnComplete(() =>
+        LeanTween.moveLocalY(gameObject, animationOffSet, 1.0f).setEaseOutQuad().setOnComplete(() =>
         {
             Destroy(gameObject);
         });
@@ -39,7 +59,9 @@ public class DoorEventManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameEvents.current.onPlayerPlaceDown -= OnPlayerPlaceDown;
+        //GameEvents.current.onPlayerPlaceDown -= OnPlayerPlaceDown;
+        GameEvents.current.onTriggerActivated -= OnTriggerActivated;
+
     }
 
 }

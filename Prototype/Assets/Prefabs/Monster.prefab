@@ -1011,7 +1011,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 3330520d73c00294cabebbd15a44204f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1031,7 +1031,7 @@ CharacterController:
   m_Height: 1.77
   m_Radius: 0.5
   m_SlopeLimit: 0
-  m_StepOffset: 0
+  m_StepOffset: 0.7
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.95, z: 0}
@@ -1050,8 +1050,15 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   friction: 1
-  speed: 200
+  speed: 400
   controller: {fileID: 569099631}
+  gravity: -9.81
+  groundCheck: {fileID: 2850863420232790446}
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  isGrounded: 0
 --- !u!114 &3395804326014273797
 MonoBehaviour:
   m_ObjectHideFlags: 0

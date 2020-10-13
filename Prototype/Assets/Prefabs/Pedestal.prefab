@@ -46,12 +46,13 @@ GameObject:
   - component: {fileID: 3283167236382276914}
   - component: {fileID: 3749249218369144737}
   - component: {fileID: 945536621}
+  - component: {fileID: 7795309905966993939}
   m_Layer: 11
   m_Name: Pedestal
   m_TagString: Pedestal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5927272625230587231
 Transform:
@@ -182,3 +183,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items: []
   capacity: 1
+--- !u!114 &7795309905966993939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6970562940828326053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3320d35bd10b441439a584828bda28b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggered: 0

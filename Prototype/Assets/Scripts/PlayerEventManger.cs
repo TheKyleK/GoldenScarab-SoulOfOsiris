@@ -35,10 +35,11 @@ public class PlayerEventManger : MonoBehaviour
                     ItemEventManager iem = item.GetComponent<ItemEventManager>();
                     if (iem != null && iem.rayhit && iem.entered)
                     {
-                        GameObject parent = hit.transform.parent.parent.gameObject;
+                        GameObject parent = hit.transform.parent.gameObject;
                         if (parent.transform.CompareTag("Pedestal"))
                         {
                             GameEvents.current.PlayerPickUpFromPedestal(gameObject, hit.transform.gameObject, parent);
+                            GameEvents.current.TriggerDeactivated(parent);
                         }
                         else
                         {
@@ -58,7 +59,18 @@ public class PlayerEventManger : MonoBehaviour
                         if (playerInventory.CanTransfer(0, pedestalInventory))
                         {
                             GameEvents.current.PlayerPlaceDown(gameObject, pedestal);
+                            GameEvents.current.TriggerActivated(pedestal);
                         }
+                    }
+                }
+
+                if (hit.transform.CompareTag("Button"))
+                {
+                    GameObject item = hit.transform.gameObject;
+                    ItemEventManager iem = item.GetComponent<ItemEventManager>();
+                    if (iem != null && iem.entered && iem.rayhit)
+                    {
+                        GameEvents.current.TriggerActivated(item);   
                     }
                 }
             }
@@ -107,8 +119,8 @@ public class PlayerEventManger : MonoBehaviour
                 GameObject item = pedestalInventory.items[pedestalInventory.items.Count - 1];
                 item.SetActive(true);
                 Transform anchorPoint = pedestal.GetComponent<PedestalEventManager>().ancherPoint;
-                item.transform.SetParent(anchorPoint);
-                item.transform.localPosition = Vector3.zero;
+                item.transform.SetParent(pedestal.transform);
+                item.transform.position = anchorPoint.transform.position;
                 item.transform.localRotation = Quaternion.identity;
                 SoundManager.current.PlaySound(Sound.Ding, item.transform.position);
             }

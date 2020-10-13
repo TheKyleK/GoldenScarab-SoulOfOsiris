@@ -25,6 +25,20 @@ public class GameEvents : MonoBehaviour
         onObjectTriggerExit(obj);
     }
 
+    // when an object is triggered
+    // for example: button pressed, or item placed on pedestal
+    public event Action<GameObject> onTriggerActivated;
+    public void TriggerActivated(GameObject obj)
+    {
+        onTriggerActivated(obj);
+    }
+
+    public event Action<GameObject> onTriggerDeactivated;
+    public void TriggerDeactivated(GameObject obj)
+    {
+        onTriggerDeactivated(obj);
+    }
+
     // Player
     public event Action<GameObject, GameObject> onPlayerRayHitEnter;
     public void PlayerRayHitEnter(GameObject player, GameObject target)

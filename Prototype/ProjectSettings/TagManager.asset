@@ -8,6 +8,7 @@ TagManager:
   - Pedestal
   - Wood
   - Concrete
+  - Button
   layers:
   - Default
   - TransparentFX
