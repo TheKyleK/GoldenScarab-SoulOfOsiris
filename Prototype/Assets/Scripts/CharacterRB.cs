@@ -20,9 +20,9 @@ public class CharacterRB : MonoBehaviour
    
     void FixedUpdate()
     {
-        ClampMoveSpeed();
         ApplyGraivity();
         velocity += acceleration * Time.fixedDeltaTime;
+        ClampMoveSpeed();
         controller.Move(velocity * Time.fixedDeltaTime);
         ApplyFriction();
         acceleration *= 0;
