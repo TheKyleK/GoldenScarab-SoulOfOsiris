@@ -19,7 +19,7 @@ public class ItemEventManager : MonoBehaviour
         GameEvents.current.onObjectTriggerExit += OnObjectTriggerExit;
         GameEvents.current.onPlayerRayHitEnter += OnPlayerRayHitEnter;
         GameEvents.current.onPlayerRayHitExit += OnPlayerRayHitExit;
-        GetComponent<Renderer>().material.SetColor("_Emission", color1);
+        GetComponent<Renderer>().material.SetColor("_BaseColor", color1);
         //GameEvents.current.onPlayerInteract += OnPlayerInteract;
         //GameEvents.current.onPlayerPickUp += OnPlayerPickUp;
     }
@@ -29,12 +29,12 @@ public class ItemEventManager : MonoBehaviour
         if (entered && rayhit)
         {
             //GetComponent<Renderer>().material.shader = Shader.Find("HDRenderPipeline/Lit");
-            GetComponent<Renderer>().material.SetColor("_Emission", color2);
+            GetComponent<Renderer>().material.SetColor("_BaseColor", color2);
         }
         else
         {
             //GetComponent<Renderer>().material.shader = Shader.Find("HDRenderPipeline/Lit");
-            GetComponent<Renderer>().material.SetColor("_Emission", color1);
+            GetComponent<Renderer>().material.SetColor("_BaseColor", color1);
            
         }
     }
