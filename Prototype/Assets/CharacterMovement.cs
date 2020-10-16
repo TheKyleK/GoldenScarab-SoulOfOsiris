@@ -5,6 +5,8 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     CharacterRB rb;
+    public Transform v1;
+    public Transform v2;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,7 @@ public class CharacterMovement : MonoBehaviour
         if (rb.isGrounded)
         {
             moveVec.y = 0;
+
         }
         transform.position += moveVec;
     }

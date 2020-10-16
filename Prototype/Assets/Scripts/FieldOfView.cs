@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
-using UnityEngine.XR.WSA.Input;
 
 public class FieldOfView : MonoBehaviour
 {

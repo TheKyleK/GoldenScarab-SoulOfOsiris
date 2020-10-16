@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using System;
 using UnityEngine.UIElements;
 
@@ -16,7 +15,6 @@ public enum BehaviourResult
 [Serializable]
 public abstract class BTNode
 {
-    public Port input;
     public float x = 0;
     public float y = 0;
     public BTNode()
