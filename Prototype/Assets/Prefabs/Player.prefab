@@ -1072,7 +1072,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
-  radiusRatio: 0.9
+  radiusRatio: 0.95
+  castDistanceY: 0.025
 --- !u!1 &3942448993902386647
 GameObject:
   m_ObjectHideFlags: 0
