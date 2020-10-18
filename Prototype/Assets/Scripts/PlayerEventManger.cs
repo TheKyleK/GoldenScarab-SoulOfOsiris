@@ -28,6 +28,7 @@ public class PlayerEventManger : MonoBehaviour
 
             if (hit.transform.gameObject)
             {
+
                 // if we are trying to interact with item
                 if (hit.transform.CompareTag("Item"))
                 {

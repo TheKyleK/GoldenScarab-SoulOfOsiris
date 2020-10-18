@@ -9,8 +9,8 @@ public class CharacterRB : MonoBehaviour
     public Vector3 acceleration;
     public float friction;
     public float speed;
-    public CharacterController controller;
-    //public CharacterMovement controller;
+    //public CharacterController controller;
+    public CharacterMovement controller;
 
     [Header("gravity")]
     public float gravity = -9.81f;

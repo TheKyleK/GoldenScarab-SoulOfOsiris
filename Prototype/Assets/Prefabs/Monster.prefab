@@ -933,10 +933,10 @@ GameObject:
   - component: {fileID: 2850863420944318632}
   - component: {fileID: 2850863420944318634}
   - component: {fileID: 2850863420944318637}
-  - component: {fileID: 569099631}
   - component: {fileID: 569099629}
   - component: {fileID: 3395804326014273797}
   - component: {fileID: -7549666865662580193}
+  - component: {fileID: -6519540139778262408}
   m_Layer: 10
   m_Name: Monster
   m_TagString: Untagged
@@ -985,7 +985,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2850863420944318630}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.6
+  m_Radius: 0.5
   m_Speed: 10
   m_Acceleration: 1000000
   avoidancePriority: 50
@@ -1017,24 +1017,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!143 &569099631
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2850863420944318630}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1.77
-  m_Radius: 0.5
-  m_SlopeLimit: 0
-  m_StepOffset: 0
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0.95, z: 0}
 --- !u!114 &569099629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1050,8 +1032,8 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   friction: 1
-  speed: 200
-  controller: {fileID: 569099631}
+  speed: 300
+  controller: {fileID: -6519540139778262408}
   gravity: -9.81
   groundCheck: {fileID: 2850863420232790446}
   groundDistance: 0.4
@@ -1110,6 +1092,28 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &-6519540139778262408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2850863420944318630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4f32f265d14d041beef6d66c99761c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  center: {x: 0, y: 0, z: 0}
+  radius: 0.5
+  height: 1.77
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  radiusRatio: 0.9
 --- !u!1 &2890920255950348033
 GameObject:
   m_ObjectHideFlags: 0
