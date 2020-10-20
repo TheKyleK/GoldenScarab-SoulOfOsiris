@@ -16,13 +16,13 @@ public class GameEvents : MonoBehaviour
     public event Action<GameObject> onObjectTriggerEnter;
     public void ObjectTriggerEnter(GameObject obj)
     {
-        onObjectTriggerEnter(obj);
+        onObjectTriggerEnter?.Invoke(obj);
     }
 
     public event Action<GameObject> onObjectTriggerExit;
     public void ObjectTriggerExit(GameObject obj)
     {
-        onObjectTriggerExit(obj);
+        onObjectTriggerExit?.Invoke(obj);
     }
 
     // when an object is triggered
@@ -30,26 +30,27 @@ public class GameEvents : MonoBehaviour
     public event Action<GameObject> onTriggerActivated;
     public void TriggerActivated(GameObject obj)
     {
-        onTriggerActivated(obj);
+        onTriggerActivated?.Invoke(obj);
     }
 
     public event Action<GameObject> onTriggerDeactivated;
     public void TriggerDeactivated(GameObject obj)
     {
-        onTriggerDeactivated(obj);
+        onTriggerDeactivated?.Invoke(obj);
     }
 
     // Player
     public event Action<GameObject, GameObject> onPlayerRayHitEnter;
     public void PlayerRayHitEnter(GameObject player, GameObject target)
     {
-        onPlayerRayHitEnter(player, target);
+        
+         onPlayerRayHitEnter?.Invoke(player, target);
     }
 
     public event Action<GameObject> onPlayerRayHitExit;
     public void PlayerRayHitExit(GameObject player)
     {
-        onPlayerRayHitExit(player);
+        onPlayerRayHitExit?.Invoke(player);
     }
 
 
@@ -62,25 +63,25 @@ public class GameEvents : MonoBehaviour
     public event Action<GameObject, GameObject> onPlayerPickUp;
     public void PlayerPickUp(GameObject player, GameObject target)
     {
-        onPlayerPickUp(player, target);
+        onPlayerPickUp?.Invoke(player, target);
     }
 
     public event Action<GameObject, GameObject, GameObject> onPlayerPickUpFromPedestal;
     public void PlayerPickUpFromPedestal(GameObject player, GameObject target, GameObject pedestal)
     {
-        onPlayerPickUpFromPedestal(player, target, pedestal);
+        onPlayerPickUpFromPedestal?.Invoke(player, target, pedestal);
     }
 
     public event Action<GameObject, GameObject> onPlayerPlaceDown;
     public void PlayerPlaceDown(GameObject player, GameObject target)
     {
-        onPlayerPlaceDown(player, target);
+        onPlayerPlaceDown?.Invoke(player, target);
     }
 
     // Velocity
     public event Action<GameObject> onVelocityChanged;
     public void VelocityChanged(GameObject character)
     {
-        onVelocityChanged(character);
+        onVelocityChanged?.Invoke(character);
     }
 }

@@ -134,6 +134,7 @@ public class PlayerEventManger : MonoBehaviour
         Debug.DrawRay(cam.transform.position, cam.transform.forward * rayDistance);
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, rayDistance, ~ignoreMask))
         {
+            //Debug.Log(hit.transform.gameObject.name);
             GameEvents.current.PlayerRayHitEnter(gameObject, hit.transform.gameObject);
         }
         else
@@ -141,6 +142,13 @@ public class PlayerEventManger : MonoBehaviour
             GameEvents.current.PlayerRayHitExit(gameObject);
         }
 
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.current.onPlayerPickUp -= OnPlayerPickUp;
+        GameEvents.current.onPlayerPickUpFromPedestal -= OnPlayerPickUpFromPedestal;
+        GameEvents.current.onPlayerPlaceDown -= OnPlayerPlaceDown;
     }
 
 }
