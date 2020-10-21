@@ -13,16 +13,27 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() 
+    void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        float x = 0;
+        float z = 0;
+      
+
+        if (Input.GetButton("Horizontal"))
+        {
+            x = Input.GetAxis("Horizontal");
+        }
+
+        if (Input.GetButton("Vertical"))
+        {
+            z = Input.GetAxis("Vertical");
+        }
+
         Vector3 movement = transform.forward * z + transform.right * x;
         Vector3 direction = movement.normalized;
         Vector3 force = direction * speed;
 
         m_rb.acceleration += force;
+
     }
-
-
 }
