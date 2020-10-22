@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Prototype
+/// </summary>
 public class CharacterMovement : MonoBehaviour
 {
     public Vector3 offset;

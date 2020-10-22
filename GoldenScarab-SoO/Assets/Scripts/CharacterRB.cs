@@ -16,7 +16,7 @@ public class CharacterRB : MonoBehaviour
     public Vector3 acceleration;
     public float friction;
     public float maxSpeed;
-    public CharacterController controller;
+    public CharacterMovement controller;
 
     void FixedUpdate()
     {
