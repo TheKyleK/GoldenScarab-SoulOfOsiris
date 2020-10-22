@@ -522,6 +522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 647156441}
   - component: {fileID: 647156440}
+  - component: {fileID: 647156442}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -555,6 +556,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &647156442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647156439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4ecf15b40acee40b85ff595c3e074f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: 0.5
 --- !u!1 &675249091
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,6 +954,7 @@ GameObject:
   - component: {fileID: 1216246547}
   - component: {fileID: 1216246546}
   - component: {fileID: 1216246545}
+  - component: {fileID: 1216246551}
   - component: {fileID: 1216246544}
   m_Layer: 0
   m_Name: Player
@@ -964,7 +979,7 @@ MonoBehaviour:
   acceleration: {x: 0, y: 0, z: 0}
   friction: 1
   maxSpeed: 200
-  controller: {fileID: 1216246545}
+  controller: {fileID: 1216246551}
 --- !u!143 &1216246545
 CharacterController:
   m_ObjectHideFlags: 0
@@ -974,7 +989,7 @@ CharacterController:
   m_GameObject: {fileID: 1216246543}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
@@ -1072,6 +1087,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1216246551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216246543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050eea56c74834949afce71d0b0dcb2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: -1, z: 0}
+  radius: 0.5
+  height: 2
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  radiusRatio: 0.9
+  castDistanceY: 0.025
 --- !u!1 &1225324091
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,6 +1127,7 @@ GameObject:
   - component: {fileID: 1225324097}
   - component: {fileID: 1225324099}
   - component: {fileID: 1225324100}
+  - component: {fileID: 1225324101}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -1166,7 +1205,7 @@ CharacterController:
   m_GameObject: {fileID: 1225324091}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.6
@@ -1204,7 +1243,7 @@ MonoBehaviour:
   acceleration: {x: 0, y: 0, z: 0}
   friction: 1
   maxSpeed: 200
-  controller: {fileID: 1225324095}
+  controller: {fileID: 1225324101}
 --- !u!4 &1225324098
 Transform:
   m_ObjectHideFlags: 0
@@ -1256,6 +1295,29 @@ MonoBehaviour:
   player: {fileID: 1216246543}
   threshold: 1
   steeringForce: 1
+--- !u!114 &1225324101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225324091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050eea56c74834949afce71d0b0dcb2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: -1, z: 0}
+  radius: 0.5
+  height: 2
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  radiusRatio: 0.9
+  castDistanceY: 0.025
 --- !u!1 &1922919877
 GameObject:
   m_ObjectHideFlags: 0
