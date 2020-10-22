@@ -23,7 +23,7 @@ public class MonsterNavigation : MonoBehaviour
 
 	private void Update()
 	{
-        //agent.SetDestination(player.transform.position);
+        //m_agent.SetDestination(player.transform.position);
 
         NavMeshPath path = new NavMeshPath();
         Vector3 targetPos = player.transform.position;
