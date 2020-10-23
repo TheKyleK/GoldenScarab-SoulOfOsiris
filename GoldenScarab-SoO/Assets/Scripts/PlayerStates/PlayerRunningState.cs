@@ -17,6 +17,7 @@ public class PlayerRunningState : PlayerState
     {
         float x = 0;
         float z = 0;
+
         if (Input.GetButton("Horizontal"))
         {
             x = Input.GetAxis("Horizontal");

@@ -5,7 +5,9 @@ using UnityEngine;
 public enum Sound
 {
     Chime,
-    Ding
+    Ding,
+    FootStep,
+    FootStepWood
 }
 public class SoundManager : MonoBehaviour
 {
@@ -20,11 +22,30 @@ public class SoundManager : MonoBehaviour
 
         audioMap.Add(Sound.Chime, Resources.Load<AudioClip>("Sounds/Chime"));
         audioMap.Add(Sound.Ding, Resources.Load<AudioClip>("Sounds/Ding"));
+        audioMap.Add(Sound.FootStep, Resources.Load<AudioClip>("Sounds/FootStep"));
+        audioMap.Add(Sound.FootStepWood, Resources.Load<AudioClip>("Sounds/FootStepWood"));
 
     }
 
+    /// <summary>
+    /// Play sound at position using global volume
+    /// </summary>
+    /// <param name="sound"></param>
+    /// <param name="position"></param>
     public void PlaySound(Sound sound, Vector3 position)
     {
         AudioSource.PlayClipAtPoint(audioMap[sound], position, volume);
+    }
+
+    
+    /// <summary>
+    /// Play sound at position with a percentage of volume
+    /// </summary>
+    /// <param name="sound"></param>
+    /// <param name="position"></param>
+    /// <param name="volume"></param>
+    public void PlaySound(Sound sound, Vector3 position, float volume)
+    {
+        AudioSource.PlayClipAtPoint(audioMap[sound], position, volume * this.volume);
     }
 }
