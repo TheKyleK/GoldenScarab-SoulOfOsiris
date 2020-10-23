@@ -35,7 +35,6 @@ public class CharacterRB : MonoBehaviour
             clamp = clamp.normalized * maxSpeed;
             velocity.x = clamp.x;
             velocity.z = clamp.z;
-
         }
     }
 
@@ -45,7 +44,5 @@ public class CharacterRB : MonoBehaviour
         velocity.x *= decay;
         velocity.z *= decay;
     }
-
-
 }
 

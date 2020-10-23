@@ -13,7 +13,7 @@ public class PlayerRunningState : PlayerState
         return null;
     }
 
-    public override void UpdateMovement(GameObject player, CharacterRB rb, float moveStrength)
+    public override void UpdateMovement(float dt, GameObject player, CharacterRB rb, float moveStrength)
     {
         float x = 0;
         float z = 0;

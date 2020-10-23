@@ -25,7 +25,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             m_state = newState;
         }
-        m_state.UpdateMovement(gameObject, m_rb, moveStrength);
+        m_state.UpdateMovement(Time.deltaTime, gameObject, m_rb, moveStrength);
         m_state.UpdateAnimation(m_animator);
     }
 }
