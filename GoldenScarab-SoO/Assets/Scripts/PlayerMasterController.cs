@@ -10,7 +10,11 @@ public class PlayerMasterController : MonoBehaviour
     public float moveForce;
     public float maxSpeed;
     [Range(0, 1)]
-    public float friction;
+    public float horizontalDamingStop;
+    [Range(0, 1)]
+    public float horizontalDamingTurn;
+    [Range(0, 1)]
+    public float horizontalDamingBasic;
 
     private CharacterRB m_rb;
     private PlayerStateMachine m_stateMachine;
@@ -32,7 +36,10 @@ public class PlayerMasterController : MonoBehaviour
     private void SetValues()
     {
         m_stateMachine.SetMoveForce(moveForce);
-        m_rb.SetFriction(friction);
+        m_rb.SetHorizontalDampingStop(horizontalDamingStop);
+        m_rb.SetHorizontalDampingTurn(horizontalDamingTurn);
+        m_rb.SetHorizontalDampingBasic(horizontalDamingBasic);
+
         m_rb.SetMaxSpeed(maxSpeed);
     }
 }
