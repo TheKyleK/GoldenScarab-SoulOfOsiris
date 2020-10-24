@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    public float moveStrength;
+    private float m_moveForce;
 
     PlayerState m_state;
     CharacterRB m_rb;
@@ -25,7 +25,12 @@ public class PlayerStateMachine : MonoBehaviour
         {
             m_state = newState;
         }
-        m_state.UpdateMovement(Time.deltaTime, gameObject, m_rb, moveStrength);
+        m_state.UpdateMovement(Time.deltaTime, gameObject, m_rb, m_moveForce);
         m_state.UpdateAnimation(m_animator);
+    }
+
+    public void SetMoveForce(float moveForce)
+    {
+        m_moveForce = moveForce;
     }
 }
