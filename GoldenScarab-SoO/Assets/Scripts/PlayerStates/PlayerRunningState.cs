@@ -31,7 +31,8 @@ public class PlayerRunningState : PlayerState
         Vector3 move = player.transform.forward * z + player.transform.right * x;
         Vector3 moveForce = move.normalized * moveStrength;
 
-        rb.acceleration += moveForce;
+        rb.ApplyForce(moveForce);
+        //rb.acceleration += moveForce;
     }
 
     public override void UpdateAnimation(Animator animator)

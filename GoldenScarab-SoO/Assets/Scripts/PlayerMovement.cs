@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = movement.normalized;
         Vector3 force = direction * speed;
 
-        m_rb.acceleration += force;
+        m_rb.ApplyForce(force);
 
     }
 }

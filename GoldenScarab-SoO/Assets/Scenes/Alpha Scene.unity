@@ -1311,7 +1311,7 @@ GameObject:
   - component: {fileID: 1188309025}
   - component: {fileID: 1188309024}
   - component: {fileID: 1188309023}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1433,11 +1433,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b5dafe55815c644bef5d90592786e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
-  acceleration: {x: 0, y: 0, z: 0}
   friction: 1
-  maxSpeed: 200
+  maxSpeed: 20
   controller: {fileID: 1216246551}
+  m_mag: 5
 --- !u!54 &1216246545
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1466,7 +1465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419d8df57920a624db8e1d84dc3fdc67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveStrength: 200
+  moveStrength: 30
 --- !u!136 &1216246547
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1603,7 +1602,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   seekThreshold: 0.1
-  steeringForce: 1
+  steeringForce: 30
   rotateSpeed: 5
 --- !u!114 &1225324094
 MonoBehaviour:
@@ -1655,11 +1654,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b5dafe55815c644bef5d90592786e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
-  acceleration: {x: 0, y: 0, z: 0}
   friction: 1
-  maxSpeed: 200
+  maxSpeed: 20
   controller: {fileID: 1225324101}
+  m_mag: 0
 --- !u!4 &1225324098
 Transform:
   m_ObjectHideFlags: 0

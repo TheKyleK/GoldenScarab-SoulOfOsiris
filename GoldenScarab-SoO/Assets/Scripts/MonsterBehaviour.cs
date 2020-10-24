@@ -84,17 +84,14 @@ public class MonsterBehaviour : MonoBehaviour
         GetTargetsInRange inRange = new GetTargetsInRange(playerMask, viewRange);
         GetTargetsInLineOfSight inLineOfSignt = new GetTargetsInLineOfSight(eyeTransform, viewAngle, obstacleMask);
         GetClosest getClosest = new GetClosest(BlackboardKey.Input);
-        //StoreOutputDecorator storeClosestTarget = new StoreOutputDecorator(BlackboardKey.Storage)
-        //{
-        //    child = getClosest
-        //};
+        StoreOutputDecorator storeClosestTarget = new StoreOutputDecorator(getClosest, BlackboardKey.Storage);
         GetNextWaypoint getNextWayPoint = new GetNextWaypoint(m_agent, BlackboardKey.Input, seekThreshold);
         SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, steeringForce);
         RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Running");
         sequence.Add(inRange);
         sequence.Add(inLineOfSignt);
-        sequence.Add(getClosest);
+        sequence.Add(storeClosestTarget);
         sequence.Add(getNextWayPoint);
         sequence.Add(seekTarget);
         sequence.Add(rotateTowardsTarget);
@@ -106,4 +103,6 @@ public class MonsterBehaviour : MonoBehaviour
         //}
         return sequence;
     }
+
+
 }
