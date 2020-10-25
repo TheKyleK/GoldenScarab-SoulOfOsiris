@@ -24,4 +24,24 @@ public class EventManager : MonoBehaviour
     {
         onObjectTriggerExit?.Invoke(obj);
     }
+
+    // player raycast
+    public event Action<GameObject, GameObject> onPlayerRayHitEnter;
+    public void PlayerRayHitEnter(GameObject player, GameObject target)
+    {
+        onPlayerRayHitEnter?.Invoke(player, target);
+    }
+
+    public event Action<GameObject> onPlayerRayHitExit;
+    public void PlayerRayHitExit(GameObject player)
+    {
+        onPlayerRayHitExit?.Invoke(player);
+    }
+
+    // player interact
+    public event Action<GameObject, GameObject> onPlayerInteractObject;
+    public void PlayerInteractObject(GameObject player, GameObject obj)
+    {
+        onPlayerInteractObject?.Invoke(player, obj);
+    }
 }
