@@ -14,10 +14,7 @@ public class CharacterRB : MonoBehaviour
 
     [SerializeField] private Vector3 m_velocity;
     [SerializeField] private Vector3 m_acceleration;
-    [SerializeField, Range(0, 1)] private float m_horizontalDampingStop;
-    [SerializeField, Range(0, 1)] private float m_horizontalDampingTurn;
-    [SerializeField, Range(0, 1)] private float m_horizontalDampingBasic;
-    [SerializeField] private float m_maxSpeed;
+    public CharacterMasterController characterMasterController;
     public CharacterMovement controller;
     [SerializeField]
     private float m_mag;
@@ -33,8 +30,8 @@ public class CharacterRB : MonoBehaviour
     {
         ApplyGraivity();
         m_velocity += m_acceleration * Time.fixedDeltaTime;
-        ClampMovement();
         ApplyFriction();
+        ClampMovement();
         m_mag = m_velocity.magnitude;
         controller.Move(m_velocity * Time.fixedDeltaTime);
         m_acceleration *= 0;
@@ -43,9 +40,9 @@ public class CharacterRB : MonoBehaviour
     void ClampMovement()
     {
         Vector3 clamp = new Vector3(m_velocity.x, 0, m_velocity.z);
-        if (clamp.magnitude > m_maxSpeed)
+        if (clamp.magnitude > characterMasterController.maxSpeed)
         {
-            clamp = clamp.normalized * m_maxSpeed;
+            clamp = clamp.normalized * characterMasterController.maxSpeed;
             m_velocity.x = clamp.x;
             m_velocity.z = clamp.z;
         }
@@ -54,9 +51,9 @@ public class CharacterRB : MonoBehaviour
     void ApplyFriction()
     {
         Vector3 moveAcceleration = new Vector3(m_acceleration.x, 0, m_acceleration.z);
-        if (moveAcceleration.magnitude == 0)
+        if (moveAcceleration.magnitude == 0.0f)
         {
-            float decay = Mathf.Pow(1 - m_horizontalDampingStop, Time.fixedDeltaTime * 10);
+            float decay = Mathf.Pow(1 - characterMasterController.horizontalDampingStop, Time.fixedDeltaTime * 10);
             m_velocity.x *= decay;
             m_velocity.z *= decay;
         }
@@ -64,23 +61,23 @@ public class CharacterRB : MonoBehaviour
         {
             if (Mathf.Sign(m_velocity.x) != Mathf.Sign(moveAcceleration.x))
             {
-                float decay = Mathf.Pow(1 - m_horizontalDampingTurn, Time.fixedDeltaTime * 10);
+                float decay = Mathf.Pow(1 - characterMasterController.horizontalDampingTurn, Time.fixedDeltaTime * 10);
                 m_velocity.x *= decay;
             }
             else
             {
-                float decay = Mathf.Pow(1 - m_horizontalDampingBasic, Time.fixedDeltaTime * 10);
+                float decay = Mathf.Pow(1 - characterMasterController.horizontalDampingBasic, Time.fixedDeltaTime * 10);
                 m_velocity.x *= decay;
             }
 
             if (Mathf.Sign(m_velocity.z) != Mathf.Sign(moveAcceleration.z))
             {
-                float decay = Mathf.Pow(1 - m_horizontalDampingTurn, Time.fixedDeltaTime * 10);
+                float decay = Mathf.Pow(1 - characterMasterController.horizontalDampingTurn, Time.fixedDeltaTime * 10);
                 m_velocity.z *= decay;
             }
             else
             {
-                float decay = Mathf.Pow(1 - m_horizontalDampingBasic, Time.fixedDeltaTime * 10);
+                float decay = Mathf.Pow(1 - characterMasterController.horizontalDampingBasic, Time.fixedDeltaTime * 10);
                 m_velocity.z *= decay;
             }
 
@@ -124,23 +121,23 @@ public class CharacterRB : MonoBehaviour
         m_velocity = velocity;
     }
 
-    public void SetHorizontalDampingStop(float horizontalDampingStop)
-    {
-        m_horizontalDampingStop = horizontalDampingStop;
-    }
-    public void SetHorizontalDampingTurn(float horizontalDampingTurn)
-    {
-        m_horizontalDampingTurn = horizontalDampingTurn;
-    }
-    public void SetHorizontalDampingBasic(float horizontalDampingBasic)
-    {
-        m_horizontalDampingBasic = horizontalDampingBasic;
-    }
+    //public void SetHorizontalDampingStop(float horizontalDampingStop)
+    //{
+    //    m_horizontalDampingStop = horizontalDampingStop;
+    //}
+    //public void SetHorizontalDampingTurn(float horizontalDampingTurn)
+    //{
+    //    m_horizontalDampingTurn = horizontalDampingTurn;
+    //}
+    //public void SetHorizontalDampingBasic(float horizontalDampingBasic)
+    //{
+    //    m_horizontalDampingBasic = horizontalDampingBasic;
+    //}
 
-    public void SetMaxSpeed(float maxSpeed)
-    {
-        m_maxSpeed = maxSpeed;
-    }
+    //public void SetMaxSpeed(float maxSpeed)
+    //{
+    //    m_maxSpeed = maxSpeed;
+    //}
 
     public float GetMag()
     {

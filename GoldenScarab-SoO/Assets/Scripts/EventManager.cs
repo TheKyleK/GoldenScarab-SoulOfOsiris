@@ -58,4 +58,11 @@ public class EventManager : MonoBehaviour
         onTriggerDeactivated?.Invoke(obj);
     }
 
+    // monster
+    public event Action<GameObject> onMonsterSpawn;
+    public void MonsterSpawn(GameObject obj)
+    {
+        onMonsterSpawn?.Invoke(obj);
+    }
+
 }

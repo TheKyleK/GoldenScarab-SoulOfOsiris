@@ -6,6 +6,7 @@ public class MonsterSpawnEventManager : MonoBehaviour
 {
     public List<TriggerEventManager> triggers;
     public GameObject monsterPrefab;
+    public MonsterMasterController characterMasterController;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,12 @@ public class MonsterSpawnEventManager : MonoBehaviour
 
     void SpawnMonster()
     {
-        Instantiate(monsterPrefab, transform.position, Quaternion.identity);
+        GameObject monster = Instantiate(monsterPrefab, transform.position, Quaternion.identity);
+        CharacterRB rb = monster.GetComponent<CharacterRB>();
+        MonsterBehaviour mb = monster.GetComponent<MonsterBehaviour>();
+        rb.characterMasterController = characterMasterController;
+        mb.monsterMasterController = characterMasterController;
+        //EventManager.current.MonsterSpawn(monster);
     }
 
     private void OnDestroy()

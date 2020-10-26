@@ -21,12 +21,12 @@ public class CharacterMovement : MonoBehaviour
         m_rb = GetComponent<CharacterRB>();
     }
 
-    private bool IsWalkable(Vector3 moveDir, float amount)
+    private bool IsWalkable(Vector3 moveDir, float amount, LayerMask layerMask)
 	{
         RaycastHit hit;
         Vector3 p1 = transform.position + Vector3.up * radius + offset;
         Vector3 p2 = transform.position + Vector3.up * (height - radius) + offset;
-        return !Physics.CapsuleCast(p1, p2, radius * radiusRatio, moveDir, out hit, amount, obstacleMask);
+        return !Physics.CapsuleCast(p1, p2, radius * radiusRatio, moveDir, out hit, amount, layerMask);
     }
 
 	public void Move(Vector3 moveVec)
@@ -61,18 +61,18 @@ public class CharacterMovement : MonoBehaviour
 
         // gravity
         Vector3 moveUpward = Vector3.Scale(moveVec, Vector3.up);
-        if (!IsWalkable(moveUpward.normalized, castDistanceY))
+        if (!IsWalkable(moveUpward.normalized, castDistanceY, groundMask))
         {
             moveVec.y = 0;
         }
 
         Vector3 moveForward = Vector3.Scale(moveVec, Vector3.forward);
-        if (!IsWalkable(moveForward.normalized, moveForward.magnitude))
+        if (!IsWalkable(moveForward.normalized, moveForward.magnitude, obstacleMask))
         {
             moveVec.z = 0;
         }
         Vector3 moveRight = Vector3.Scale(moveVec, Vector3.right);
-        if (!IsWalkable(moveRight.normalized, moveRight.magnitude))
+        if (!IsWalkable(moveRight.normalized, moveRight.magnitude, obstacleMask))
         {
             moveVec.x = 0;
         }
