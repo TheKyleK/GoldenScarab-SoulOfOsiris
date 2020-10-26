@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ObjectEventManager : MonoBehaviour
 {
-    private bool m_entered;
-    private bool m_rayhit;
+    public bool entered;
+    public bool rayhit;
 
     //[ColorUsage(true, true)]
     public Color color1;
@@ -25,7 +25,7 @@ public class ObjectEventManager : MonoBehaviour
     {
         if (obj == gameObject)
         {
-            m_entered = true;
+            entered = true;
         }
     }
 
@@ -33,7 +33,7 @@ public class ObjectEventManager : MonoBehaviour
     {
         if (obj == gameObject)
         {
-            m_entered = false;
+            entered = false;
         }
     }
 
@@ -41,23 +41,23 @@ public class ObjectEventManager : MonoBehaviour
     {
         if (obj == gameObject)
         {
-            m_rayhit = true;
+            rayhit = true;
         }
         else
         {
-            m_rayhit = false;
+            rayhit = false;
         }
     }
 
     void OnPlayerRayHitExit(GameObject player)
     {
-        m_rayhit = false;
+        rayhit = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_entered && m_rayhit)
+        if (entered && rayhit)
         {
             GetComponent<Renderer>().material.SetColor("_BaseColor", color2);
         }

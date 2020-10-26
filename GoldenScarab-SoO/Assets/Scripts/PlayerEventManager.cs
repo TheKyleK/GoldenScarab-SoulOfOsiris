@@ -20,7 +20,11 @@ public class PlayerEventManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             GameObject hitObject = hit.transform.gameObject;
-            EventManager.current.PlayerInteractObject(gameObject, hitObject);
+            ObjectEventManager oem = hitObject.GetComponent<ObjectEventManager>();
+            if (oem && oem.rayhit && oem.entered)
+            {
+                EventManager.current.PlayerInteractObject(gameObject, hitObject);
+            }
         }
     }
 

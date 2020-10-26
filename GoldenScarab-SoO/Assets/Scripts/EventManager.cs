@@ -44,4 +44,18 @@ public class EventManager : MonoBehaviour
     {
         onPlayerInteractObject?.Invoke(player, obj);
     }
+
+    // triggers
+    public event Action<GameObject> onTriggerActivated;
+    public void TriggerActivated(GameObject obj)
+    {
+        onTriggerActivated?.Invoke(obj);
+    }
+
+    public event Action<GameObject> onTriggerDeactivated;
+    public void TriggerDeactivated(GameObject obj)
+    {
+        onTriggerDeactivated?.Invoke(obj);
+    }
+
 }

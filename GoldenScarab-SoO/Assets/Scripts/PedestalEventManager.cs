@@ -29,6 +29,7 @@ public class PedestalEventManager : MonoBehaviour
                     item.transform.localRotation = Quaternion.identity;
                     SoundManager.current.PlaySound(Sound.Ding, item.transform.position);
                     EventManager.current.onPlayerInteractObject -= OnPlayerInteractObject;
+                    EventManager.current.TriggerActivated(gameObject);
                 }
             }
         }
