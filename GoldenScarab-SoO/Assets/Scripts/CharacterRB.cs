@@ -12,8 +12,8 @@ public class CharacterRB : MonoBehaviour
     /// </summary>
 
 
-    private Vector3 m_velocity;
-    private Vector3 m_acceleration;
+    [SerializeField] private Vector3 m_velocity;
+    [SerializeField] private Vector3 m_acceleration;
     [SerializeField, Range(0, 1)] private float m_horizontalDampingStop;
     [SerializeField, Range(0, 1)] private float m_horizontalDampingTurn;
     [SerializeField, Range(0, 1)] private float m_horizontalDampingBasic;
@@ -22,8 +22,16 @@ public class CharacterRB : MonoBehaviour
     [SerializeField]
     private float m_mag;
 
+    [Header("gravity")]
+    public float gravity = -9.81f;
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
+    public bool isGrounded;
+
     void FixedUpdate()
     {
+        ApplyGraivity();
         m_velocity += m_acceleration * Time.fixedDeltaTime;
         ClampMovement();
         ApplyFriction();
@@ -85,6 +93,20 @@ public class CharacterRB : MonoBehaviour
 
 
 
+    }
+
+    void ApplyGraivity()
+    {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (isGrounded && m_velocity.y < 0)
+        {
+            m_velocity.y = 0;
+            m_acceleration.y = -2f;
+        }
+        else
+        {
+            m_acceleration.y = gravity;
+        }
     }
 
     public void ApplyForce(Vector3 force)
