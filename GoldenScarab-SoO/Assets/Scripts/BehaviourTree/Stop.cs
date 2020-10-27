@@ -11,7 +11,7 @@ public class Stop : TreeNode
     }
     public override BehaviourResult Execute(GameObject agent, Blackboard blackboard, float dt)
     {
-        m_rb.SetVelocity(Vector3.zero);
+        m_rb.force *= 0;
         return BehaviourResult.Success;
     }
 }

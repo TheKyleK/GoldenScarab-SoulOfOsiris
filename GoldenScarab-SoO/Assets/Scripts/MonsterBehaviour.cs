@@ -99,12 +99,12 @@ public class MonsterBehaviour : MonoBehaviour
         SequenceNode sequence = new SequenceNode();
         GetTargetsInRange inRnage = new GetTargetsInRange(playerMask, monsterMasterController.stopRange);
         GetClosest getClosest = new GetClosest(BlackboardKey.Input);
-        //Stop stop = new Stop(m_rb);
+        Stop stop = new Stop(m_rb);
         RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Idle");
         sequence.Add(inRnage);
         sequence.Add(getClosest);
-        //sequence.Add(stop);
+        sequence.Add(stop);
         sequence.Add(rotateTowardsTarget);
         sequence.Add(updateAnimation);
 
@@ -146,10 +146,10 @@ public class MonsterBehaviour : MonoBehaviour
         SequenceNode sequence = new SequenceNode();
         TreeNode removeStorageDecorator = new DeleteMemoryDecorator(sequence, BlackboardKey.Storage, BehaviourResult.Success);
         IsTargetInRange isTargetInRange = new IsTargetInRange(BlackboardKey.Storage, monsterMasterController.stopRange);
-        //Stop stop = new Stop(m_rb);
+        Stop stop = new Stop(m_rb);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Idle");
         sequence.Add(isTargetInRange);
-        //sequence.Add(stop);
+        sequence.Add(stop);
         sequence.Add(updateAnimation);
 
         //if (debug)
@@ -187,7 +187,7 @@ public class MonsterBehaviour : MonoBehaviour
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Idle");
         sequence.Add(inRnage);
         sequence.Add(getClosest);
-        //sequence.Add(stop);
+        sequence.Add(stop);
         sequence.Add(rotateTowardsTarget);
         sequence.Add(updateAnimation);
         //if (debug)

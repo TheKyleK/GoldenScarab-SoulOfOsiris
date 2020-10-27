@@ -19,6 +19,10 @@ public class CharacterRB : MonoBehaviour
     [SerializeField]
     private float m_mag;
 
+    //public float dirX;
+    //public float dirZ;
+    public Vector3 force;
+
     [Header("gravity")]
     public float gravity = -9.81f;
     public Transform groundCheck;
@@ -29,9 +33,11 @@ public class CharacterRB : MonoBehaviour
     void FixedUpdate()
     {
         ApplyGraivity();
+        ApplyForce();
         m_velocity += m_acceleration * Time.fixedDeltaTime;
         ApplyFriction();
         ClampMovement();
+        //Vector3 moveAcceleration = new Vector3(m_acceleration.x, 0, m_acceleration.z);
         m_mag = m_velocity.magnitude;
         controller.Move(m_velocity * Time.fixedDeltaTime);
         m_acceleration *= 0;
@@ -106,8 +112,10 @@ public class CharacterRB : MonoBehaviour
         }
     }
 
-    public void ApplyForce(Vector3 force)
+    public void ApplyForce()
     {
+        //Vector3 move = transform.forward * dirZ + transform.right * dirX;
+        //Vector3 moveForce = move.normalized * characterMasterController.moveForce;
         m_acceleration += force;
     }
 

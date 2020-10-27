@@ -22,7 +22,7 @@ public class SeekTarget : TreeNode
         Vector3 target = blackboard.Get(m_key);
         Vector3 desireVelocity = (target - agent.transform.position).normalized * m_steeringForce;
         Vector3 force = (desireVelocity - m_rb.GetVelocity());
-        m_rb.ApplyForce(force);
+        m_rb.force = force;
         return BehaviourResult.Success;
     }
 }
