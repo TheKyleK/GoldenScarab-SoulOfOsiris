@@ -87,6 +87,7 @@ MonoBehaviour:
   characterMasterController: {fileID: 0}
   controller: {fileID: 6383108678067500414}
   m_mag: 0
+  force: {x: 0, y: 0, z: 0}
   gravity: -9.81
   groundCheck: {fileID: 1347716827}
   groundDistance: 0.4
@@ -153,20 +154,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2c648fa3275314899b0c1a8c1932ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopRange: 2
+  monsterMasterController: {fileID: 0}
   playerMask:
     serializedVersion: 2
     m_Bits: 256
-  viewRange: 10
   eyeTransform: {fileID: 6383108679145371665}
-  viewAngle: 90
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3639
   seekThreshold: 0.1
-  steeringForce: 30
   rotateSpeed: 5
-  m_lookAtPlayerRange: 100
   debug: 1
   meshResolution: 1
   edgeDistanceThreshold: 4
