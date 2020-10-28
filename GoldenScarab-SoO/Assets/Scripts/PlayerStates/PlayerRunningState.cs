@@ -13,8 +13,9 @@ public class PlayerRunningState : PlayerState
         return null;
     }
 
-    public override void UpdateMovement(float dt, GameObject player, CharacterRB rb, float moveStrength)
+    public override void UpdateRBDir(GameObject player, CharacterRB rb, float moveStrength)
     {
+        //Vector3 moveDir = new Vector3();
         float x = 0;
         float z = 0;
 
@@ -30,8 +31,7 @@ public class PlayerRunningState : PlayerState
 
         Vector3 move = player.transform.forward * z + player.transform.right * x;
         Vector3 moveForce = move.normalized * moveStrength;
-
-        rb.acceleration += moveForce;
+        rb.force = moveForce;
     }
 
     public override void UpdateAnimation(Animator animator)

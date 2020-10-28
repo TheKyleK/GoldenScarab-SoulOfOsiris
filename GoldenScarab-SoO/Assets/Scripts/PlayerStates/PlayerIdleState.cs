@@ -13,7 +13,13 @@ public class PlayerIdleState : PlayerState
         return null;
     }
 
-    public override void UpdateMovement(float dt, GameObject player, CharacterRB rb, float moveStrength) { }
+    public override void UpdateRBDir(GameObject player, CharacterRB rb, float moveStrength)
+    {
+        rb.force *= 0;
+        //rb.dirX = 0;
+        //rb.dirZ = 0;
+    }
+
 
     public override void UpdateAnimation(Animator animator)
     {

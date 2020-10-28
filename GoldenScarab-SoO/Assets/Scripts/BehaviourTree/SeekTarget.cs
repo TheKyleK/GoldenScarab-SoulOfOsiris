@@ -20,9 +20,9 @@ public class SeekTarget : TreeNode
     {
         if (!blackboard.Contains(m_key)) return BehaviourResult.Failure;
         Vector3 target = blackboard.Get(m_key);
-        Vector3 desireVelocity = (target - agent.transform.position).normalized * m_rb.maxSpeed;
-        Vector3 force = (desireVelocity - m_rb.velocity) * m_steeringForce;
-        m_rb.acceleration += force;
+        Vector3 desireVelocity = (target - agent.transform.position).normalized * m_steeringForce;
+        Vector3 force = (desireVelocity - m_rb.GetVelocity());
+        m_rb.force = force;
         return BehaviourResult.Success;
     }
 }
