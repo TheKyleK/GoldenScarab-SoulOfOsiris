@@ -102,11 +102,13 @@ public class MonsterBehaviour : MonoBehaviour
         Stop stop = new Stop(m_rb);
         RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Idle");
+        LoseGame loseGame = new LoseGame();
         sequence.Add(inRnage);
         sequence.Add(getClosest);
         sequence.Add(stop);
         sequence.Add(rotateTowardsTarget);
         sequence.Add(updateAnimation);
+        sequence.Add(loseGame);
 
         //if (debug)
         //{
