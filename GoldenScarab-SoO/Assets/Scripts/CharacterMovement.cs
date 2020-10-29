@@ -13,6 +13,7 @@ public class CharacterMovement : MonoBehaviour
     public float castDistanceY;
     public float stepOffset;
     public int stepDetails;
+    public float castAmount;
     CharacterRB m_rb;
 
     // Start is called before the first frame update
@@ -67,12 +68,12 @@ public class CharacterMovement : MonoBehaviour
         }
 
         Vector3 moveForward = Vector3.Scale(moveVec, Vector3.forward);
-        if (!IsWalkable(moveForward.normalized, moveForward.magnitude, obstacleMask))
+        if (!IsWalkable(moveForward.normalized, castAmount, obstacleMask))
         {
             moveVec.z = 0;
         }
         Vector3 moveRight = Vector3.Scale(moveVec, Vector3.right);
-        if (!IsWalkable(moveRight.normalized, moveRight.magnitude, obstacleMask))
+        if (!IsWalkable(moveRight.normalized, castAmount, obstacleMask))
         {
             moveVec.x = 0;
         }
