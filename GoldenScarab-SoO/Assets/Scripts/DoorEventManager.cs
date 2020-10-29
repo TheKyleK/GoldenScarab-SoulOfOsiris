@@ -27,7 +27,7 @@ public class DoorEventManager : MonoBehaviour
         if (allTriggered)
         {
             OpenDoor();
-            EventManager.current.onTriggerActivated -= OnTriggerActivated;
+            //EventManager.current.onTriggerActivated -= OnTriggerActivated;
         }
     }
 
