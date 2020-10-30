@@ -52,10 +52,6 @@ public class PerlinNoise : MonoBehaviour
 
         transform.localEulerAngles += rotationOffset;
 
-
-
-
-
     }
 
 
