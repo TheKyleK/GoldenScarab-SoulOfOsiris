@@ -50,7 +50,7 @@ public class PerlinNoise : MonoBehaviour
         rotationOffset.x += noise.x;
         rotationOffset.y += noise.y;
 
-        transform.localEulerAngles = rotationOffset;
+        transform.localEulerAngles += rotationOffset;
 
 
 
