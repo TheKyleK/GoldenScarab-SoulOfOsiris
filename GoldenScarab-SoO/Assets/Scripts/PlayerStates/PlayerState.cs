@@ -7,4 +7,6 @@ public abstract class PlayerState
     public abstract PlayerState HandleInput();
     public abstract void UpdateRBDir(GameObject player, CharacterRB rb, float moveStrength);
     public abstract void UpdateAnimation(Animator animator);
+
+    public abstract void UpdateHeadBobbing(Camera camera);
 }

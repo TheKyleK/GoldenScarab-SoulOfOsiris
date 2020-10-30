@@ -42,4 +42,18 @@ public class PlayerRunningState : PlayerState
             animator.SetBool(param, "Running".Equals(param));
         }
     }
+
+
+    public override void UpdateHeadBobbing(Camera camera)
+    {
+        float theta = Time.timeSinceLevelLoad / 0.2f;
+        float distance = 0.01f * Mathf.Sin(theta);
+        camera.transform.position += Vector3.up * distance;
+    }
+
+    //public override void UpdateHeadBobbing(Camera camera)
+    //{
+
+    //}
+
 }

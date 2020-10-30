@@ -29,4 +29,12 @@ public class PlayerIdleState : PlayerState
             animator.SetBool(param, "Idle".Equals(param));
         }
     }
+
+
+    public override void UpdateHeadBobbing(Camera camera)
+    {
+        
+    }
+
+
 }

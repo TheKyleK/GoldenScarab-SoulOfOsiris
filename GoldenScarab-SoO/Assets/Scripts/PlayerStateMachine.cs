@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal.Internal;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class PlayerStateMachine : MonoBehaviour
             state = newState;
         }
         state.UpdateRBDir(gameObject, m_rb, characterMasterController.moveForce);
+        state.UpdateHeadBobbing(Camera.main);
+        //state.UpdateBrething();
         state.UpdateAnimation(m_animator);
         
     }
