@@ -8,6 +8,11 @@ public class PlayerStateMachine : MonoBehaviour
     public CharacterMasterController characterMasterController;
 
     public PlayerState state;
+
+    [Header("Head Bob")]
+    public float ampitude;
+    public float frequency;
+    public Vector3 originalPos;
     CharacterRB m_rb;
     Animator m_animator;
 
@@ -27,8 +32,7 @@ public class PlayerStateMachine : MonoBehaviour
             state = newState;
         }
         state.UpdateRBDir(gameObject, m_rb, characterMasterController.moveForce);
-        state.UpdateHeadBobbing(Camera.main);
-        //state.UpdateBrething();
+        state.UpdateHeadBobbing(Camera.main, m_rb, ampitude, frequency, originalPos);
         state.UpdateAnimation(m_animator);
         
     }

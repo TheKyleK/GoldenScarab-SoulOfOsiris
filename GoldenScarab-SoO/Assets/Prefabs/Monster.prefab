@@ -41,10 +41,10 @@ GameObject:
   - component: {fileID: 6383108678067500409}
   - component: {fileID: 6383108678067500410}
   - component: {fileID: 6383108678067500408}
-  - component: {fileID: 6383108678067500414}
   - component: {fileID: 6383108678067500294}
   - component: {fileID: 6383108678067500292}
   - component: {fileID: 6383108678067500293}
+  - component: {fileID: -6267658125671865536}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_velocity: {x: 0, y: 0, z: 0}
   m_acceleration: {x: 0, y: 0, z: 0}
   characterMasterController: {fileID: 0}
-  controller: {fileID: 6383108678067500414}
+  controller: {fileID: -6267658125671865536}
   m_mag: 0
   force: {x: 0, y: 0, z: 0}
   gravity: -9.81
@@ -117,31 +117,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6383108678067500414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6383108678067500288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 050eea56c74834949afce71d0b0dcb2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0, z: 0}
-  radius: 0.5
-  height: 1.77
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  radiusRatio: 0.9
-  castDistanceY: 0.025
-  stepOffset: 0
-  stepDetails: 0
 --- !u!114 &6383108678067500294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +182,24 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!143 &-6267658125671865536
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6383108678067500288}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.77
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0
+  m_SkinWidth: 0.01
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &6383108678385091306
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,11 +44,13 @@ public class PlayerRunningState : PlayerState
     }
 
 
-    public override void UpdateHeadBobbing(Camera camera)
+    public override void UpdateHeadBobbing(Camera camera, CharacterRB rb, float ampitude, float period, Vector3 originalPos)
     {
-        float theta = Time.timeSinceLevelLoad / 0.2f;
-        float distance = 0.01f * Mathf.Sin(theta);
-        camera.transform.position += Vector3.up * distance;
+        float theta = Time.timeSinceLevelLoad / period;
+        float distance = ampitude * Mathf.Sin(theta);
+        offset += distance;
+        //Debug.Log(offset);
+        camera.transform.localPosition = originalPos + Vector3.up * offset;
     }
 
     //public override void UpdateHeadBobbing(Camera camera)

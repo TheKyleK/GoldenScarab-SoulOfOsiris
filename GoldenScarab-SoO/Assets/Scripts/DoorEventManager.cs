@@ -17,18 +17,18 @@ public class DoorEventManager : MonoBehaviour
         bool allTriggered = true;
         foreach (TriggerEventManager trigger in triggers)
         {
-            if (trigger.triggered == false)
+            if (trigger.triggered == true)
             {
-                allTriggered = false;
-                break;
+                OpenDoor();
+                //break;
             }
         }
 
-        if (allTriggered)
-        {
-            OpenDoor();
-            //EventManager.current.onTriggerActivated -= OnTriggerActivated;
-        }
+        //if (allTriggered)
+        //{
+        //    OpenDoor();
+        //    //EventManager.current.onTriggerActivated -= OnTriggerActivated;
+        //}
     }
 
     void OpenDoor()

@@ -31,9 +31,11 @@ public class PlayerIdleState : PlayerState
     }
 
 
-    public override void UpdateHeadBobbing(Camera camera)
+    public override void UpdateHeadBobbing(Camera camera, CharacterRB rb, float ampitude, float period, Vector3 originalPos)
     {
-        
+        float current = Mathf.Lerp(camera.transform.localPosition.y, originalPos.y, 10 * Time.deltaTime);
+
+        camera.transform.localPosition = new Vector3(camera.transform.localPosition.x, current, camera.transform.localPosition.z);
     }
 
 

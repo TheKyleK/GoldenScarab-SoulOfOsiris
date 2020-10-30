@@ -4,9 +4,10 @@ using UnityEngine;
 
 public abstract class PlayerState
 {
+    protected float offset = 0;
     public abstract PlayerState HandleInput();
     public abstract void UpdateRBDir(GameObject player, CharacterRB rb, float moveStrength);
     public abstract void UpdateAnimation(Animator animator);
 
-    public abstract void UpdateHeadBobbing(Camera camera);
+    public abstract void UpdateHeadBobbing(Camera camera, CharacterRB rb, float ampitude, float period, Vector3 originalPos);
 }

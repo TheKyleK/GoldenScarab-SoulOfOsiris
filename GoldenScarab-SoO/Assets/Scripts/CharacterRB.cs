@@ -15,7 +15,8 @@ public class CharacterRB : MonoBehaviour
     [SerializeField] private Vector3 m_velocity;
     [SerializeField] private Vector3 m_acceleration;
     public CharacterMasterController characterMasterController;
-    public CharacterMovement controller;
+    //public CharacterMovement controller;
+    public CharacterController controller;
     [SerializeField]
     private float m_mag;
 
