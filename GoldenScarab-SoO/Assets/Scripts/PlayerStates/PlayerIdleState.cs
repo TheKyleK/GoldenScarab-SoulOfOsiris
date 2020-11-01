@@ -8,6 +8,7 @@ public class PlayerIdleState : PlayerState
     {
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
         {
+            time = 0;
             return new PlayerRunningState();
         }
         return null;
@@ -31,10 +32,10 @@ public class PlayerIdleState : PlayerState
     }
 
 
-    public override void UpdateHeadBobbing(Camera camera, CharacterRB rb, float ampitude, float period, Vector3 originalPos)
+    public override void UpdateHeadBobbing(Camera camera, CharacterRB rb, float ampitude, float frequency, Vector3 originalPos)
     {
         float current = Mathf.Lerp(camera.transform.localPosition.y, originalPos.y, 10 * Time.deltaTime);
-
+        offset = current - originalPos.y;
         camera.transform.localPosition = new Vector3(camera.transform.localPosition.x, current, camera.transform.localPosition.z);
     }
 

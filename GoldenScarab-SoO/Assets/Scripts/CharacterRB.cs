@@ -130,6 +130,11 @@ public class CharacterRB : MonoBehaviour
         m_velocity = velocity;
     }
 
+    public float GetMaxSpeed()
+    {
+        return characterMasterController.maxSpeed;
+    }
+
     //public void SetHorizontalDampingStop(float horizontalDampingStop)
     //{
     //    m_horizontalDampingStop = horizontalDampingStop;

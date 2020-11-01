@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class PlayerRunningState : PlayerState
     {
         if (!Input.GetButton("Horizontal") && !Input.GetButton("Vertical"))
         {
+            time = 0;
             return new PlayerIdleState();
         }
         return null;
@@ -44,18 +46,21 @@ public class PlayerRunningState : PlayerState
     }
 
 
-    public override void UpdateHeadBobbing(Camera camera, CharacterRB rb, float ampitude, float period, Vector3 originalPos)
+    public override void UpdateHeadBobbing(Camera camera, CharacterRB rb, float ampitude, float frequency, Vector3 originalPos)
     {
-        float theta = Time.timeSinceLevelLoad / period;
-        float distance = ampitude * Mathf.Sin(theta);
+        float speedMultiplier = Util.Map(rb.GetVelocity().magnitude, 0, rb.GetMaxSpeed(), 0, 1);
+        //Debug.Log(speedMultiplier);
+        time += Time.deltaTime * speedMultiplier;
+        float distance = -ampitude * Mathf.Sin(2 * Mathf.PI * frequency * time);
         offset += distance;
-        //Debug.Log(offset);
+        Debug.Log(offset);
+        if (Mathf.Sign(previousMove) != Mathf.Sign(distance) && distance > 0)
+        {
+            SoundManager.current.PlaySound(Sound.FootStep, camera.transform.position);
+        }
+        previousMove = distance;
+        //float y = Mathf.Lerp(camera.transform.localPosition.y, originalPos.y + offset, smoothAmount * Time.deltaTime);
         camera.transform.localPosition = originalPos + Vector3.up * offset;
     }
-
-    //public override void UpdateHeadBobbing(Camera camera)
-    //{
-
-    //}
 
 }
