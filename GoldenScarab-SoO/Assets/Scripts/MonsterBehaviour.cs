@@ -30,11 +30,8 @@ public class MonsterBehaviour : MonoBehaviour
 
     private Mesh viewMesh;
 
-   
-    
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
@@ -46,6 +43,8 @@ public class MonsterBehaviour : MonoBehaviour
 
         m_root = ConstructBehaviourTree();
         m_blackboard = new Blackboard();
+
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame

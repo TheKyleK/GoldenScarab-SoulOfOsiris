@@ -6,17 +6,27 @@ public class ObjectTrigger : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        EventManager.current.ObjectTriggerEnter(gameObject);
+        //Debug.Log(other.gameObject.name);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            EventManager.current.ObjectTriggerEnter(gameObject);
+        }
         //SoundManager.current.PlaySound(Sound.Chime, transform.position);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        EventManager.current.ObjectTriggerEnter(gameObject);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            EventManager.current.ObjectTriggerStay(gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        EventManager.current.ObjectTriggerExit(gameObject);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            EventManager.current.ObjectTriggerExit(gameObject);
+        }
     }
 }

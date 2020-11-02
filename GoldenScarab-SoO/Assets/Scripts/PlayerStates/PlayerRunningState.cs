@@ -52,15 +52,12 @@ public class PlayerRunningState : PlayerState
         //Debug.Log(speedMultiplier);
         time += Time.deltaTime * speedMultiplier;
         float distance = -ampitude * Mathf.Sin(2 * Mathf.PI * frequency * time);
-        offset += distance;
-        Debug.Log(offset);
         if (Mathf.Sign(previousMove) != Mathf.Sign(distance) && distance > 0)
         {
             SoundManager.current.PlaySound(Sound.FootStep, camera.transform.position);
         }
         previousMove = distance;
-        //float y = Mathf.Lerp(camera.transform.localPosition.y, originalPos.y + offset, smoothAmount * Time.deltaTime);
-        camera.transform.localPosition = originalPos + Vector3.up * offset;
+        camera.transform.localPosition = originalPos +  Vector3.up * distance;
     }
 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class MonsterSpawnEventManager : MonoBehaviour
 {
     public List<TriggerEventManager> triggers;
-    public GameObject monsterPrefab;
+    public GameObject monster;
     public MonsterMasterController characterMasterController;
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,10 @@ public class MonsterSpawnEventManager : MonoBehaviour
         {
             if (trigger.triggered == true)
             {
-                SpawnMonster();
+                //SpawnMonster()
+                //;
+                monster.transform.position = transform.position;
+                monster.SetActive(true);
                 EventManager.current.onTriggerActivated -= OnTriggerActivated;
                 break;
             }
@@ -28,11 +31,11 @@ public class MonsterSpawnEventManager : MonoBehaviour
 
     void SpawnMonster()
     {
-        GameObject monster = Instantiate(monsterPrefab, transform.position, Quaternion.identity);
-        CharacterRB rb = monster.GetComponent<CharacterRB>();
-        MonsterBehaviour mb = monster.GetComponent<MonsterBehaviour>();
-        rb.characterMasterController = characterMasterController;
-        mb.monsterMasterController = characterMasterController;
+        //GameObject monster = Instantiate(monster, transform.position, Quaternion.identity);
+        //CharacterRB rb = monster.GetComponent<CharacterRB>();
+        //MonsterBehaviour mb = monster.GetComponent<MonsterBehaviour>();
+        //rb.characterMasterController = characterMasterController;
+        //mb.monsterMasterController = characterMasterController;
         //EventManager.current.MonsterSpawn(monster);
     }
 

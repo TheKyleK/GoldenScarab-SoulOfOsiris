@@ -16,6 +16,7 @@ public class ObjectEventManager : MonoBehaviour
     void Start()
     {
         EventManager.current.onObjectTriggerEnter += OnObjectTriggerEnter;
+        EventManager.current.onObjectTriggerStay += OnObjectTriggerStay;
         EventManager.current.onObjectTriggerExit += OnObjectTriggerExit;
         EventManager.current.onPlayerRayHitEnter += OnPlayerRayHitEnter;
         EventManager.current.onPlayerRayHitExit += OnPlayerRayHitExit;
@@ -28,6 +29,15 @@ public class ObjectEventManager : MonoBehaviour
             entered = true;
         }
     }
+
+    void OnObjectTriggerStay(GameObject obj)
+    {
+        if (obj == gameObject)
+        {
+            entered = true;
+        }
+    }
+
 
     void OnObjectTriggerExit(GameObject obj)
     {
@@ -71,6 +81,7 @@ public class ObjectEventManager : MonoBehaviour
     private void OnDestroy()
     {
         EventManager.current.onObjectTriggerEnter -= OnObjectTriggerEnter;
+        EventManager.current.onObjectTriggerStay -= OnObjectTriggerStay;
         EventManager.current.onObjectTriggerExit -= OnObjectTriggerExit;
         EventManager.current.onPlayerRayHitEnter -= OnPlayerRayHitEnter;
         EventManager.current.onPlayerRayHitExit -= OnPlayerRayHitExit;

@@ -32,8 +32,14 @@ public class PlayerStateMachine : MonoBehaviour
             state = newState;
         }
         state.UpdateRBDir(gameObject, m_rb, characterMasterController.moveForce);
-        state.UpdateHeadBobbing(Camera.main, m_rb, ampitude, frequency, originalPos);
+        //state.UpdateHeadBobbing(Camera.main, m_rb, ampitude, frequency, originalPos);
         state.UpdateAnimation(m_animator);
         
+    }
+
+    private void LateUpdate()
+    {
+        state.UpdateHeadBobbing(Camera.main, m_rb, ampitude, frequency, originalPos);
+
     }
 }

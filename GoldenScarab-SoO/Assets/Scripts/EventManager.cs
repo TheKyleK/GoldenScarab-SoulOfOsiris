@@ -19,6 +19,12 @@ public class EventManager : MonoBehaviour
         onObjectTriggerEnter?.Invoke(obj);
     }
 
+    public event Action<GameObject> onObjectTriggerStay;
+    public void ObjectTriggerStay(GameObject obj)
+    {
+        onObjectTriggerStay?.Invoke(obj);
+    }
+
     public event Action<GameObject> onObjectTriggerExit;
     public void ObjectTriggerExit(GameObject obj)
     {
