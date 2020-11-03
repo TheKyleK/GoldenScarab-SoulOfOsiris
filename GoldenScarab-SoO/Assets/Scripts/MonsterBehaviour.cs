@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,6 +14,7 @@ public class MonsterBehaviour : MonoBehaviour
     public LayerMask obstacleMask;
     public float seekThreshold;
     public float rotateSpeed;
+
 
     [Header("Debug")]
     public bool debug;
@@ -30,7 +32,8 @@ public class MonsterBehaviour : MonoBehaviour
 
     private Mesh viewMesh;
 
-
+    Queue<TreeNode> m_queueBefore = new Queue<TreeNode>();
+    Queue<TreeNode> m_queueAfter = new Queue<TreeNode>();
     private void Awake()
     {
         viewMesh = new Mesh();
@@ -57,12 +60,52 @@ public class MonsterBehaviour : MonoBehaviour
 
         //if (m_root != null && monsterMasterController != null)
         //{
-        m_root.Execute(gameObject, m_blackboard, Time.deltaTime);
+        //if (m_queue.Count() > 0)
+        //{
+        //    foreach (TreeNode node in m_queue)
+        //    {
+        //        Execute(node);
+        //    }
+        //    m_queue.Clear();
+        //}
+        //else
+        //{
+        foreach (TreeNode node in m_queueBefore)
+        {
+            Execute(node);
+        }
+        m_queueBefore.Clear();
+
+        if (Execute(m_root) == BehaviourResult.Failure)
+        {
+            foreach (TreeNode node in m_queueAfter)
+            {
+                Execute(node);
+            }
+        }
+        m_queueAfter.Clear();
+
+        //}
         if (debug)
         {
             DrawFieldOfView();
         }
         //}
+    }
+
+    public BehaviourResult Execute(TreeNode node)
+    {
+        return node.Execute(gameObject, m_blackboard, Time.deltaTime);
+    }
+
+    public void EnqueueBefore(TreeNode node)
+    {
+        m_queueBefore.Enqueue(node);
+    }
+
+    public void EnqueueAfter(TreeNode node)
+    {
+        m_queueAfter.Enqueue(node);
     }
 
     TreeNode ConstructBehaviourTree()
@@ -95,7 +138,7 @@ public class MonsterBehaviour : MonoBehaviour
 
     private TreeNode CreateStopSequence()
     {
-        SequenceNode sequence = new SequenceNode();
+       SequenceNode sequence = new SequenceNode();
         GetTargetsInRange inRnage = new GetTargetsInRange(playerMask, monsterMasterController.stopRange);
         GetClosest getClosest = new GetClosest(BlackboardKey.Input);
         Stop stop = new Stop(m_rb);
@@ -107,7 +150,7 @@ public class MonsterBehaviour : MonoBehaviour
         sequence.Add(stop);
         sequence.Add(rotateTowardsTarget);
         sequence.Add(updateAnimation);
-        sequence.Add(loseGame);
+        //sequence.Add(loseGame);
 
         //if (debug)
         //{
@@ -124,7 +167,7 @@ public class MonsterBehaviour : MonoBehaviour
         GetClosest getClosest = new GetClosest(BlackboardKey.Input);
         StoreOutputDecorator storeClosestTarget = new StoreOutputDecorator(getClosest, BlackboardKey.Storage);
         GetNextWaypoint getNextWayPoint = new GetNextWaypoint(m_agent, BlackboardKey.Input, seekThreshold);
-        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, monsterMasterController.moveForce);
+        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, monsterMasterController.maxSpeed);
         RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Running");
         sequence.Add(inRange);
@@ -164,7 +207,7 @@ public class MonsterBehaviour : MonoBehaviour
     {
         SequenceNode sequence = new SequenceNode();
         GetNextWaypoint getNextWayPoint = new GetNextWaypoint(m_agent, BlackboardKey.Storage, seekThreshold);
-        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, monsterMasterController.moveForce);
+        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, monsterMasterController.maxSpeed);
         RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Running");
         sequence.Add(getNextWayPoint);
@@ -186,11 +229,13 @@ public class MonsterBehaviour : MonoBehaviour
         Stop stop = new Stop(m_rb);
         RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Idle");
+        Fail fail = new Fail();
         sequence.Add(inRnage);
         sequence.Add(getClosest);
         sequence.Add(stop);
         sequence.Add(rotateTowardsTarget);
         sequence.Add(updateAnimation);
+        sequence.Add(fail);
         //if (debug)
         //{
         //    return AttachDebugLog(sequence, "Look At Player", BehaviourResult.Success);

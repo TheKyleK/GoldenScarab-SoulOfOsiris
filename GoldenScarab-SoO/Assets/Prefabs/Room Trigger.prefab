@@ -73,6 +73,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oneTime: 1
   continuous: 0
+  directional: 0
+  player: {fileID: 0}
+  dir: {x: 0, y: 0, z: 0}
 --- !u!114 &3363079189181286499
 MonoBehaviour:
   m_ObjectHideFlags: 0

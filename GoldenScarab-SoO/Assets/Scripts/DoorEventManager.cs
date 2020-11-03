@@ -14,7 +14,7 @@ public class DoorEventManager : MonoBehaviour
 
     void OnTriggerActivated(GameObject obj)
     {
-        bool allTriggered = true;
+        //bool allTriggered = true;
         foreach (TriggerEventManager trigger in triggers)
         {
             if (trigger.triggered == true)
