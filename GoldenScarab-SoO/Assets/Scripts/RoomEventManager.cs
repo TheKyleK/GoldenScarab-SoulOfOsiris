@@ -30,6 +30,10 @@ public class RoomEventManager : MonoBehaviour
     void OnObjectTriggerEnter(GameObject obj)
     {
         bool triggered = ActivateTrigger(obj);
+        if (triggered)
+        {
+            EventManager.current.TriggerActivated(obj);
+        }
         if (oneTime && triggered)
         {
             EventManager.current.onObjectTriggerEnter -= OnObjectTriggerEnter;
@@ -42,6 +46,15 @@ public class RoomEventManager : MonoBehaviour
         ActivateTrigger(obj);
     }
 
+    void OnObjectTriggerExit(GameObject obj)
+    {
+        bool triggered = ActivateTrigger(obj);
+        if (triggered)
+        {
+            EventManager.current.TriggerDeactivated(obj);
+        }
+    }
+
     bool ActivateTrigger(GameObject obj)
     {
         if (gameObject == obj)
@@ -49,7 +62,6 @@ public class RoomEventManager : MonoBehaviour
             // if the room trigger is not directional, activate the trigger
             if (!directional)
             {
-                EventManager.current.TriggerActivated(obj);
                 return true;
             }
             // otherwise check the direction
@@ -58,7 +70,6 @@ public class RoomEventManager : MonoBehaviour
                 float dotProd = Vector3.Dot(m_playerRB.GetVelocity(), dir);
                 if (dotProd > 0)
                 {
-                    EventManager.current.TriggerActivated(obj);
                     return true;
                 }
             }
@@ -66,13 +77,6 @@ public class RoomEventManager : MonoBehaviour
         return false;
     }
 
-    void OnObjectTriggerExit(GameObject obj)
-    {
-        if (gameObject == obj)
-        {
-            EventManager.current.TriggerDeactivated(obj);
-        }
-    }
     // Update is called once per frame
     void Update()
     {

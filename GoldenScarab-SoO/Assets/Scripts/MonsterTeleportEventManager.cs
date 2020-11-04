@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterTeleportEventManager : MonoBehaviour
 {
-    public TriggerEventManager trigger;
+    public List<TriggerEventManager> triggers;
     public GameObject monster;
     private MonsterBehaviour m_mb;
     private CharacterRB m_rb;
@@ -16,32 +16,38 @@ public class MonsterTeleportEventManager : MonoBehaviour
         m_rb = monster.GetComponent<CharacterRB>();
         m_animator = monster.GetComponent<Animator>();
         EventManager.current.onTriggerActivated += OnTriggerActivated;
+        EventManager.current.onTriggerDeactivated += OnTriggerDeactivated;
     }
 
     void OnTriggerActivated(GameObject obj)
     {
-        if (trigger.triggered)
-        {
-            //float dotprod = Vector3.Dot(m_rb.GetVelocity(), new Vector3(0, 0, 1));
-            //if (dotprod > 0)
-            //{
-            SequenceNode sequenceBefore = new SequenceNode();
-            TreeNode removeStorageDecorator = new DeleteMemoryDecorator(sequenceBefore, BlackboardKey.Storage, BehaviourResult.Failure);
-            SequenceNode sequenceAfter = new SequenceNode();
-            Stop stop = new Stop(m_rb);         
-            UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Idle");
-            SetPosition setPosition = new SetPosition(transform.position);
-            sequenceAfter.Add(stop);
-            sequenceAfter.Add(updateAnimation);
-            sequenceAfter.Add(setPosition);
-            m_mb.EnqueueBefore(removeStorageDecorator);
-            m_mb.EnqueueAfter(sequenceAfter);
+        TeleportPlayer(obj);
+    }
 
-            //}
-            //m_mb.Execute(removeStorageDecorator);
-            //monster.SetActive(false);
-            //monster.transform.position = transform.position;
-            //monster.SetActive(true);
+    void OnTriggerDeactivated(GameObject obj)
+    {
+        TeleportPlayer(obj);
+    }
+
+    void TeleportPlayer(GameObject obj)
+    {
+        foreach(TriggerEventManager trigger in triggers)
+        {
+            if (trigger.gameObject == obj)
+            {
+                //SequenceNode sequenceBefore = new SequenceNode();
+                SequenceNode sequenceAfter = new SequenceNode();
+                Stop stop = new Stop(m_rb);
+                UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Idle");
+                SetPosition setPosition = new SetPosition(transform.position);
+                TreeNode removeStorageDecorator = new DeleteMemoryDecorator(sequenceAfter, BlackboardKey.LastKnownPosition, BehaviourResult.Success);
+                sequenceAfter.Add(stop);
+                sequenceAfter.Add(updateAnimation);
+                sequenceAfter.Add(setPosition);
+                //m_mb.EnqueueBefore(removeStorageDecorator);
+                m_mb.EnqueueAfter(removeStorageDecorator);
+                break;
+            }
         }
     }
 }

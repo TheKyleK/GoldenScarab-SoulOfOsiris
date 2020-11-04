@@ -5,8 +5,10 @@ using UnityEngine;
 public enum BlackboardKey
 {
     Input,
-    Storage,
-    Debug
+    LastKnownPosition,
+    Debug,
+    Path,
+    PathIndex
 }
 
 public class Blackboard
