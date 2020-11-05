@@ -5,9 +5,10 @@ using UnityEngine.Rendering.Universal.Internal;
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    public CharacterMasterController characterMasterController;
+    //public CharacterMasterController characterMasterController;
 
     public PlayerState state;
+    public float moveForce;
 
     [Header("Head Bob")]
     public float ampitude;
@@ -31,7 +32,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             state = newState;
         }
-        state.UpdateRBDir(gameObject, m_rb, characterMasterController.moveForce);
+        state.UpdateRBDir(gameObject, m_rb, moveForce);
         //state.UpdateHeadBobbing(Camera.main, m_rb, ampitude, frequency, originalPos);
         state.UpdateAnimation(m_animator);
         

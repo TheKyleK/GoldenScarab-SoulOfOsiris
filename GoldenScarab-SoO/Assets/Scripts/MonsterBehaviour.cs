@@ -6,16 +6,25 @@ using UnityEngine.AI;
 
 public class MonsterBehaviour : MonoBehaviour
 {
-    public MonsterMasterController monsterMasterController;
-    
+    //public MonsterMasterController monsterMasterController;
+    [Header("Stop Sequence")]
+    public float stopRange;
+
+
     [Header("Seek Sequence")]
     public LayerMask playerMask;
     public Transform eyeTransform;
     public LayerMask obstacleMask;
     public float seekThreshold;
     public float rotateSpeed;
+    public float viewRange;
+    public float viewAngle;
+    public float moveForce;
 
     public List<WayPoints> paths;
+
+    [Header("Look At Player Sequence")]
+    public float lookAtPlayerRange;
 
 
     [Header("Debug")]
@@ -127,7 +136,7 @@ public class MonsterBehaviour : MonoBehaviour
     private TreeNode CreateStopSequence()
     {
        SequenceNode sequence = new SequenceNode();
-        GetTargetsInRange inRnage = new GetTargetsInRange(playerMask, monsterMasterController.stopRange);
+        GetTargetsInRange inRnage = new GetTargetsInRange(playerMask, stopRange);
         GetClosest getClosest = new GetClosest(BlackboardKey.Input);
         Stop stop = new Stop(m_rb);
         RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
@@ -150,12 +159,12 @@ public class MonsterBehaviour : MonoBehaviour
     private TreeNode CreateSeekPlayerSequence()
     {
         SequenceNode sequence = new SequenceNode();
-        GetTargetsInRange inRange = new GetTargetsInRange(playerMask, monsterMasterController.viewRange);
-        GetTargetsInLineOfSight inLineOfSignt = new GetTargetsInLineOfSight(eyeTransform, monsterMasterController.viewAngle, obstacleMask);
+        GetTargetsInRange inRange = new GetTargetsInRange(playerMask, viewRange);
+        GetTargetsInLineOfSight inLineOfSignt = new GetTargetsInLineOfSight(eyeTransform, viewAngle, obstacleMask);
         GetClosest getClosest = new GetClosest(BlackboardKey.Input);
         StoreOutputDecorator storeClosestTarget = new StoreOutputDecorator(getClosest, BlackboardKey.LastKnownPosition);
         GetNextWaypoint getNextWayPoint = new GetNextWaypoint(m_agent, BlackboardKey.Input, seekThreshold);
-        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, monsterMasterController.maxSpeed);
+        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, moveForce);
         RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Running");
         sequence.Add(inRange);
@@ -177,7 +186,7 @@ public class MonsterBehaviour : MonoBehaviour
     {
         SequenceNode sequence = new SequenceNode();
         TreeNode removeStorageDecorator = new DeleteMemoryDecorator(sequence, BlackboardKey.LastKnownPosition, BehaviourResult.Success);
-        IsTargetInRange isTargetInRange = new IsTargetInRange(BlackboardKey.LastKnownPosition, monsterMasterController.stopRange);
+        IsTargetInRange isTargetInRange = new IsTargetInRange(BlackboardKey.LastKnownPosition, stopRange);
         Stop stop = new Stop(m_rb);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Idle");
         sequence.Add(isTargetInRange);
@@ -195,7 +204,7 @@ public class MonsterBehaviour : MonoBehaviour
     {
         SequenceNode sequence = new SequenceNode();
         GetNextWaypoint getNextWayPoint = new GetNextWaypoint(m_agent, BlackboardKey.LastKnownPosition, seekThreshold);
-        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, monsterMasterController.maxSpeed);
+        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, moveForce);
         RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Running");
         sequence.Add(getNextWayPoint);
@@ -212,7 +221,7 @@ public class MonsterBehaviour : MonoBehaviour
     public TreeNode CreateLookAtPlayerSequence()
     {
         SequenceNode sequence = new SequenceNode();
-        GetTargetsInRange inRnage = new GetTargetsInRange(playerMask, monsterMasterController.lookAtPlayerRange);
+        GetTargetsInRange inRnage = new GetTargetsInRange(playerMask, lookAtPlayerRange);
         GetClosest getClosest = new GetClosest(BlackboardKey.Input);
         Stop stop = new Stop(m_rb);
         RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
@@ -236,7 +245,7 @@ public class MonsterBehaviour : MonoBehaviour
         SequenceNode sequence = new SequenceNode();
         GetNextWayPointOnPath getNextWayPointOnPath = new GetNextWayPointOnPath();
         GetNextWaypoint getNextWaypoint = new GetNextWaypoint(m_agent, BlackboardKey.Input, seekThreshold);
-        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, monsterMasterController.maxSpeed);
+        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, moveForce);
         RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Running");
         sequence.Add(getNextWayPointOnPath);
@@ -255,13 +264,13 @@ public class MonsterBehaviour : MonoBehaviour
     // Debug draw that we don't really care
     void DrawFieldOfView()
     {
-        int stepCount = Mathf.RoundToInt(monsterMasterController.viewAngle * meshResolution);
-        float stepAngleSize = monsterMasterController.viewAngle / stepCount;
+        int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
+        float stepAngleSize = viewAngle / stepCount;
         List<Vector3> viewPoints = new List<Vector3>();
         ViewCastInfo oldViewCast = new ViewCastInfo();
         for (int i = 0; i <= stepCount; i++)
         {
-            float angle = transform.rotation.eulerAngles.y - monsterMasterController.viewAngle / 2 + stepAngleSize * i;
+            float angle = transform.rotation.eulerAngles.y - viewAngle / 2 + stepAngleSize * i;
             //Debug.DrawLine(eyeTransform.position, eyeTransform.position + DirFromAngle(angle, true) * viewRange, Color.red);
             ViewCastInfo viewCast = ViewCast(angle);
             if (i > 0)
@@ -309,13 +318,13 @@ public class MonsterBehaviour : MonoBehaviour
     {
         Vector3 dir = DirFromAngle(globalAngle, true);
         RaycastHit hit;
-        if (Physics.Raycast(eyeTransform.position, dir, out hit, monsterMasterController.viewRange, obstacleMask))
+        if (Physics.Raycast(eyeTransform.position, dir, out hit, viewRange, obstacleMask))
         {
             return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
         }
         else
         {
-            return new ViewCastInfo(false, eyeTransform.position + dir * monsterMasterController.viewRange, monsterMasterController.viewRange, globalAngle);
+            return new ViewCastInfo(false, eyeTransform.position + dir * viewRange, viewRange, globalAngle);
         }
     }
 

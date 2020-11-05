@@ -14,8 +14,16 @@ public class CharacterRB : MonoBehaviour
 
     [SerializeField] private Vector3 m_velocity;
     [SerializeField] private Vector3 m_acceleration;
-    public CharacterMasterController characterMasterController;
+    //public CharacterMasterController characterMasterController;
     //public CharacterMovement controller;
+    public float maxSpeed;
+    [Range(0, 1)]
+    public float horizontalDampingStop;
+    [Range(0, 1)]
+    public float horizontalDampingTurn;
+    [Range(0, 1)]
+    public float horizontalDampingBasic;
+
     public CharacterController controller;
     [SerializeField]
     private float m_mag;
@@ -47,9 +55,9 @@ public class CharacterRB : MonoBehaviour
     void ClampMovement()
     {
         Vector3 clamp = new Vector3(m_velocity.x, 0, m_velocity.z);
-        if (clamp.magnitude > characterMasterController.maxSpeed)
+        if (clamp.magnitude > maxSpeed)
         {
-            clamp = clamp.normalized * characterMasterController.maxSpeed;
+            clamp = clamp.normalized * maxSpeed;
             m_velocity.x = clamp.x;
             m_velocity.z = clamp.z;
         }
@@ -60,7 +68,7 @@ public class CharacterRB : MonoBehaviour
         Vector3 moveAcceleration = new Vector3(m_acceleration.x, 0, m_acceleration.z);
         if (moveAcceleration.magnitude == 0.0f)
         {
-            float decay = Mathf.Pow(1 - characterMasterController.horizontalDampingStop, Time.fixedDeltaTime * 10);
+            float decay = Mathf.Pow(1 - horizontalDampingStop, Time.fixedDeltaTime * 10);
             m_velocity.x *= decay;
             m_velocity.z *= decay;
         }
@@ -68,23 +76,23 @@ public class CharacterRB : MonoBehaviour
         {
             if (Mathf.Sign(m_velocity.x) != Mathf.Sign(moveAcceleration.x))
             {
-                float decay = Mathf.Pow(1 - characterMasterController.horizontalDampingTurn, Time.fixedDeltaTime * 10);
+                float decay = Mathf.Pow(1 - horizontalDampingTurn, Time.fixedDeltaTime * 10);
                 m_velocity.x *= decay;
             }
             else
             {
-                float decay = Mathf.Pow(1 - characterMasterController.horizontalDampingBasic, Time.fixedDeltaTime * 10);
+                float decay = Mathf.Pow(1 - horizontalDampingBasic, Time.fixedDeltaTime * 10);
                 m_velocity.x *= decay;
             }
 
             if (Mathf.Sign(m_velocity.z) != Mathf.Sign(moveAcceleration.z))
             {
-                float decay = Mathf.Pow(1 - characterMasterController.horizontalDampingTurn, Time.fixedDeltaTime * 10);
+                float decay = Mathf.Pow(1 - horizontalDampingTurn, Time.fixedDeltaTime * 10);
                 m_velocity.z *= decay;
             }
             else
             {
-                float decay = Mathf.Pow(1 - characterMasterController.horizontalDampingBasic, Time.fixedDeltaTime * 10);
+                float decay = Mathf.Pow(1 - horizontalDampingBasic, Time.fixedDeltaTime * 10);
                 m_velocity.z *= decay;
             }
 
@@ -116,7 +124,7 @@ public class CharacterRB : MonoBehaviour
     public void ApplyForce()
     {
         //Vector3 move = transform.forward * dirZ + transform.right * dirX;
-        //Vector3 moveForce = move.normalized * characterMasterController.moveForce;
+        //Vector3 moveForce = move.normalized * moveForce;
         m_acceleration += force;
     }
 
@@ -132,7 +140,7 @@ public class CharacterRB : MonoBehaviour
 
     public float GetMaxSpeed()
     {
-        return characterMasterController.maxSpeed;
+        return maxSpeed;
     }
 
     //public void SetHorizontalDampingStop(float horizontalDampingStop)
