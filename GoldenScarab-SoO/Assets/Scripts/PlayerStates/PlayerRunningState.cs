@@ -54,7 +54,7 @@ public class PlayerRunningState : PlayerState
         float distance = -ampitude * Mathf.Sin(2 * Mathf.PI * frequency * time);
         if (Mathf.Sign(previousMove) != Mathf.Sign(distance) && distance > 0)
         {
-            SoundManager.current.PlaySound(Sound.FootStep, camera.transform.position);
+            SoundManager.current.PlaySound(Sound.FootStep, camera.transform.position, 0.05f);
         }
         previousMove = distance;
         camera.transform.localPosition = originalPos +  Vector3.up * distance;

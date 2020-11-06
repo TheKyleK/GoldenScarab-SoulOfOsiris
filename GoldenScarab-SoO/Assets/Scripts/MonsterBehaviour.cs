@@ -147,7 +147,7 @@ public class MonsterBehaviour : MonoBehaviour
         sequence.Add(stop);
         sequence.Add(rotateTowardsTarget);
         sequence.Add(updateAnimation);
-        //sequence.Add(loseGame);
+        sequence.Add(loseGame);
 
         //if (debug)
         //{
