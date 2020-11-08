@@ -21,6 +21,8 @@ public class MonsterBehaviour : MonoBehaviour
     public float viewAngle;
     public float moveForce;
 
+    public float delay;
+
     public List<WayPoints> paths;
 
     [Header("Look At Player Sequence")]
@@ -109,7 +111,8 @@ public class MonsterBehaviour : MonoBehaviour
         TreeNode stopSequence = CreateStopSequence();
 
         // Seek Sequence
-        TreeNode seekPlayerSequence = CreateSeekPlayerSequence();
+        //TreeNode seekPlayerSequence = CreateSeekPlayerSequence();
+        TreeNode seekPlayerSelector = CreateSeekPlayerSelector();
 
         // Stop at last known position
         TreeNode stopAtLastKnownPositionSequence = CreateStopLastKnownPositionSequence();
@@ -124,7 +127,7 @@ public class MonsterBehaviour : MonoBehaviour
         TreeNode moveToPath = CreateIdlePathSequence();
 
         monsterBehaviour.Add(stopSequence);
-        monsterBehaviour.Add(seekPlayerSequence);
+        monsterBehaviour.Add(seekPlayerSelector);
         monsterBehaviour.Add(stopAtLastKnownPositionSequence);
         monsterBehaviour.Add(seekLastKnownPositionSequence);
         //monsterBehaviour.Add(moveToPath);
@@ -147,12 +150,43 @@ public class MonsterBehaviour : MonoBehaviour
         sequence.Add(stop);
         sequence.Add(rotateTowardsTarget);
         sequence.Add(updateAnimation);
-        sequence.Add(loseGame);
+        //sequence.Add(loseGame);
 
         //if (debug)
         //{
         //    return AttachDebugLog(sequence, "Stop", BehaviourResult.Success);
         //}
+        return sequence;
+    }
+
+    private TreeNode CreateSeekPlayerSelector()
+    {
+        SelectorNode selector = new SelectorNode();
+        TreeNode seekPlayer = CreateSeekPlayerSequence();
+        SetMemoryDecorator setDelay = new SetMemoryDecorator(seekPlayer, BlackboardKey.Delay, 0.0f, BehaviourResult.Success);
+        TreeNode delaySeekPlayer = CreateDelaySeekPlayerSequence();
+        selector.Add(setDelay);
+        selector.Add(delaySeekPlayer);
+        return selector;
+    }
+    private TreeNode CreateDelaySeekPlayerSequence()
+    {
+        SequenceNode sequence = new SequenceNode();
+        CheckDelay checkDelay = new CheckDelay(delay);
+        GetTargetsInRange inRange = new GetTargetsInRange(playerMask, viewRange);
+        GetClosest getClosest = new GetClosest(BlackboardKey.Input);
+        StoreOutputDecorator storeClosestTarget = new StoreOutputDecorator(getClosest, BlackboardKey.LastKnownPosition);
+        GetNextWaypoint getNextWayPoint = new GetNextWaypoint(m_agent, BlackboardKey.Input, seekThreshold);
+        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, moveForce);
+        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
+        UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Running");
+        sequence.Add(checkDelay);
+        sequence.Add(inRange);
+        sequence.Add(storeClosestTarget);
+        sequence.Add(getNextWayPoint);
+        sequence.Add(seekTarget);
+        sequence.Add(rotateTowardsTarget);
+        sequence.Add(updateAnimation);
         return sequence;
     }
 

@@ -21,7 +21,7 @@ public class MonsterSpawnEventManager : MonoBehaviour
             {
                 //SpawnMonster()
                 //;
-                monster.transform.position = transform.position;
+                //monster.transform.position = transform.position;
                 monster.SetActive(true);
                 EventManager.current.onTriggerActivated -= OnTriggerActivated;
                 break;

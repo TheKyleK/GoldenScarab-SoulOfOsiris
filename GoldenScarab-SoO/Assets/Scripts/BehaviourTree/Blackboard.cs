@@ -8,7 +8,8 @@ public enum BlackboardKey
     LastKnownPosition,
     Debug,
     Path,
-    PathIndex
+    PathIndex,
+    Delay
 }
 
 public class Blackboard
