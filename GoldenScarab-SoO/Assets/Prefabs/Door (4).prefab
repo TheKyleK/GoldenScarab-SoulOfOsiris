@@ -64,6 +64,10 @@ MonoBehaviour:
   triggers:
   - {fileID: 0}
   animationOffSet: -4
+  magX: 0.1
+  magY: 0.1
+  decayRate: 0.97
+  minimum: 0.1
 --- !u!1 &3384862509915160960
 GameObject:
   m_ObjectHideFlags: 0

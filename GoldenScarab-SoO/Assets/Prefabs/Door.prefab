@@ -344,3 +344,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   animationOffSet: -4
+  magX: 0.1
+  magY: 0.1
+  decayRate: 0.97
+  minimum: 0.1
