@@ -9,8 +9,8 @@ public class DoorEventManager : MonoBehaviour
     [Header("Camera shake")]
     public float magX;
     public float magY;
-    public float decayRate;
-    public float minimum;
+    public float time;
+    public AnimationCurve curve;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +38,7 @@ public class DoorEventManager : MonoBehaviour
 
     void OpenDoor()
     {
-        CameraShake.current.Shake(magX, magY, decayRate, minimum);
+        CameraShake.current.Shake(magX, magY, time, curve);
         LeanTween.moveLocalY(gameObject, animationOffSet, 1.0f).setEaseOutQuad().setOnComplete(() =>
         {
             Destroy(gameObject);

@@ -24,10 +24,10 @@ public class AreaEventManager : MonoBehaviour
             //Debug.Log("b");
             //SequenceNode sequenceBefore = new SequenceNode();
             SequenceNode sequence = new SequenceNode();
-            SetBlackboardKey setPath = new SetBlackboardKey(BlackboardKey.Path, m_waypoints.transforms);
-            SetBlackboardKey setPathIndex = new SetBlackboardKey(BlackboardKey.PathIndex, 0);
+            SetPath setPath = new SetPath(m_waypoints.transforms, 0);
+            //SetPath setPathIndex = new SetPath(BlackboardKey.PathIndex, 0);
             sequence.Add(setPath);
-            sequence.Add(setPathIndex);
+            //sequence.Add(setPathIndex);
             m_mb.EnqueueBefore(sequence);
         }
     }

@@ -47,7 +47,7 @@ public class MonsterBehaviour : MonoBehaviour
 
     Queue<TreeNode> m_queueBefore = new Queue<TreeNode>();
     Queue<TreeNode> m_queueAfter = new Queue<TreeNode>();
-    private void Awake()
+    private void Start()
     {
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
@@ -140,9 +140,9 @@ public class MonsterBehaviour : MonoBehaviour
     {
        SequenceNode sequence = new SequenceNode();
         GetTargetsInRange inRnage = new GetTargetsInRange(playerMask, stopRange);
-        GetClosest getClosest = new GetClosest(BlackboardKey.Input);
+        GetClosest getClosest = new GetClosest(BlackboardKey.Position);
         Stop stop = new Stop(m_rb);
-        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
+        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Idle");
         LoseGame loseGame = new LoseGame();
         sequence.Add(inRnage);
@@ -163,7 +163,7 @@ public class MonsterBehaviour : MonoBehaviour
     {
         SelectorNode selector = new SelectorNode();
         TreeNode seekPlayer = CreateSeekPlayerSequence();
-        SetMemoryDecorator setDelay = new SetMemoryDecorator(seekPlayer, BlackboardKey.Delay, 0.0f, BehaviourResult.Success);
+        SetDelayDecorator setDelay = new SetDelayDecorator(seekPlayer, 0.0f, BehaviourResult.Success);
         TreeNode delaySeekPlayer = CreateDelaySeekPlayerSequence();
         selector.Add(setDelay);
         selector.Add(delaySeekPlayer);
@@ -174,11 +174,11 @@ public class MonsterBehaviour : MonoBehaviour
         SequenceNode sequence = new SequenceNode();
         CheckDelay checkDelay = new CheckDelay(delay);
         GetTargetsInRange inRange = new GetTargetsInRange(playerMask, viewRange);
-        GetClosest getClosest = new GetClosest(BlackboardKey.Input);
-        StoreOutputDecorator storeClosestTarget = new StoreOutputDecorator(getClosest, BlackboardKey.LastKnownPosition);
-        GetNextWaypoint getNextWayPoint = new GetNextWaypoint(m_agent, BlackboardKey.Input, seekThreshold);
-        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, moveForce);
-        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
+        GetClosest getClosest = new GetClosest(BlackboardKey.Position);
+        StoreLastKnownPositionDecorator storeClosestTarget = new StoreLastKnownPositionDecorator(getClosest);
+        GetNextWaypointFromLastKnownPosition getNextWayPoint = new GetNextWaypointFromLastKnownPosition(m_agent, seekThreshold);
+        SeekTarget seekTarget = new SeekTarget(m_rb, moveForce);
+        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Running");
         sequence.Add(checkDelay);
         sequence.Add(inRange);
@@ -195,11 +195,11 @@ public class MonsterBehaviour : MonoBehaviour
         SequenceNode sequence = new SequenceNode();
         GetTargetsInRange inRange = new GetTargetsInRange(playerMask, viewRange);
         GetTargetsInLineOfSight inLineOfSignt = new GetTargetsInLineOfSight(eyeTransform, viewAngle, obstacleMask);
-        GetClosest getClosest = new GetClosest(BlackboardKey.Input);
-        StoreOutputDecorator storeClosestTarget = new StoreOutputDecorator(getClosest, BlackboardKey.LastKnownPosition);
-        GetNextWaypoint getNextWayPoint = new GetNextWaypoint(m_agent, BlackboardKey.Input, seekThreshold);
-        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, moveForce);
-        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
+        GetClosest getClosest = new GetClosest(BlackboardKey.Position);
+        StoreLastKnownPositionDecorator storeClosestTarget = new StoreLastKnownPositionDecorator(getClosest);
+        GetNextWaypointFromLastKnownPosition getNextWayPoint = new GetNextWaypointFromLastKnownPosition(m_agent, seekThreshold);
+        SeekTarget seekTarget = new SeekTarget(m_rb, moveForce);
+        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Running");
         sequence.Add(inRange);
         sequence.Add(inLineOfSignt);
@@ -219,8 +219,8 @@ public class MonsterBehaviour : MonoBehaviour
     public TreeNode CreateStopLastKnownPositionSequence()
     {
         SequenceNode sequence = new SequenceNode();
-        TreeNode removeStorageDecorator = new DeleteMemoryDecorator(sequence, BlackboardKey.LastKnownPosition, BehaviourResult.Success);
-        IsTargetInRange isTargetInRange = new IsTargetInRange(BlackboardKey.LastKnownPosition, stopRange);
+        TreeNode removeStorageDecorator = new DeleteLastKnowPositionDecorator(sequence, BehaviourResult.Success);
+        IsLastKnownPositionInRange isTargetInRange = new IsLastKnownPositionInRange(stopRange);
         Stop stop = new Stop(m_rb);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Idle");
         sequence.Add(isTargetInRange);
@@ -237,9 +237,9 @@ public class MonsterBehaviour : MonoBehaviour
     public TreeNode CreateSeekLastSawPositionSequence()
     {
         SequenceNode sequence = new SequenceNode();
-        GetNextWaypoint getNextWayPoint = new GetNextWaypoint(m_agent, BlackboardKey.LastKnownPosition, seekThreshold);
-        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, moveForce);
-        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
+        GetNextWaypointFromLastKnownPosition getNextWayPoint = new GetNextWaypointFromLastKnownPosition(m_agent, seekThreshold);
+        SeekTarget seekTarget = new SeekTarget(m_rb, moveForce);
+        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Running");
         sequence.Add(getNextWayPoint);
         sequence.Add(seekTarget);
@@ -256,9 +256,9 @@ public class MonsterBehaviour : MonoBehaviour
     {
         SequenceNode sequence = new SequenceNode();
         GetTargetsInRange inRnage = new GetTargetsInRange(playerMask, lookAtPlayerRange);
-        GetClosest getClosest = new GetClosest(BlackboardKey.Input);
+        GetClosest getClosest = new GetClosest(BlackboardKey.Position);
         Stop stop = new Stop(m_rb);
-        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
+        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Idle");
         Fail fail = new Fail();
         sequence.Add(inRnage);
@@ -278,9 +278,9 @@ public class MonsterBehaviour : MonoBehaviour
     {
         SequenceNode sequence = new SequenceNode();
         GetNextWayPointOnPath getNextWayPointOnPath = new GetNextWayPointOnPath();
-        GetNextWaypoint getNextWaypoint = new GetNextWaypoint(m_agent, BlackboardKey.Input, seekThreshold);
-        SeekTarget seekTarget = new SeekTarget(m_rb, BlackboardKey.Input, moveForce);
-        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(BlackboardKey.Input, rotateSpeed);
+        GetNextWaypointFromPosition getNextWaypoint = new GetNextWaypointFromPosition(m_agent, seekThreshold);
+        SeekTarget seekTarget = new SeekTarget(m_rb, moveForce);
+        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(rotateSpeed);
         UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Running");
         sequence.Add(getNextWayPointOnPath);
         sequence.Add(getNextWaypoint);

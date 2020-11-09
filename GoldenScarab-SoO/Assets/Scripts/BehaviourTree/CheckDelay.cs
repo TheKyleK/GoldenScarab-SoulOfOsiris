@@ -12,9 +12,8 @@ public class CheckDelay : TreeNode
     }
     public override BehaviourResult Execute(GameObject agent, Blackboard blackboard, float dt)
     {
-        if (!blackboard.Contains(BlackboardKey.Delay)) return BehaviourResult.Failure;
-        float delay = dt + blackboard.Get(BlackboardKey.Delay);
-        blackboard.Set(BlackboardKey.Delay, delay);
+        float delay = dt + blackboard.Delay;
+        blackboard.Delay = delay;
         if (delay < m_maxDelay) return BehaviourResult.Success;
         return BehaviourResult.Failure;
     }

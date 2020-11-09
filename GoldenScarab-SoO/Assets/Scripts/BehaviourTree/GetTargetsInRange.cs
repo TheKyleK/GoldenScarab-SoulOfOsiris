@@ -20,7 +20,8 @@ public class GetTargetsInRange : TreeNode
     public override BehaviourResult Execute(GameObject agent, Blackboard blackboard, float dt)
     {
         List<Vector3> targetInViewRadius = Physics.OverlapSphere(agent.transform.position, m_range, m_targetMask).Select(x => x.transform.position).ToList();
-        blackboard.Set(BlackboardKey.Input, targetInViewRadius);
+        blackboard.Positions = targetInViewRadius;
+        //blackboard.Set(BlackboardKey.Position, targetInViewRadius);
         return BehaviourResult.Success;
     }
 }

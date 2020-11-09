@@ -40,7 +40,7 @@ public class MonsterTeleportEventManager : MonoBehaviour
                 Stop stop = new Stop(m_rb);
                 UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Idle");
                 SetPosition setPosition = new SetPosition(transform.position);
-                TreeNode removeStorageDecorator = new DeleteMemoryDecorator(sequenceAfter, BlackboardKey.LastKnownPosition, BehaviourResult.Success);
+                TreeNode removeStorageDecorator = new DeleteLastKnowPositionDecorator(sequenceAfter, BehaviourResult.Success);
                 sequenceAfter.Add(stop);
                 sequenceAfter.Add(updateAnimation);
                 sequenceAfter.Add(setPosition);

@@ -11,34 +11,30 @@ public class CameraShake : MonoBehaviour
     {
         current = this;
     }
-    public void Shake(float magX, float magY, float decayRate, float minimum)
+    public void Shake(float magX, float magY, float time, AnimationCurve curve)
     {
         if (!shaking)
         {
-            StartCoroutine(DoShake(magX, magY, decayRate, minimum));
+            StartCoroutine(DoShake(magX, magY, time, curve));
         }
     }
 
 
-    IEnumerator DoShake(float magX, float magY, float decayRate, float minimum)
+    IEnumerator DoShake(float magX, float magY, float time, AnimationCurve curve)
     {
-        float shake = 1.0f;
+        float elapsed = 0;
         shaking = true;
-        while (shake > 0)
+        while (elapsed < time)
         {
             float shakeX = Random.Range(-magX, magX);
             float shakeY = Random.Range(-magY, magY);
-            shakeX *= shake;
-            shakeY *= shake;
+            shakeX *= curve.Evaluate(elapsed);
+            shakeY *= curve.Evaluate(elapsed);
             transform.localPosition = new Vector3(shakeX, shakeY);
-            shake *= decayRate;
-            if (shake < minimum)
-            {
-                transform.localPosition = new Vector3(0, 0);
-                break;
-            }
+            elapsed += Time.deltaTime;
             yield return null;
         }
+        transform.localPosition = new Vector3(0, 0);
         shaking = false;
         yield return null;
     }

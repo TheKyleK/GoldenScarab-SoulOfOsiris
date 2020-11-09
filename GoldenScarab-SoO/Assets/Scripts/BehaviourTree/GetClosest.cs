@@ -16,17 +16,17 @@ public class GetClosest : TreeNode
 
     public override BehaviourResult Execute(GameObject agent, Blackboard blackboard, float dt)
     {
-        if (!blackboard.Contains(m_key)) return BehaviourResult.Failure;
-        List<Vector3> targets = blackboard.Get(m_key);
+        if (blackboard.Positions == null) return BehaviourResult.Failure;
+        List<Vector3> targets = blackboard.Positions;
         if (targets.Count == 0) return BehaviourResult.Failure;
         float closest = float.MaxValue;
         foreach (Vector3 target in targets)
         {
-            float dist = Vector3.Distance(agent.transform.position, target);
+            float dist = (target - agent.transform.position).sqrMagnitude;
             if (dist < closest)
             {
                 closest = dist;
-                blackboard.Set(BlackboardKey.Input, target);
+                blackboard.Position = target;
             }
         }
         return BehaviourResult.Success;

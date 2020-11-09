@@ -8,18 +8,18 @@ using UnityEngine;
 public class SeekTarget : TreeNode
 {
     private CharacterRB m_rb;
-    private BlackboardKey m_key;
+    //private BlackboardKey m_key;
     private float m_steeringForce;
-    public SeekTarget(CharacterRB rb, BlackboardKey key, float steeringForce)
+    public SeekTarget(CharacterRB rb, float steeringForce)
     {
         m_rb = rb;
-        m_key = key;
+        //m_key = key;
         m_steeringForce = steeringForce;
     }
     public override BehaviourResult Execute(GameObject agent, Blackboard blackboard, float dt)
     {
-        if (!blackboard.Contains(m_key)) return BehaviourResult.Failure;
-        Vector3 target = blackboard.Get(m_key);
+        //if (!blackboard.Contains(m_key)) return BehaviourResult.Failure;
+        Vector3 target = blackboard.Position;
         Vector3 desireVelocity = (target - agent.transform.position).normalized * m_steeringForce;
         Vector3 force = (desireVelocity - m_rb.GetVelocity());
         m_rb.force = force;

@@ -18,7 +18,7 @@ public class GetTargetsInLineOfSight : TreeNode
     }
     public override BehaviourResult Execute(GameObject agent, Blackboard blackboard, float dt)
     {
-        List<Vector3> targetInRadius = blackboard.Get(BlackboardKey.Input);
+        List<Vector3> targetInRadius = blackboard.Positions;
         List<Vector3> visibleTargets = new List<Vector3>();
         for (int i = 0; i < targetInRadius.Count; i++)
         {
@@ -35,7 +35,8 @@ public class GetTargetsInLineOfSight : TreeNode
                 }
             }
         }
-        blackboard.Set(BlackboardKey.Input, visibleTargets);
+        blackboard.Positions = visibleTargets;
+        //blackboard.Set(BlackboardKey.Position, visibleTargets);
         return BehaviourResult.Success;
     }
 }
