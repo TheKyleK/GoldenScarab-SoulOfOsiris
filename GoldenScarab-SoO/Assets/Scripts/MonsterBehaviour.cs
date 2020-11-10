@@ -22,6 +22,8 @@ public class MonsterBehaviour : MonoBehaviour
     public float moveForce;
 
     public float delay;
+    public float cooldown;
+    public float seekTime;
 
     public List<WayPoints> paths;
 
@@ -90,6 +92,7 @@ public class MonsterBehaviour : MonoBehaviour
 
     public BehaviourResult Execute(TreeNode node)
     {
+        Debug.Log("seeking: " + m_blackboard.TimeSeeking + ", cooldown: " + m_blackboard.Cooldown + ", delay: " + m_blackboard.Delay);
         return node.Execute(gameObject, m_blackboard, Time.deltaTime);
     }
 
@@ -106,7 +109,8 @@ public class MonsterBehaviour : MonoBehaviour
     TreeNode ConstructBehaviourTree()
     {
         SelectorNode monsterBehaviour = new SelectorNode();
-
+        IncrementSeekTimeDecorator incrementSeekTime = new IncrementSeekTimeDecorator(monsterBehaviour, BehaviourResult.Success);
+        
         // Stop Sequence
         TreeNode stopSequence = CreateStopSequence();
 
@@ -133,7 +137,7 @@ public class MonsterBehaviour : MonoBehaviour
         //monsterBehaviour.Add(moveToPath);
         monsterBehaviour.Add(lookAtPlayerSequence);
 
-        return monsterBehaviour;
+        return incrementSeekTime;
     }
 
     private TreeNode CreateStopSequence()
@@ -164,18 +168,45 @@ public class MonsterBehaviour : MonoBehaviour
         SelectorNode selector = new SelectorNode();
         TreeNode seekPlayer = CreateSeekPlayerSequence();
         SetDelayDecorator setDelay = new SetDelayDecorator(seekPlayer, 0.0f, BehaviourResult.Success);
+        TreeNode cooldownSequence = CreateCheckCooldownSequence();
         TreeNode delaySeekPlayer = CreateDelaySeekPlayerSequence();
         selector.Add(setDelay);
+        selector.Add(cooldownSequence);
         selector.Add(delaySeekPlayer);
         return selector;
     }
+
+    private TreeNode CreateCheckCooldownSequence()
+    {
+        SequenceNode sequence = new SequenceNode();
+        //SetSeekTimeDecorator setSeekTime = new SetSeekTimeDecorator(sequence, 0.0f, BehaviourResult.Success);
+        //SetCooldownDecorator setCooldown = new SetCooldownDecorator(sequence, 0.0f, BehaviourResult.Success);
+        //SetSeekTimeDecorator setSeekTime = new SetSeekTimeDecorator(sequence, 0.0f, BehaviourResult.Success);
+
+        CheckSeekTime checkSeekTime = new CheckSeekTime(seekTime);
+        CheckCooldown checkCooldown = new CheckCooldown(cooldown);
+        GetTargetsInRange inRnage = new GetTargetsInRange(playerMask, lookAtPlayerRange);
+        GetClosest getClosest = new GetClosest(BlackboardKey.Position);
+        Stop stop = new Stop(m_rb);
+        RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(rotateSpeed);
+        UpdateAnimation updateAnimation = new UpdateAnimation(m_animator, "Idle");
+        sequence.Add(checkSeekTime);
+        sequence.Add(checkCooldown);
+        sequence.Add(inRnage);
+        sequence.Add(getClosest);
+        sequence.Add(stop);
+        sequence.Add(rotateTowardsTarget);
+        sequence.Add(updateAnimation);
+        return sequence;
+    }
+
     private TreeNode CreateDelaySeekPlayerSequence()
     {
         SequenceNode sequence = new SequenceNode();
         CheckDelay checkDelay = new CheckDelay(delay);
         GetTargetsInRange inRange = new GetTargetsInRange(playerMask, viewRange);
         GetClosest getClosest = new GetClosest(BlackboardKey.Position);
-        StoreLastKnownPositionDecorator storeClosestTarget = new StoreLastKnownPositionDecorator(getClosest);
+        SetLastKnownPositionDecorator storeClosestTarget = new SetLastKnownPositionDecorator(getClosest);
         GetNextWaypointFromLastKnownPosition getNextWayPoint = new GetNextWaypointFromLastKnownPosition(m_agent, seekThreshold);
         SeekTarget seekTarget = new SeekTarget(m_rb, moveForce);
         RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(rotateSpeed);
@@ -196,7 +227,7 @@ public class MonsterBehaviour : MonoBehaviour
         GetTargetsInRange inRange = new GetTargetsInRange(playerMask, viewRange);
         GetTargetsInLineOfSight inLineOfSignt = new GetTargetsInLineOfSight(eyeTransform, viewAngle, obstacleMask);
         GetClosest getClosest = new GetClosest(BlackboardKey.Position);
-        StoreLastKnownPositionDecorator storeClosestTarget = new StoreLastKnownPositionDecorator(getClosest);
+        SetLastKnownPositionDecorator storeClosestTarget = new SetLastKnownPositionDecorator(getClosest);
         GetNextWaypointFromLastKnownPosition getNextWayPoint = new GetNextWaypointFromLastKnownPosition(m_agent, seekThreshold);
         SeekTarget seekTarget = new SeekTarget(m_rb, moveForce);
         RotateTowardsTarget rotateTowardsTarget = new RotateTowardsTarget(rotateSpeed);
@@ -254,7 +285,9 @@ public class MonsterBehaviour : MonoBehaviour
 
     public TreeNode CreateLookAtPlayerSequence()
     {
+
         SequenceNode sequence = new SequenceNode();
+        SetSeekTimeDecorator setSeekTime = new SetSeekTimeDecorator(sequence, 0, BehaviourResult.Failure);
         GetTargetsInRange inRnage = new GetTargetsInRange(playerMask, lookAtPlayerRange);
         GetClosest getClosest = new GetClosest(BlackboardKey.Position);
         Stop stop = new Stop(m_rb);
@@ -271,7 +304,7 @@ public class MonsterBehaviour : MonoBehaviour
         //{
         //    return AttachDebugLog(sequence, "Look At Player", BehaviourResult.Success);
         //}
-        return sequence;
+        return setSeekTime;
     }
 
     public TreeNode CreateIdlePathSequence()

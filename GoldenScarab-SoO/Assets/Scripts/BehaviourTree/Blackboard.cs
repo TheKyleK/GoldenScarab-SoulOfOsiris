@@ -67,7 +67,8 @@ public class Blackboard
     public List<Vector3> Path { get; set; }
     public int PathIndex { get; set; }
     public float Delay { get; set; }
-
+    public float TimeSeeking { get; set; }
+    public float Cooldown { get; set; }
     //public bool Contains(BlackboardKey key)
     //{
     //    return m_entries.ContainsKey(key);

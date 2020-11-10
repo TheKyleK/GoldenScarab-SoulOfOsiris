@@ -14,7 +14,9 @@ public class CheckDelay : TreeNode
     {
         float delay = dt + blackboard.Delay;
         blackboard.Delay = delay;
+        //Debug.Log(Delay);
         if (delay < m_maxDelay) return BehaviourResult.Success;
+        //blackboard.Delay = 0;
         return BehaviourResult.Failure;
     }
 }
