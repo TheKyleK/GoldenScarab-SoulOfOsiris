@@ -29,6 +29,7 @@ public class CloseDoorEventManager : MonoBehaviour
             if (trigger.triggered == true)
             {
                 MoveDoor();
+                EventManager.current.onTriggerActivated -= OnTriggerActivated;
                 //break;
             }
         }
