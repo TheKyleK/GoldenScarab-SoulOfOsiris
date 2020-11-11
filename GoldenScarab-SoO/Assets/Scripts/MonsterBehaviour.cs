@@ -171,7 +171,7 @@ public class MonsterBehaviour : MonoBehaviour
         TreeNode cooldownSequence = CreateCheckCooldownSequence();
         TreeNode delaySeekPlayer = CreateDelaySeekPlayerSequence();
         selector.Add(setDelay);
-        selector.Add(cooldownSequence);
+        //selector.Add(cooldownSequence);
         selector.Add(delaySeekPlayer);
         return selector;
     }
