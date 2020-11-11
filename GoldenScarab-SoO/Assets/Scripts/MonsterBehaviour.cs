@@ -30,6 +30,10 @@ public class MonsterBehaviour : MonoBehaviour
     [Header("Look At Player Sequence")]
     public float lookAtPlayerRange;
 
+    [Header("Chase Music")]
+    public ChaseMusic chaseMusic;
+    public float fadeinDuration;
+    public float fadeoutDuration;
 
     [Header("Debug")]
     public bool debug;
@@ -77,10 +81,15 @@ public class MonsterBehaviour : MonoBehaviour
 
         if (Execute(m_root) == BehaviourResult.Failure)
         {
+            chaseMusic.Stop(fadeoutDuration);
             foreach (TreeNode node in m_queueAfter)
             {
                 Execute(node);
             }
+        }
+        else
+        {
+            chaseMusic.Play(fadeinDuration);
         }
         m_queueAfter.Clear();
 
