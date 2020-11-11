@@ -6,8 +6,15 @@ public class CloseDoorEventManager : MonoBehaviour
 {
     public List<TriggerEventManager> triggers;
     public float animationOffSet;
+    public float doorAnimationTime;
     public Transform mesh;
     public Transform meshCollider;
+
+    [Header("Camera shake")]
+    public float magX;
+    public float magY;
+    public float time;
+    public AnimationCurve curve;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +42,13 @@ public class CloseDoorEventManager : MonoBehaviour
 
     void MoveDoor()
     {
+        //meshCollider.localPosition = new Vector3(0, animationOffSet, 0);
+        //LeanTween.moveLocalY(mesh.gameObject, animationOffSet, 1.0f).setEaseOutQuad();
         meshCollider.localPosition = new Vector3(0, animationOffSet, 0);
-        LeanTween.moveLocalY(mesh.gameObject, animationOffSet, 1.0f).setEaseOutQuad();
+        CameraShake.current.Shake(magX, magY, time, curve);
+        SoundManager.current.PlaySound(Sound.DoorClose, transform.position, 2);
+        LeanTween.moveLocalY(mesh.gameObject, animationOffSet, doorAnimationTime).setEaseOutQuad();
+
     }
 
     private void OnDestroy()

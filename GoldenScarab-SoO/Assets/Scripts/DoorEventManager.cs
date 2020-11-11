@@ -6,6 +6,7 @@ public class DoorEventManager : MonoBehaviour
 {
     public List<TriggerEventManager> triggers;
     public float animationOffSet;
+    public float doorAnimationTime;
     [Header("Camera shake")]
     public float magX;
     public float magY;
@@ -39,9 +40,10 @@ public class DoorEventManager : MonoBehaviour
     void OpenDoor()
     {
         CameraShake.current.Shake(magX, magY, time, curve);
-        LeanTween.moveLocalY(gameObject, animationOffSet, 1.0f).setEaseOutQuad().setOnComplete(() =>
+        SoundManager.current.PlaySound(Sound.DoorOpen, transform.position, 2);
+        LeanTween.moveLocalY(gameObject, animationOffSet, doorAnimationTime).setEaseOutQuad().setOnComplete(() =>
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         });
     }
 

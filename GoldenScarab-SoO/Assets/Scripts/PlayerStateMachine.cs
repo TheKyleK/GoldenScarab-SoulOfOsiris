@@ -14,6 +14,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float ampitude;
     public float frequency;
     public Vector3 originalPos;
+    public FootSteps footSteps;
     CharacterRB m_rb;
     Animator m_animator;
 
@@ -40,7 +41,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void LateUpdate()
     {
-        state.UpdateHeadBobbing(Camera.main, m_rb, ampitude, frequency, originalPos);
+        state.UpdateHeadBobbing(Camera.main, m_rb, ampitude, frequency, originalPos, footSteps);
 
     }
 }

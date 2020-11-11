@@ -6,8 +6,13 @@ public enum Sound
 {
     Chime,
     Ding,
-    FootStep,
-    FootStepWood
+    PlayerStepStone,
+    PlayerStepSand,
+    MonsterStepStone,
+    MonsterStepSand,
+    MonsterGrowl,
+    DoorOpen,
+    DoorClose
 }
 public class SoundManager : MonoBehaviour
 {
@@ -22,9 +27,16 @@ public class SoundManager : MonoBehaviour
 
         audioMap.Add(Sound.Chime, Resources.Load<AudioClip>("Sounds/Chime"));
         audioMap.Add(Sound.Ding, Resources.Load<AudioClip>("Sounds/Ding"));
-        audioMap.Add(Sound.FootStep, Resources.Load<AudioClip>("Sounds/FootStep"));
-        audioMap.Add(Sound.FootStepWood, Resources.Load<AudioClip>("Sounds/FootStepWood"));
+        audioMap.Add(Sound.PlayerStepStone, Resources.Load<AudioClip>("Sounds/Player/PlayerStepStone"));
+        audioMap.Add(Sound.PlayerStepSand, Resources.Load<AudioClip>("Sounds/Player/PlayerStepSand"));
 
+        audioMap.Add(Sound.MonsterStepStone, Resources.Load<AudioClip>("Sounds/Monster/MonsterStepStone"));
+        audioMap.Add(Sound.MonsterStepSand, Resources.Load<AudioClip>("Sounds/Monster/MonsterStepSand"));
+
+        audioMap.Add(Sound.MonsterGrowl, Resources.Load<AudioClip>("Sounds/Monster/MonsterGrowl4"));
+
+        audioMap.Add(Sound.DoorOpen, Resources.Load<AudioClip>("Sounds/Environment/DoorOpen"));
+        audioMap.Add(Sound.DoorClose, Resources.Load<AudioClip>("Sounds/Environment/DoorClose"));
     }
 
     /// <summary>

@@ -22,22 +22,28 @@ public class MonsterSpawnEventManager : MonoBehaviour
                 //SpawnMonster()
                 //;
                 //monster.transform.position = transform.position;
-                monster.SetActive(true);
-                EventManager.current.onTriggerActivated -= OnTriggerActivated;
-                break;
+                StartCoroutine(SpawnMonster());
             }
         }
     }
 
-    void SpawnMonster()
+    IEnumerator SpawnMonster()
     {
-        //GameObject monster = Instantiate(monster, transform.position, Quaternion.identity);
-        //CharacterRB rb = monster.GetComponent<CharacterRB>();
-        //MonsterBehaviour mb = monster.GetComponent<MonsterBehaviour>();
-        //rb.characterMasterController = characterMasterController;
-        //mb.monsterMasterController = characterMasterController;
-        //EventManager.current.MonsterSpawn(monster);
+        SoundManager.current.PlaySound(Sound.MonsterGrowl, monster.transform.position, 2);
+        EventManager.current.onTriggerActivated -= OnTriggerActivated;
+        yield return new WaitForSeconds(2);
+        monster.SetActive(true);
     }
+
+    //void SpawnMonster()
+    //{
+    //    //GameObject monster = Instantiate(monster, transform.position, Quaternion.identity);
+    //    //CharacterRB rb = monster.GetComponent<CharacterRB>();
+    //    //MonsterBehaviour mb = monster.GetComponent<MonsterBehaviour>();
+    //    //rb.characterMasterController = characterMasterController;
+    //    //mb.monsterMasterController = characterMasterController;
+    //    //EventManager.current.MonsterSpawn(monster);
+    //}
 
     private void OnDestroy()
     {

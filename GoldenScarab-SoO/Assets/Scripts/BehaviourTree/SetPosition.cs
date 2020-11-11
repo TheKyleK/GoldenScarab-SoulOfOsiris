@@ -16,6 +16,8 @@ public class SetPosition : TreeNode
         agent.SetActive(false);
         agent.transform.position = m_position;
         agent.SetActive(true);
+        SoundManager.current.PlaySound(Sound.MonsterGrowl, agent.transform.position, 2);
+
         return BehaviourResult.Success;
     }
 }

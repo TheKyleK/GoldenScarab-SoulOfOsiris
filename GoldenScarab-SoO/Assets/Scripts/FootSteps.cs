@@ -9,6 +9,8 @@ public class FootSteps : MonoBehaviour
     public float footstepVolume;
     public float rayDistance;
     public LayerMask ignoreMask;
+    public Sound stone;
+    public Sound sand;
 
 
     public void PlayFootStepSoundLeft()
@@ -17,14 +19,14 @@ public class FootSteps : MonoBehaviour
 
         if (Physics.Raycast(leftFoot.transform.position, -transform.up, out hit, rayDistance, ~ignoreMask))
         {
-            if (hit.transform.CompareTag("Concrete"))
+            if (hit.transform.CompareTag("Stone"))
             {
-                SoundManager.current.PlaySound(Sound.FootStep, leftFoot.position, footstepVolume);
+                SoundManager.current.PlaySound(stone, leftFoot.position, footstepVolume);
             }
 
-            if (hit.transform.CompareTag("Wood"))
+            if (hit.transform.CompareTag("Sand"))
             {
-                SoundManager.current.PlaySound(Sound.FootStepWood, leftFoot.position, footstepVolume);
+                SoundManager.current.PlaySound(sand, leftFoot.position, footstepVolume);
             }
         }
     }
@@ -35,14 +37,14 @@ public class FootSteps : MonoBehaviour
 
         if (Physics.Raycast(rightFoot.transform.position, -transform.up, out hit, rayDistance, ~ignoreMask))
         {
-            if (hit.transform.CompareTag("Concrete"))
+            if (hit.transform.CompareTag("Stone"))
             {
-                SoundManager.current.PlaySound(Sound.FootStep, leftFoot.position, footstepVolume);
+                SoundManager.current.PlaySound(stone, rightFoot.position, footstepVolume);
             }
 
-            if (hit.transform.CompareTag("Wood"))
+            if (hit.transform.CompareTag("Sand"))
             {
-                SoundManager.current.PlaySound(Sound.FootStepWood, leftFoot.position, footstepVolume);
+                SoundManager.current.PlaySound(sand, rightFoot.position, footstepVolume);
             }
         }
     }

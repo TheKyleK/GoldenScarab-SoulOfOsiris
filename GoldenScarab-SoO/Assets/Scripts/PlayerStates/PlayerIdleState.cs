@@ -32,7 +32,7 @@ public class PlayerIdleState : PlayerState
     }
 
 
-    public override void UpdateHeadBobbing(Camera camera, CharacterRB rb, float ampitude, float frequency, Vector3 originalPos)
+    public override void UpdateHeadBobbing(Camera camera, CharacterRB rb, float ampitude, float frequency, Vector3 originalPos, FootSteps footSteps)
     {
         float current = Mathf.Lerp(camera.transform.localPosition.y, originalPos.y, 10 * Time.deltaTime);
         offset = current - originalPos.y;

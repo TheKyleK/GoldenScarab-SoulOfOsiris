@@ -46,7 +46,7 @@ public class PlayerRunningState : PlayerState
     }
 
 
-    public override void UpdateHeadBobbing(Camera camera, CharacterRB rb, float ampitude, float frequency, Vector3 originalPos)
+    public override void UpdateHeadBobbing(Camera camera, CharacterRB rb, float ampitude, float frequency, Vector3 originalPos, FootSteps footSteps)
     {
         float speedMultiplier = Util.Map(rb.GetVelocity().magnitude, 0, rb.GetMaxSpeed(), 0, 1);
         //Debug.Log(speedMultiplier);
@@ -54,7 +54,16 @@ public class PlayerRunningState : PlayerState
         float distance = -ampitude * Mathf.Sin(2 * Mathf.PI * frequency * time);
         if (Mathf.Sign(previousMove) != Mathf.Sign(distance) && distance > 0)
         {
-            SoundManager.current.PlaySound(Sound.FootStep, camera.transform.position, 0.05f);
+            if (left)
+            {
+                footSteps.PlayFootStepSoundLeft();
+            }
+            else
+            {
+                footSteps.PlayFootStepSoundRight();
+            }
+            left = !left;
+            //SoundManager.current.PlaySound(Sound.FootStep, camera.transform.position, 0.05f);
         }
         previousMove = distance;
         camera.transform.localPosition = originalPos +  Vector3.up * distance;

@@ -66,9 +66,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   animationOffSet: -4
+  doorAnimationTime: 3
   magX: 0.1
   magY: 0.1
-  time: 1
+  time: 2
   curve:
     serializedVersion: 2
     m_Curve:

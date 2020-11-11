@@ -33,7 +33,7 @@ public class MonsterTeleportEventManager : MonoBehaviour
     {
         foreach(TriggerEventManager trigger in triggers)
         {
-            if (trigger.gameObject == obj)
+            if (trigger.gameObject == obj && Vector3.Distance(monster.transform.position, transform.position) > 1.0f)
             {
                 //SequenceNode sequenceBefore = new SequenceNode();
                 SequenceNode sequenceAfter = new SequenceNode();
