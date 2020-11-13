@@ -11,6 +11,7 @@ public class ObjectEventManager : MonoBehaviour
     public Color color1;
     //[ColorUsage(true, true)]
     public Color color2;
+    public Renderer renderer;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class ObjectEventManager : MonoBehaviour
         EventManager.current.onObjectTriggerExit += OnObjectTriggerExit;
         EventManager.current.onPlayerRayHitEnter += OnPlayerRayHitEnter;
         EventManager.current.onPlayerRayHitExit += OnPlayerRayHitExit;
-        GetComponent<Renderer>().material.SetColor("_BaseColor", color1);
+        renderer.material.SetColor("_BaseColor", color1);
     }
     void OnObjectTriggerEnter(GameObject obj)
     {
@@ -69,11 +70,11 @@ public class ObjectEventManager : MonoBehaviour
     {
         if (entered && rayhit)
         {
-            GetComponent<Renderer>().material.SetColor("_BaseColor", color2);
+            renderer.material.SetColor("_BaseColor", color2);
         }
         else
         {
-            GetComponent<Renderer>().material.SetColor("_BaseColor", color1);
+            renderer.material.SetColor("_BaseColor", color1);
 
         }
     }

@@ -116,6 +116,7 @@ MonoBehaviour:
   rayhit: 0
   color1: {r: 1, g: 0, b: 0, a: 0}
   color2: {r: 1, g: 0.95132554, b: 0, a: 0}
+  renderer: {fileID: 7928155853747751662}
 --- !u!114 &142814740220369149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,6 +276,12 @@ GameObject:
 --- !u!4 &4639262226133634081 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 7844e98c689bcdb42a5eef2e24866a8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 367972064789587771}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7928155853747751662 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 7844e98c689bcdb42a5eef2e24866a8e,
     type: 3}
   m_PrefabInstance: {fileID: 367972064789587771}
   m_PrefabAsset: {fileID: 0}
