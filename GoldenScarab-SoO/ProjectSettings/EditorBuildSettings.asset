@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu Scene.unity
     guid: a4572162a3c52764481fc62ff34ad670
   - enabled: 1
-    path: Assets/Scenes/Beta Scene For Building hallway.unity
+    path: Assets/Scenes/Old WIP Scenes/Beta Scene For Building hallway.unity
     guid: a3dd9065547284f468e76b75c6c0d878
   - enabled: 1
     path: Assets/Scenes/LoseScene.unity
