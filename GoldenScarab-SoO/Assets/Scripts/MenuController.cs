@@ -12,12 +12,46 @@ public class MenuController : MonoBehaviour
     {
         loadingScreen.gameObject.SetActive(true);
         //transform.children
+        HideMenu();
+        StartCoroutine(LoadSceneAsync());
+    }
+
+    private void HideMenu()
+    {
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(false);
         }
-        StartCoroutine(LoadSceneAsync());
     }
+
+    private void ShowMenu()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
+    public void ShowSettings(Canvas canvas)
+    {
+        HideMenu();
+        canvas.gameObject.SetActive(true);
+
+    }
+
+    public void HideSettings(Canvas canvas)
+    {
+        canvas.gameObject.SetActive(false);
+        ShowMenu();
+    }
+
+
+
 
     IEnumerator LoadSceneAsync()
     {

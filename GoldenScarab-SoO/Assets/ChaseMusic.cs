@@ -5,12 +5,19 @@ using UnityEngine;
 public class ChaseMusic : MonoBehaviour
 {
     public AudioSource source;
-    public float volume;
+    public float volumeMultiplier;
     bool playing = false;
+    float baseVolume;
 
     private void Start()
     {
+        baseVolume = volumeMultiplier * SoundManager.current.volume;
         source.Stop();
+    }
+
+    private void Update()
+    {
+        baseVolume = volumeMultiplier * SoundManager.current.volume;
     }
 
     public void Play(float fadeinTime)
@@ -25,12 +32,13 @@ public class ChaseMusic : MonoBehaviour
     {
         float time = 0;
         playing = true;
+        source.volume = baseVolume;
         source.Play();
         while(time < fadeinTime)
         {
             float currentVolume = time / fadeinTime;
             time += Time.deltaTime;
-            source.volume = volume * SoundManager.current.volume * currentVolume;
+            source.volume = baseVolume * currentVolume;
             yield return null;
         }
         yield return null;
@@ -50,7 +58,7 @@ public class ChaseMusic : MonoBehaviour
         while (time < fadeoutTime)
         {
             float currentVolume = 1 - time / fadeoutTime;
-            source.volume = volume * SoundManager.current.volume * currentVolume;
+            source.volume = baseVolume * currentVolume;
             time += Time.deltaTime;
             yield return null;
         }

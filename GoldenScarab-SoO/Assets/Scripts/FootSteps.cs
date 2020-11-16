@@ -6,7 +6,7 @@ public class FootSteps : MonoBehaviour
 {
     public Transform leftFoot;
     public Transform rightFoot;
-    public float footstepVolume;
+    public float footstepVolumeMultiplier;
     public float rayDistance;
     public LayerMask ignoreMask;
     public Sound stone;
@@ -21,12 +21,12 @@ public class FootSteps : MonoBehaviour
         {
             if (hit.transform.CompareTag("Stone"))
             {
-                SoundManager.current.PlaySound(stone, leftFoot.position, footstepVolume);
+                SoundManager.current.PlaySound(stone, leftFoot.position, footstepVolumeMultiplier);
             }
 
             if (hit.transform.CompareTag("Sand"))
             {
-                SoundManager.current.PlaySound(sand, leftFoot.position, footstepVolume);
+                SoundManager.current.PlaySound(sand, leftFoot.position, footstepVolumeMultiplier);
             }
         }
     }
@@ -39,12 +39,12 @@ public class FootSteps : MonoBehaviour
         {
             if (hit.transform.CompareTag("Stone"))
             {
-                SoundManager.current.PlaySound(stone, rightFoot.position, footstepVolume);
+                SoundManager.current.PlaySound(stone, rightFoot.position, footstepVolumeMultiplier);
             }
 
             if (hit.transform.CompareTag("Sand"))
             {
-                SoundManager.current.PlaySound(sand, rightFoot.position, footstepVolume);
+                SoundManager.current.PlaySound(sand, rightFoot.position, footstepVolumeMultiplier);
             }
         }
     }

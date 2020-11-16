@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 
-    public float mouseSensitivity = 100f;
+    //public float mouseSensitivity = 100f;
 
     public Transform playerBody;
     public Vector2 smoothAmount;
@@ -22,6 +22,10 @@ public class CameraController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        //if (Setting.current)
+        //{
+        //    mouseSensitivity = Setting.current.mouseSensitivity;
+        //}
     }
 
     // Update is called once per frame
@@ -32,8 +36,8 @@ public class CameraController : MonoBehaviour
 
     void MouseMoveAssist()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity.current.value * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity.current.value * Time.deltaTime;
 
         m_desireY -= mouseY;
         m_desireX += mouseX;

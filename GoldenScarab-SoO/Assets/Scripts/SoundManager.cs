@@ -24,6 +24,10 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         current = this;
+        if (Setting.current)
+        {
+            volume = Setting.current.volume;
+        }
 
         audioMap.Add(Sound.Chime, Resources.Load<AudioClip>("Sounds/Chime"));
         audioMap.Add(Sound.Ding, Resources.Load<AudioClip>("Sounds/Ding"));
@@ -39,6 +43,21 @@ public class SoundManager : MonoBehaviour
         audioMap.Add(Sound.DoorClose, Resources.Load<AudioClip>("Sounds/Environment/DoorClose"));
     }
 
+    AudioSource PlayClipAt(AudioClip clip, Vector3 pos, float volume)
+    {
+        GameObject tempGO = new GameObject("TempAudio"); // create the temp object
+        tempGO.transform.position = pos; // set its position
+        AudioSource aSource = tempGO.AddComponent<AudioSource>(); // add an audio source
+        aSource.clip = clip; // define the clip
+        // set other aSource properties here, if desired
+        aSource.volume = volume;
+        aSource.dopplerLevel = 0;
+        aSource.Play(); // start the sound
+        Destroy(tempGO, clip.length); // destroy object after clip duration
+        return aSource; // return the AudioSource reference
+    }
+
+
     /// <summary>
     /// Play sound at position using global volume
     /// </summary>
@@ -46,7 +65,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="position"></param>
     public void PlaySound(Sound sound, Vector3 position)
     {
-        AudioSource.PlayClipAtPoint(audioMap[sound], position, volume);
+        PlayClipAt(audioMap[sound], position, volume);
     }
 
     
@@ -55,9 +74,9 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     /// <param name="sound"></param>
     /// <param name="position"></param>
-    /// <param name="volume"></param>
-    public void PlaySound(Sound sound, Vector3 position, float volume)
+    /// <param name="multiplier"></param>
+    public void PlaySound(Sound sound, Vector3 position, float multiplier)
     {
-        AudioSource.PlayClipAtPoint(audioMap[sound], position, volume * this.volume);
+        PlayClipAt(audioMap[sound], position, multiplier * volume);
     }
 }
