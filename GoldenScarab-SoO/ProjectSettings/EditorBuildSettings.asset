@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu Scene.unity
     guid: a4572162a3c52764481fc62ff34ad670
   - enabled: 1
-    path: Assets/Scenes/Gold Scene For UI.unity
+    path: Assets/Scenes/Old WIP Scenes/Gold Scene For UI.unity
     guid: 426c7f55b98e26f48a79e4baba8dd9fb
   - enabled: 1
     path: Assets/Scenes/LoseScene.unity
