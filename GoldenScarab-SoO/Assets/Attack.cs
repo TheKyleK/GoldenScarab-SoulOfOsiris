@@ -9,6 +9,8 @@ public class Attack : MonoBehaviour
     public float magY;
     public float time;
     public AnimationCurve curve;
+    public Transform trans;
+    public Camera cam;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +24,26 @@ public class Attack : MonoBehaviour
         
     }
 
+    IEnumerator LoseGameCorutine()
+    {
+        yield return new WaitForSeconds(1.0f);
+        GameSceneManager.current.LoadScene(2, 1);
+    }
+
+    void LoseGame()
+    {
+        GameSceneManager.current.LoadScene(2, 1);
+    }
+
     void Shake()
     {
+        CameraShake.current.holder = trans;
         CameraShake.current.Shake(magX, magY, time, curve);
+    }
+
+    void SwitchCamera()
+    {
+        Camera.main.gameObject.SetActive(false);
+        cam.gameObject.SetActive(true);
     }
 }

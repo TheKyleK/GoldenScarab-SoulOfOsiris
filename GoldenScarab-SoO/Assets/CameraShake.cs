@@ -6,10 +6,16 @@ public class CameraShake : MonoBehaviour
 {
     public static CameraShake current;
     bool shaking = false;
+    public Transform holder;
 
     private void Awake()
     {
         current = this;
+    }
+
+    private void Start()
+    {
+        holder = transform;
     }
     public void Shake(float magX, float magY, float time, AnimationCurve curve)
     {
@@ -30,12 +36,14 @@ public class CameraShake : MonoBehaviour
             float shakeY = Random.Range(-magY, magY);
             shakeX *= curve.Evaluate(elapsed);
             shakeY *= curve.Evaluate(elapsed);
-            transform.localPosition = new Vector3(shakeX, shakeY);
+            holder.localPosition = new Vector3(shakeX, shakeY);
             elapsed += Time.deltaTime;
             yield return null;
         }
-        transform.localPosition = new Vector3(0, 0);
+        holder.localPosition = new Vector3(0, 0);
         shaking = false;
         yield return null;
     }
+
+   
 }
