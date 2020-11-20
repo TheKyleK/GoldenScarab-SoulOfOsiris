@@ -69,6 +69,8 @@ public class Blackboard
     public float Delay { get; set; }
     public float TimeSeeking { get; set; }
     public float Cooldown { get; set; }
+
+    public float DelayLoseGame { get; set; }
     //public bool Contains(BlackboardKey key)
     //{
     //    return m_entries.ContainsKey(key);
