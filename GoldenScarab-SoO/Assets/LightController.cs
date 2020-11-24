@@ -17,8 +17,8 @@ public class LightController : MonoBehaviour
         myLight.gameObject.SetActive(true);
     }
 
-    //private void Update()
-    //{
-    //    myLight.gameObject.SetActive(false);
-    //}
+    private void Update()
+    {
+        myLight.gameObject.SetActive(false);
+    }
 }
