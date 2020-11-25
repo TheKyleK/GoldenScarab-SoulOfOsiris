@@ -30,7 +30,6 @@ public class SoundManager : MonoBehaviour
         }
 
         audioMap.Add(Sound.PickUp, Resources.Load<AudioClip>("Updated/Environment/pickup"));
-        Debug.Log(audioMap[Sound.PickUp]);
         audioMap.Add(Sound.PutDown, Resources.Load<AudioClip>("Updated/Environment/PLACING"));
         audioMap.Add(Sound.PlayerStepStone, Resources.Load<AudioClip>("Sounds/Player/PlayerStepStone"));
         audioMap.Add(Sound.PlayerStepSand, Resources.Load<AudioClip>("Sounds/Player/PlayerStepSand"));

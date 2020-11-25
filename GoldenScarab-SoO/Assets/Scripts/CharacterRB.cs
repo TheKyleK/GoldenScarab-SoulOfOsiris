@@ -41,7 +41,7 @@ public class CharacterRB : MonoBehaviour
 
     void FixedUpdate()
     {
-        ApplyGraivity();
+        //ApplyGraivity();
         ApplyForce();
         m_velocity += m_acceleration * Time.fixedDeltaTime;
         ApplyFriction();

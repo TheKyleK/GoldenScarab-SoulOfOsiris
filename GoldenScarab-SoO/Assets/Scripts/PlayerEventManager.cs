@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerEventManager : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class PlayerEventManager : MonoBehaviour
     void Update()
     {
         CheckRayHit();
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0))
         {
             GameObject hitObject = hit.transform.gameObject;
             ObjectEventManager oem = hitObject.GetComponent<ObjectEventManager>();
