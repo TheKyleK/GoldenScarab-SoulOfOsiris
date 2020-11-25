@@ -6,19 +6,23 @@ using UnityEngine;
 public class LightController : MonoBehaviour
 {
     public Light myLight;
+    public AudioSource audio;
 
     public void Start()
     {
-        myLight.gameObject.SetActive(false);
+        Enable();
+        //myLight.gameObject.SetActive(false);
     }
     // Start is called before the first frame update
     public void Enable()
     {
+        
         myLight.gameObject.SetActive(true);
     }
 
     private void Update()
     {
+      
         myLight.gameObject.SetActive(false);
     }
 }
