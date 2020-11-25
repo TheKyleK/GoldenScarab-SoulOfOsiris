@@ -117,6 +117,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Modular_HallwayPrefabTripleIntersection_001_V002
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5b4242556ed2a074898144afe3f4dacf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5b4242556ed2a074898144afe3f4dacf,
+        type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b4242556ed2a074898144afe3f4dacf, type: 3}
 --- !u!1 &1562247990102802449 stripped

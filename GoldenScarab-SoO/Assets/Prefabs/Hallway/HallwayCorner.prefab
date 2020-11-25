@@ -117,6 +117,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Modular_HallwayPrefabCorner_001_V002
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 67fdfb2748a80154ca1e4f86b2c00078,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 67fdfb2748a80154ca1e4f86b2c00078,
+        type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67fdfb2748a80154ca1e4f86b2c00078, type: 3}
 --- !u!1 &8633331244785575889 stripped

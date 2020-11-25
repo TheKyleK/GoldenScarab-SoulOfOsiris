@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ObjectEventManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ObjectEventManager : MonoBehaviour
     //[ColorUsage(true, true)]
     public Color color2;
     public Renderer renderer;
+    public Image handUI;
 
     // Start is called before the first frame update
     void Start()
@@ -71,11 +73,11 @@ public class ObjectEventManager : MonoBehaviour
         if (entered && rayhit)
         {
             renderer.material.SetColor("_BaseColor", color2);
+            handUI.gameObject.SetActive(true);
         }
         else
         {
             renderer.material.SetColor("_BaseColor", color1);
-
         }
     }
 
