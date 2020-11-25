@@ -29,7 +29,7 @@ public class SoundManager : MonoBehaviour
             volume = Setting.current.volume;
         }
 
-        audioMap.Add(Sound.Chime, Resources.Load<AudioClip>("Sounds/Chime"));
+        audioMap.Add(Sound.Chime, Resources.Load<AudioClip>("Updated Sounds/Environment/PICKING UP ARTIFACT"));
         audioMap.Add(Sound.Ding, Resources.Load<AudioClip>("Sounds/Ding"));
         audioMap.Add(Sound.PlayerStepStone, Resources.Load<AudioClip>("Sounds/Player/PlayerStepStone"));
         audioMap.Add(Sound.PlayerStepSand, Resources.Load<AudioClip>("Sounds/Player/PlayerStepSand"));
