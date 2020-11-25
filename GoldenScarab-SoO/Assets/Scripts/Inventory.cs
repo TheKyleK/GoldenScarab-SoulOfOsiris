@@ -6,9 +6,6 @@ public class Inventory : MonoBehaviour
 {
     public List<GameObject> items = new List<GameObject>();
     public int capacity;
-    public CharacterController cc;
-    public float r0;
-    public float r1;
     bool CanPickUp()
     {
         return items.Count < capacity;
@@ -39,18 +36,5 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
-    private void Update()
-    {
-        if (cc)
-        {
-            if (items.Count > 0)
-            {
-                cc.radius = r1;
-            }
-            else
-            {
-                cc.radius = r0;
-            }
-        }
-    }
+    
 }
