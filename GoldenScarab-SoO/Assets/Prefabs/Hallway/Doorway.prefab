@@ -117,6 +117,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Modular_Doorway_001_4x4x1_V001 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 17df1650eef26ca48b096fe5a749278c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 17df1650eef26ca48b096fe5a749278c,
+        type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17df1650eef26ca48b096fe5a749278c, type: 3}
 --- !u!1 &883005888712142284 stripped

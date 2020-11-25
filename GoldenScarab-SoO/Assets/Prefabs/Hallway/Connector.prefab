@@ -117,6 +117,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Modular_ConnectorPrefab_001_V001
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 150e6145b1ee16343a68bdbd0adec9f5,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 150e6145b1ee16343a68bdbd0adec9f5,
+        type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 150e6145b1ee16343a68bdbd0adec9f5, type: 3}
 --- !u!1 &2592637312194038119 stripped

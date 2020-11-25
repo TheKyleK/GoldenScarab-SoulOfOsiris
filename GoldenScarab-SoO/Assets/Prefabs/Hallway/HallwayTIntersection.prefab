@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!64 &689181488570988378
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562247990102802449}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4812116547348860885, guid: 5b4242556ed2a074898144afe3f4dacf, type: 3}
 --- !u!1 &2791571299348184990
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,20 +45,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &689181488570988378
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562247990102802449}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4812116547348860885, guid: 5b4242556ed2a074898144afe3f4dacf, type: 3}
 --- !u!1001 &7390360068063631640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,6 +116,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Modular_HallwayPrefabTripleIntersection_001_V002
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5b4242556ed2a074898144afe3f4dacf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5b4242556ed2a074898144afe3f4dacf,
+        type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b4242556ed2a074898144afe3f4dacf, type: 3}
