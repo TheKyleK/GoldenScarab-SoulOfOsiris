@@ -429,6 +429,20 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
+--- !u!64 &5674286187043336585
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278919822167958089}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6329158148709259305, guid: 97ef07ea28961e24799f56053770f3c2, type: 3}
 --- !u!1001 &6818728161551956800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -503,6 +517,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97ef07ea28961e24799f56053770f3c2, type: 3}
+--- !u!1 &3278919822167958089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 97ef07ea28961e24799f56053770f3c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6818728161551956800}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2006997862995988570 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 97ef07ea28961e24799f56053770f3c2,

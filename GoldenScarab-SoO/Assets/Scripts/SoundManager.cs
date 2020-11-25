@@ -4,8 +4,8 @@ using UnityEngine;
 
 public enum Sound
 {
-    Chime,
-    Ding,
+    PickUp,
+    PutDown,
     PlayerStepStone,
     PlayerStepSand,
     MonsterStepStone,
@@ -29,8 +29,8 @@ public class SoundManager : MonoBehaviour
             volume = Setting.current.volume;
         }
 
-        audioMap.Add(Sound.Chime, Resources.Load<AudioClip>("Updated Sounds/Environment/PICKING UP ARTIFACT"));
-        audioMap.Add(Sound.Ding, Resources.Load<AudioClip>("Sounds/Ding"));
+        audioMap.Add(Sound.PickUp, Resources.Load<AudioClip>("Updated/Environment/pickup"));
+        audioMap.Add(Sound.PutDown, Resources.Load<AudioClip>("Updated/Environment/PLACING"));
         audioMap.Add(Sound.PlayerStepStone, Resources.Load<AudioClip>("Sounds/Player/PlayerStepStone"));
         audioMap.Add(Sound.PlayerStepSand, Resources.Load<AudioClip>("Sounds/Player/PlayerStepSand"));
 
