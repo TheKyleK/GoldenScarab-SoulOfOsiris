@@ -14,6 +14,7 @@ public class ObjectEventManager : MonoBehaviour
     public Color color2;
     public Renderer renderer;
     public Image handUI;
+    public MeshCollider mesh;
 
     // Start is called before the first frame update
     void Start()
