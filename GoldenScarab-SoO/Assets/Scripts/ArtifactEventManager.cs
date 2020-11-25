@@ -19,7 +19,7 @@ public class ArtifactEventManager : MonoBehaviour
             {
                 if (inventory.Pickup(obj))
                 {
-                    SoundManager.current.PlaySound(Sound.Chime, obj.transform.position);
+                    SoundManager.current.PlaySound(Sound.PickUp, obj.transform.position, 2);
                     obj.SetActive(false);
                     EventManager.current.onPlayerInteractObject -= OnPlayerInteractObject;
                 }
