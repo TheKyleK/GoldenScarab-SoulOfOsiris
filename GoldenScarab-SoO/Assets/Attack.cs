@@ -37,13 +37,11 @@ public class Attack : MonoBehaviour
 
     void Shake()
     {
-        CameraShake.current.holder = trans;
         CameraShake.current.Shake(magX, magY, time, curve);
     }
 
     void SwitchCamera()
     {
-        Camera.main.gameObject.SetActive(false);
-        cam.gameObject.SetActive(true);
+        Camera.main.gameObject.SetActive(true);
     }
 }
