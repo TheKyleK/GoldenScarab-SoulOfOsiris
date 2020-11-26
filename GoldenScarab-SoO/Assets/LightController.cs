@@ -7,6 +7,7 @@ public class LightController : MonoBehaviour
 {
     public Light myLight;
     public AudioSource audio;
+    public GameObject particles;
 
     public void Start()
     {
@@ -16,13 +17,13 @@ public class LightController : MonoBehaviour
     // Start is called before the first frame update
     public void Enable()
     {
-        
         myLight.gameObject.SetActive(true);
+        particles.SetActive(true);
     }
 
     private void Update()
     {
-      
         myLight.gameObject.SetActive(false);
+        particles.SetActive(false);
     }
 }

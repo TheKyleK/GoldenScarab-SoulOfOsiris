@@ -6,7 +6,7 @@ public class CameraShake : MonoBehaviour
 {
     public static CameraShake current;
     bool shaking = false;
-    public Transform holder;
+    Transform holder;
 
     private void Awake()
     {
