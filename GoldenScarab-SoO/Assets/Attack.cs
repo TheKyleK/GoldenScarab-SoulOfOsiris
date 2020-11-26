@@ -11,6 +11,7 @@ public class Attack : MonoBehaviour
     public AnimationCurve curve;
     public Transform trans;
     public Camera cam;
+    public PlayerStateMachine psm;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,11 @@ public class Attack : MonoBehaviour
     void Shake()
     {
         CameraShake.current.Shake(magX, magY, time, curve);
+    }
+
+    void FreezePlayer()
+    {
+        psm.state = new PlayerDeadState();
     }
 
     void SwitchCamera()

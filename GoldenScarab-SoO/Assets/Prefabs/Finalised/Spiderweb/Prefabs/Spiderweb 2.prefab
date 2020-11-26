@@ -108,6 +108,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Singular_002_Web_B_001
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 58b4374b33701ae4e9761e2a3437bc1d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58b4374b33701ae4e9761e2a3437bc1d, type: 3}
 --- !u!4 &8766521395724160401 stripped

@@ -12,6 +12,7 @@ public class DoorEventManager : MonoBehaviour
     public float magY;
     public float time;
     public AnimationCurve curve;
+    public GameObject sandParticles;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,8 +43,22 @@ public class DoorEventManager : MonoBehaviour
     {
         CameraShake.current.Shake(magX, magY, time, curve);
         SoundManager.current.PlaySound(Sound.DoorOpen, transform.position, 2);
+        //if（sandParticles)
+        //{
+        //    sandParticles.SetActive(true);
+        //}
+        //LeanTween.moveLocalY(sandParticles, -8, doorAnimationTime).setEaseOutQuad().setOnComplete(() =>
+        //{
+        //sandParticles.SetActive(false);
+        //Destroy(gameObject);
+        //});
+        if (sandParticles)
+        {
+            sandParticles.SetActive(true);
+        }
         LeanTween.moveLocalY(gameObject, animationOffSet, doorAnimationTime).setEaseOutQuad().setOnComplete(() =>
         {
+            //sandParticles.SetActive(false);
             //Destroy(gameObject);
         });
     }

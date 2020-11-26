@@ -42,6 +42,5 @@ public class PlayerStateMachine : MonoBehaviour
     private void LateUpdate()
     {
         state.UpdateHeadBobbing(Camera.main, m_rb, ampitude, frequency, originalPos, footSteps);
-
     }
 }
