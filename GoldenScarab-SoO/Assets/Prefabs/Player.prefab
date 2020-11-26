@@ -1,5 +1,69 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &65083710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 65083711}
+  - component: {fileID: 65083712}
+  - component: {fileID: 65083713}
+  m_Layer: 8
+  m_Name: Eye Level
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &65083711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65083710}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.66, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5477984619720795660}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &65083712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65083710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41235ea2f3341794590f81910a727fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 40
+  mask:
+    serializedVersion: 2
+    m_Bits: 4096
+  offset: 0
+  angle: 120
+  radiusClose: 10
+--- !u!135 &65083713
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65083710}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 50
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1895310322
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be2092bf8f101b64396445dc6b78980a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 100
   playerBody: {fileID: 5477984619720795660}
   smoothAmount: {x: 20, y: 20}
 --- !u!114 &5477984618745109009
@@ -458,7 +521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 101712228580774427}
-  volume: 0.05
+  volumeMultiplier: 0.1
 --- !u!114 &6174141700812729122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,7 +552,6 @@ GameObject:
   - component: {fileID: 5477984619720795650}
   - component: {fileID: 5477984619720795651}
   - component: {fileID: 809986565}
-  - component: {fileID: 809986573}
   - component: {fileID: 809986566}
   m_Layer: 8
   m_Name: Player
@@ -513,6 +575,7 @@ Transform:
   - {fileID: 1895310323}
   - {fileID: 2296268158265547945}
   - {fileID: 8030180815217028441}
+  - {fileID: 65083711}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -542,7 +605,7 @@ MonoBehaviour:
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 4294967295
   isGrounded: 0
 --- !u!54 &5477984619720795659
 Rigidbody:
@@ -638,35 +701,11 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1.77
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 0
   m_StepOffset: 0
-  m_SkinWidth: 0.01
-  m_MinMoveDistance: 0.001
+  m_SkinWidth: 0.0001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1, z: 0}
---- !u!167 &809986573
-AudioReverbZone:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5477984619720795669}
-  m_Enabled: 0
-  m_MinDistance: 10
-  m_MaxDistance: 15
-  m_ReverbPreset: 3
-  m_Room: -1000
-  m_RoomHF: -454
-  m_DecayTime: 0.4
-  m_DecayHFRatio: 0.83
-  m_Reflections: -1646
-  m_ReflectionsDelay: 0.002
-  m_Reverb: 53
-  m_ReverbDelay: 0.003
-  m_HFReference: 5000
-  m_Diffusion: 100
-  m_Density: 100
-  m_LFReference: 250
-  m_RoomLF: 0
 --- !u!114 &809986566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,7 +720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftFoot: {fileID: 3429452486930499202}
   rightFoot: {fileID: 548021571840894692}
-  footstepVolume: 0.1
+  footstepVolumeMultiplier: 0.5
   rayDistance: 100
   ignoreMask:
     serializedVersion: 2
@@ -1131,6 +1170,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1736f56a3a1b7244289b47bfd69e27a0, type: 3}
+--- !u!4 &3429452486930499202 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7174912748542996742, guid: 1736f56a3a1b7244289b47bfd69e27a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 5477984618097489796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &684266982901062814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 1736f56a3a1b7244289b47bfd69e27a0,
@@ -1140,12 +1185,6 @@ Transform:
 --- !u!4 &548021571840894692 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3774223970089119392, guid: 1736f56a3a1b7244289b47bfd69e27a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 5477984618097489796}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &3429452486930499202 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7174912748542996742, guid: 1736f56a3a1b7244289b47bfd69e27a0,
     type: 3}
   m_PrefabInstance: {fileID: 5477984618097489796}
   m_PrefabAsset: {fileID: 0}
