@@ -24,6 +24,6 @@ public class LightController : MonoBehaviour
     private void Update()
     {
         myLight.gameObject.SetActive(false);
-        particles.SetActive(false);
+        //particles.SetActive(false);
     }
 }
