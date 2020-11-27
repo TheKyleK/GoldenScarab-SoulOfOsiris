@@ -41,4 +41,9 @@ public class InGameSettingManager : MonoBehaviour
         AudioListener.pause = false;
         settingMenu.gameObject.SetActive(false);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
